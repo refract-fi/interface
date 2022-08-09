@@ -34,7 +34,7 @@ const useButtonStyles = ({ variant = 'primary' }: ButtonStyleProps) =>
   );
 
 const Button = ({
-  variant,
+  variant = 'primary',
   size,
   label,
   href,
@@ -49,7 +49,7 @@ const Button = ({
   ...restProps
 }: ButtonProps) => {
   return (
-    <Box className={clsx(active && styles.active)}>
+    <Box className={clsx(active && styles.active, styles.buttonWrapperVariants[variant])}>
       <Box
         component={href ? 'a' : 'button'}
         onClick={onClick}

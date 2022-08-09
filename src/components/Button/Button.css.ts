@@ -10,8 +10,25 @@ const baseButton = style({
 
 export const active = style({});
 
+export const buttonWrapperVariants = styleVariants({
+  primary: {
+    background: vars.gradients.primary,
+    padding: '1px',
+  },
+  hero: {},
+  nav: {},
+});
+
 export const buttonVariants = styleVariants({
-  primary: [baseButton, {}],
+  primary: [
+    baseButton,
+    {
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'black',
+      color: 'white',
+    },
+  ],
   hero: [
     baseButton,
     {

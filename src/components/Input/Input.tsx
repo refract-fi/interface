@@ -10,22 +10,22 @@ interface InputStyleProps {
 
 interface InputProps extends BoxProps, InputStyleProps {
   label?: string;
-  href?: string;
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLElement>;
   className?: string;
+  placeholder?: string;
 }
 
 const useInputStyles = ({ variant = 'hero' }: InputStyleProps) =>
   clsx(variant === 'hero' && styles.inputVariants.hero);
 
-const Input = ({ variant = 'primary', ...restProps }: InputProps) => {
+const Input = ({ variant = 'primary', placeholder, ...restProps }: InputProps) => {
   return (
-    <Box className={styles.inputWrapperVariants[variant]}>
+    <Box className={styles.inputWrapperVariants[variant]} {...restProps}>
       <Box
         component='input'
         className={clsx(useInputStyles({ variant }), useTextStyles({ level: 'b1' }))}
-        {...restProps}
+        placeholder={placeholder}
       ></Box>
     </Box>
   );

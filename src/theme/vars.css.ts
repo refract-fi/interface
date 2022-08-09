@@ -6,6 +6,12 @@ const createSteps = (base: number, increments: number) => (steps: number) =>
 const spaceIncrements = createSteps(4, 4);
 
 export const title = {
+  hero: {
+    fontSize: '52px',
+    lineHeight: '60px',
+    fontWeight: '500',
+    letterSpacing: '35px',
+  },
   h1: {
     fontSize: '48px',
     lineHeight: '70px',
@@ -170,6 +176,7 @@ export const vars = createGlobalTheme(':root', {
     f2: text.f2.fontSize,
     f3: text.f3.fontSize,
     f4: text.f4.fontSize,
+    '0': title.hero.fontSize,
     '1': title.h1.fontSize,
     '2': title.h2.fontSize,
     '3': title.h3.fontSize,
@@ -178,6 +185,7 @@ export const vars = createGlobalTheme(':root', {
     '6': title.h6.fontSize,
   },
   fontWeight: {
+    '0': title.hero.fontWeight,
     '1': title.h1.fontWeight,
     '2': title.h2.fontWeight,
     '3': title.h3.fontWeight,
@@ -199,6 +207,7 @@ export const vars = createGlobalTheme(':root', {
     f2: text.f2.lineHeight,
     f3: text.f3.lineHeight,
     f4: text.f4.lineHeight,
+    '0': title.hero.lineHeight,
     '1': title.h1.lineHeight,
     '2': title.h2.lineHeight,
     '3': title.h3.lineHeight,
@@ -207,6 +216,7 @@ export const vars = createGlobalTheme(':root', {
     '6': title.h6.lineHeight,
   },
   letterSpacing: {
+    '0': title.hero.letterSpacing,
     '1': title.h1.letterSpacing,
     '2': title.h2.letterSpacing,
     '3': title.h3.letterSpacing,
