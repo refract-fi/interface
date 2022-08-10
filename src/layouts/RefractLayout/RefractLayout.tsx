@@ -1,7 +1,8 @@
 import { Button } from 'components';
 import { useRouter } from 'next/router';
 import { ReactNode, useCallback } from 'react';
-import { Box, FlexRow } from 'theme/components';
+import { Box, Flex, FlexRow } from 'theme/components';
+import * as styles from './RefractLayout.css';
 
 interface RefractLayoutProps {
   children: ReactNode;
@@ -38,7 +39,9 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
         />
         <Button label='NEW LINK' variant='primary' />
       </FlexRow>
-      {children}
+      <Flex justifyContent={'center'} paddingTop='12x' className={styles.childWrapper}>
+        {children}
+      </Flex>
     </Box>
   );
 };

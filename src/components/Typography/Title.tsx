@@ -29,6 +29,9 @@ const getTitleComponent = (level: ResponsiveTitleSizeLevel | TitleSizeLevel | an
   if (level === '5' || level?.sm === '5') {
     return 'h5';
   }
+  if (level === '6' || level?.sm === '6') {
+    return 'h6';
+  }
 
   throw new Error('No valid heading level');
 };
@@ -52,7 +55,6 @@ export const useTitleStyles = (
       textAlign: align,
       color: color,
       fontFamily: 'title',
-      textTransform: level !== '5' ? 'uppercase' : 'none',
       fontSize: {
         sm: level?.sm || level,
         md: level?.md && level.md,

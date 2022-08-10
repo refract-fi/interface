@@ -1,4 +1,4 @@
-import RefractLayout from 'layouts/RefractLayout';
+import { RefractLayout } from 'layouts';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';
 import { Box } from 'theme/components';

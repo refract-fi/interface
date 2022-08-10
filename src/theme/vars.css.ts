@@ -88,7 +88,7 @@ export const text = {
   },
   f4: {
     fontSize: '13px',
-    lineHeight: '18px',
+    lineHeight: '20px',
     letterSpacing: '0.5px',
   },
   f5: {
@@ -158,6 +158,12 @@ export const vars = createGlobalTheme(':root', {
 
     'bg-primary': '#131314',
     'bg-sec': '#1C1C1E',
+
+    red: '#EC5C38',
+    orange: '#E9B047',
+    arctic: '#88E3F0',
+    yellow: '#F8EC8B',
+    blue: '#253ABD',
   },
   borderRadius: {},
   fontFamily: {

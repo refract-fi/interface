@@ -1,19 +1,19 @@
-import { createElement, AllHTMLAttributes, ElementType } from "react";
-import { sprinkles, Sprinkles } from "./sprinkles.css";
-import * as resetStyles from "./reset.css";
-import clsx from "clsx";
+import { createElement, AllHTMLAttributes, ElementType } from 'react';
+import { sprinkles, Sprinkles } from './sprinkles.css';
+import * as resetStyles from './reset.css';
+import clsx from 'clsx';
 
 export interface BoxProps
   extends Omit<
       AllHTMLAttributes<HTMLElement>,
-      "content" | "height" | "translate" | "color" | "width" | "cursor" | "size"
+      'content' | 'height' | 'translate' | 'color' | 'width' | 'cursor' | 'size'
     >,
     Sprinkles {
   component?: ElementType;
 }
 
 export const Box = ({
-  component = "div",
+  component = 'div',
   className,
   padding,
   paddingX,
@@ -58,6 +58,7 @@ export const Box = ({
   whiteSpace,
   alignSelf,
   listStyleType,
+  textTransform,
   ...restProps
 }: BoxProps) => {
   const atomClasses = clsx(
@@ -106,6 +107,7 @@ export const Box = ({
       whiteSpace,
       alignSelf,
       listStyleType,
+      textTransform,
     }),
     className
   );
@@ -113,19 +115,15 @@ export const Box = ({
   return createElement(component, { className: atomClasses, ...restProps });
 };
 
-export const Flex = ({
-  display = "flex",
-  children,
-  ...restProps
-}: BoxProps) => (
+export const Flex = ({ display = 'flex', children, ...restProps }: BoxProps) => (
   <Box display={display} {...restProps}>
     {children}
   </Box>
 );
 
 export const FlexCol = ({
-  display = "flex",
-  flexDirection = "column",
+  display = 'flex',
+  flexDirection = 'column',
   children,
   ...restProps
 }: BoxProps) => (
@@ -135,8 +133,8 @@ export const FlexCol = ({
 );
 
 export const FlexRow = ({
-  display = "flex",
-  flexDirection = "row",
+  display = 'flex',
+  flexDirection = 'row',
   children,
   ...restProps
 }: BoxProps) => (

@@ -23,7 +23,7 @@ export const useTextStyles = ({ level = 'b1', color, weight, align, className }:
   clsx(
     (level[0] === 'b' || (level?.sm && level?.sm[0] === 'b')) && styles.fonts['body'],
     (level[0] === 'f' || (level?.sm && level?.sm[0] === 'f')) && styles.fonts['func'],
-    (level[0] === 'f' || (level?.sm && level?.sm[0] === 'f')) && styles.functionalFont,
+    (level[0] === 'f' || (level?.sm && level?.sm[0] === 'f')) && styles.funcFont,
     sprinkles({
       color: color,
       textAlign: align,
@@ -45,7 +45,7 @@ export const useTextStyles = ({ level = 'b1', color, weight, align, className }:
     weight && styles.weight[weight],
     className
   );
-const Text = ({
+export const Text = ({
   component = 'span',
   color,
   weight,
