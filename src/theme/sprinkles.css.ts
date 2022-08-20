@@ -40,8 +40,9 @@ const responsiveProperties = defineProperties({
       auto: 'auto',
       half: '50%',
       quarter: '25%',
+      icon: '24px',
     },
-    height: ['100vh'],
+    height: { full: '100%', fit: 'fit-content', icon: '24px' },
     borderRadius: vars.borderRadius,
     fontFamily: vars.fontFamily,
     fontSize: vars.fontSize,
@@ -83,7 +84,6 @@ const unresponsiveProperties = defineProperties({
     flexGrow: [0, 1],
     zIndex: [-1, 0, 1, 2, 3, 4, 5],
 
-    height: { full: '100%' },
     cursor: ['pointer'],
     listStyleType: ['circle', 'disc', 'square'],
   },
@@ -98,7 +98,7 @@ const colorModeProperties = defineProperties({
   defaultCondition: 'darkMode',
   properties: {
     color: vars.color,
-    background: vars.color,
+    background: vars.gradients,
     fill: vars.color,
     backgroundColor: vars.color,
   },

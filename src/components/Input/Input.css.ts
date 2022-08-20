@@ -14,7 +14,7 @@ export const inputWrapperVariants = styleVariants({
   hero: {
     background: vars.gradients.primary,
     padding: '1px',
-    width: '500px',
+    width: '800px',
   },
   primary: {},
 });

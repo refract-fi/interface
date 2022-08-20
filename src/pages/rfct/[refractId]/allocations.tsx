@@ -6,7 +6,7 @@ import { Flex } from 'theme/components';
 
 const Allocations: NextPageWithLayout = () => {
   return (
-    <Flex width={'full'} gap='3x'>
+    <Flex width={'full'} gap='3x' marginX={'3x'}>
       <AllocationBlock
         title='WALLET'
         allocationShare={0.22}

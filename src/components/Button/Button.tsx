@@ -4,11 +4,11 @@ import { weight } from 'components/Typography/typography.css';
 import { ReactNode } from 'react';
 import { Box, BoxProps } from 'theme/components';
 import { Sprinkles } from 'theme/sprinkles.css';
-import { text } from 'theme/vars.css';
+import { text, vars } from 'theme/vars.css';
 import * as styles from './Button.css';
 
 interface ButtonStyleProps {
-  variant?: 'nav' | 'hero' | 'primary';
+  variant?: 'nav' | 'hero' | 'primary' | 'none';
   size?: 'none' | 'large' | 'small';
 }
 
@@ -24,13 +24,15 @@ interface ButtonProps extends BoxProps, ButtonStyleProps {
   fill?: Sprinkles['color'];
   weight?: keyof typeof weight;
   active?: boolean;
+  fixedHeight?: Sprinkles['height'];
 }
 
 const useButtonStyles = ({ variant = 'primary' }: ButtonStyleProps) =>
   clsx(
     variant === 'primary' && styles.buttonVariants.primary,
     variant === 'hero' && styles.buttonVariants.hero,
-    variant === 'nav' && styles.buttonVariants.nav
+    variant === 'nav' && styles.buttonVariants.nav,
+    variant === 'none' && styles.buttonVariants.none
   );
 
 const Button = ({
@@ -42,14 +44,17 @@ const Button = ({
   disabled,
   children,
   fill,
-  width,
+  fixedHeight,
   className,
   level = 'b2',
   active,
   ...restProps
 }: ButtonProps) => {
   return (
-    <Box className={clsx(active && styles.active, styles.buttonWrapperVariants[variant])}>
+    <Box
+      className={clsx(active && styles.active, styles.buttonWrapperVariants[variant])}
+      height={fixedHeight}
+    >
       <Box
         component={href ? 'a' : 'button'}
         onClick={onClick}

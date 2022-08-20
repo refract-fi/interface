@@ -5,7 +5,7 @@ const baseButton = style({
   cursor: 'pointer',
   flexDirection: 'row',
   alignItems: 'center',
-  height: 'fit-content',
+  // height: 'fit-content',
 });
 
 export const active = style({});
@@ -17,6 +17,7 @@ export const buttonWrapperVariants = styleVariants({
   },
   hero: {},
   nav: {},
+  none: {},
 });
 
 export const buttonVariants = styleVariants({
@@ -35,7 +36,7 @@ export const buttonVariants = styleVariants({
       color: vars.color.tertiary,
       background: vars.gradients.primary,
       fontWeight: 700,
-      padding: '10px 100px',
+      padding: '10px 70px',
     },
   ],
   nav: [
@@ -56,4 +57,5 @@ export const buttonVariants = styleVariants({
       },
     },
   ],
+  none: [baseButton],
 });
