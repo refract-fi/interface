@@ -12,7 +12,7 @@ export const active = style({});
 
 export const buttonWrapperVariants = styleVariants({
   primary: {
-    background: vars.gradients.primary,
+    background: vars.background.spectrum,
     padding: '1px',
   },
   hero: {},
@@ -34,7 +34,7 @@ export const buttonVariants = styleVariants({
     baseButton,
     {
       color: vars.color.tertiary,
-      background: vars.gradients.primary,
+      background: vars.background.spectrum,
       fontWeight: 700,
       padding: '10px 70px',
     },

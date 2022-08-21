@@ -12,7 +12,7 @@ const baseInput = style({
 
 export const inputWrapperVariants = styleVariants({
   hero: {
-    background: vars.gradients.primary,
+    background: vars.background.spectrum,
     padding: '1px',
     width: '800px',
   },

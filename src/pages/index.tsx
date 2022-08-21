@@ -1,8 +1,10 @@
-import { Button, Chips, Input } from 'components';
-import { Title } from 'components/Typography/Title';
+import { Button, Chips, Input, Text, Title } from 'components';
+import { AdvancedForm } from 'modules/home';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { FlexCol, FlexRow } from 'theme/components';
+import { vars } from 'theme/vars.css';
+import Arrow from '/public/icons/arrow.svg';
 
 const Home: NextPage = () => {
   return (
@@ -33,6 +35,15 @@ const Home: NextPage = () => {
           </FlexRow>
         </Input>
         <Button label='GENERATE YOUR REFRACT' variant='hero' marginTop='8x' />
+        <Button color='secondary' marginTop={'7x'}>
+          <FlexRow alignItems={'center'} gap='1x'>
+            <Text level='f4' color={'secondary'}>
+              ADVANCED PARAMETERS
+            </Text>
+            <Arrow stroke={vars.color.secondary} />
+          </FlexRow>
+        </Button>
+        <AdvancedForm />
       </FlexCol>
     </>
   );

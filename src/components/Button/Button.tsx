@@ -36,7 +36,7 @@ const useButtonStyles = ({ variant = 'primary' }: ButtonStyleProps) =>
   );
 
 const Button = ({
-  variant = 'primary',
+  variant = 'none',
   size,
   label,
   href,
@@ -48,22 +48,32 @@ const Button = ({
   className,
   level = 'b2',
   active,
+  background,
+  color,
   ...restProps
 }: ButtonProps) => {
   return (
     <Box
       className={clsx(active && styles.active, styles.buttonWrapperVariants[variant])}
       height={fixedHeight}
+      background={background}
+      fill={fill}
+      {...restProps}
     >
       <Box
         component={href ? 'a' : 'button'}
         onClick={onClick}
-        {...restProps}
         className={clsx(useButtonStyles({ variant }))}
+        height='full'
+        width='full'
       >
         {/* Improve text variants in buttons */}
-        {label && <Text level={variant === 'hero' ? 'f4' : level}>{label}</Text>}
-        {children && <Box fill={fill}>{children}</Box>}
+        {label && (
+          <Text level={variant === 'hero' ? 'f4' : level} color={color}>
+            {label}
+          </Text>
+        )}
+        {children && children}
       </Box>
     </Box>
   );

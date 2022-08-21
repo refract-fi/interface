@@ -1,4 +1,4 @@
-import AllocationBlock from 'components/AllocationBlock/AllocationBlock';
+import AllocationBlock from 'modules/allocations/AllocationBlock/AllocationBlock';
 import { RefractLayout } from 'layouts';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';

@@ -152,19 +152,25 @@ export const vars = createGlobalTheme(':root', {
     secondary: '#868686',
     tertiary: '#48484A',
 
-    action: '#B5FF00',
+    action: '#0A84FF',
     positive: '#17D768',
     warning: '#FFC929',
     negative: '#E6164A',
 
     'bg-primary': '#131314',
     'bg-sec': '#1C1C1E',
+    'bg-primary-half': '#0A0A0A',
+    'bg-fill-quarter': '#151517',
+
+    separator: '#545458B3',
 
     red: '#EC5C38',
     orange: '#E9B047',
     arctic: '#88E3F0',
     yellow: '#F8EC8B',
     blue: '#253ABD',
+
+    'tint-active': '#FBFBFB',
   },
   borderRadius: {},
   fontFamily: {
@@ -232,12 +238,14 @@ export const vars = createGlobalTheme(':root', {
     '6': title.h6.letterSpacing,
   },
 
-  gradients: {
-    primary:
-      'linear-gradient(90deg, #282630 0%, #D55535 15.62%, #E9B047 29.17%, #F8EC8B 42.71%, #F4F3CB 52.6%, #BBEEF0 63.02%, #88E3F0 73.53%, #4FC1DE 83.8%, #2439BC 100%);',
+  background: {
+    none: '',
+    spectrum:
+      'linear-gradient(90deg, #D55535 1.04%, #E9B047 29.17%, #F8EC8B 42.71%, #F4F3CB 52.6%, #BBEEF0 63.02%, #88E3F0 73.53%, #4FC1DE 83.8%, #2439BC 100%)',
     blue: 'linear-gradient(270deg, #2F53C3 -1.84%, #73D3E8 100%)',
     red: 'linear-gradient(270deg, #D55535 -1.84%, #F8EC8B 100%)',
     green: 'linear-gradient(270deg, #E6FF6C -1.84%, #8BF8A3 100%)',
+    secondary: '#868686',
   },
 
   weight: {

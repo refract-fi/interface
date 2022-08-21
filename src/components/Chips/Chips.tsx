@@ -9,7 +9,7 @@ interface ChipsProps {
   isLocked?: boolean;
   onClear?: Function;
   isVerified?: boolean;
-  background: keyof typeof vars.gradients;
+  background: keyof typeof vars.background;
 }
 
 const Chips = ({ label, isLocked, onClear, isVerified, background }: ChipsProps) => {
