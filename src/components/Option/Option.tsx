@@ -1,7 +1,7 @@
 import Button from 'components/Button/Button';
 import Text from 'components/Typography/Text';
 import { useMemo } from 'react';
-import { Box, BoxProps, Flex, FlexRow } from 'theme/components';
+import { BoxProps, Flex } from 'theme/components';
 import Check from '/public/icons/check.svg';
 
 interface OptionProps extends BoxProps {

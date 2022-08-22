@@ -8,6 +8,7 @@ export const switchWrapper = style({
   padding: '2px',
   width: '44px',
   height: '24px',
+  cursor: 'pointer',
   background: vars.color['bg-fill-quarter'],
   borderRadius: '12px',
   selectors: {

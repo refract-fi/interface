@@ -1,15 +1,15 @@
 import clsx from 'clsx';
-import { Box } from 'theme/components';
+import { Box, BoxProps } from 'theme/components';
 import * as styles from './Switch.css';
 
-interface SwitchProps {
-  isChecked: boolean;
+interface SwitchProps extends BoxProps {
+  toggled: boolean;
 }
 
-const Switch = ({ isChecked }: SwitchProps) => {
+const Switch = ({ toggled, ...restProps }: SwitchProps) => {
   return (
-    <Box className={clsx(styles.switchWrapper, isChecked ? 'checked' : '')}>
-      <Box className={clsx(styles.slider, isChecked ? 'checked' : '')} />
+    <Box className={clsx(styles.switchWrapper, toggled ? 'checked' : '')} {...restProps}>
+      <Box className={clsx(styles.slider, toggled ? 'checked' : '')} />
     </Box>
   );
 };
