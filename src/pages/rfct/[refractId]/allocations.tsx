@@ -1,5 +1,5 @@
 import AllocationBlock from 'modules/allocations/AllocationBlock/AllocationBlock';
-import { RefractLayout } from 'layouts';
+import { Layout, RefractLayout } from 'layouts';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';
 import { Flex } from 'theme/components';
@@ -55,7 +55,11 @@ const Allocations: NextPageWithLayout = () => {
 };
 
 Allocations.getLayout = function getLayout(page: ReactNode) {
-  return <RefractLayout>{page}</RefractLayout>;
+  return (
+    <Layout>
+      <RefractLayout>{page}</RefractLayout>
+    </Layout>
+  );
 };
 
 export default Allocations;

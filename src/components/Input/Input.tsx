@@ -20,13 +20,31 @@ interface InputProps extends BoxProps, InputStyleProps {
 const useInputStyles = ({ variant = 'hero' }: InputStyleProps) =>
   clsx(variant === 'hero' && styles.inputVariants.hero);
 
-const Input = ({ variant = 'primary', placeholder, children, ...restProps }: InputProps) => {
+const Input = ({
+  variant = 'primary',
+  placeholder,
+  children,
+  value,
+  onChange,
+  ...restProps
+}: InputProps) => {
   return (
     <Box className={styles.inputWrapperVariants[variant]} {...restProps}>
-      <FlexRow width='full' height='full' backgroundColor={'black'} alignItems='center'>
+      <FlexRow
+        width='full'
+        height='full'
+        backgroundColor={'black'}
+        alignItems='center'
+        flexWrap={'wrap'}
+        gap='1x'
+        paddingX={'1x'}
+        paddingY='1x'
+      >
         {children}
         <Box
           component='input'
+          value={value}
+          onChange={onChange}
           className={clsx(useInputStyles({ variant }), useTextStyles({ level: 'b1' }))}
           placeholder={placeholder}
         />

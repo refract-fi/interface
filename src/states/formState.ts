@@ -2,7 +2,7 @@ import { atom, useSetRecoilState } from 'recoil';
 import { IForm } from 'utils/types';
 
 const initialState: IForm = {
-  address: [{ address: '', signature: '' }],
+  addresses: [],
   chains: ['all'],
   groupAssetsUnder: 0.1,
   isGroupAssetsUnder: true,
@@ -19,8 +19,8 @@ export function useFormActions() {
   const setForm = useSetRecoilState(formState);
   const resetForm = () => setForm(initialState);
 
-  const setAddress = (address: IForm['address']) =>
-    setForm(prevState => ({ ...prevState, address }));
+  const setAddress = (addresses: IForm['addresses']) =>
+    setForm(prevState => ({ ...prevState, addresses }));
   const setName = (name: IForm['name']) => setForm(prevState => ({ ...prevState, name }));
   const setDuration = (duration: IForm['duration']) =>
     setForm(prevState => ({ ...prevState, duration }));

@@ -24,8 +24,14 @@ export const inputVariants = styleVariants({
     baseInput,
     {
       height: '100%',
-      width: '100%',
-      padding: '16px 12px',
+      minWidth: 'max-content',
+      padding: '7.5px 8px',
+      selectors: {
+        '&:focus': {
+          outline: 'none',
+        },
+      },
+      flex: '1',
     },
   ],
   primary: [baseInput, {}],

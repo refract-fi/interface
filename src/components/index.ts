@@ -5,5 +5,6 @@ import { Title } from './Typography/Title';
 import Chips from './Chips/Chips';
 import Option from './Option/Option';
 import Switch from './Switch/Switch';
+import AddressInput from './AddressInput/AddressInput';
 
-export { Button, Input, Text, Title, Chips, Option, Switch };
+export { Button, Input, Text, Title, Chips, Option, Switch, AddressInput };

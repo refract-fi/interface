@@ -1,14 +1,18 @@
-import { RefractLayout } from 'layouts';
+import { Layout, RefractLayout } from 'layouts';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';
 import { Box } from 'theme/components';
 
-const Spectrum: NextPageWithLayout = () => {
+const Refraction: NextPageWithLayout = () => {
   return <Box>This is a test</Box>;
 };
 
-Spectrum.getLayout = function getLayout(page: ReactNode) {
-  return <RefractLayout>{page}</RefractLayout>;
+Refraction.getLayout = function getLayout(page: ReactNode) {
+  return (
+    <Layout>
+      <RefractLayout>{page}</RefractLayout>
+    </Layout>
+  );
 };
 
-export default Spectrum;
+export default Refraction;

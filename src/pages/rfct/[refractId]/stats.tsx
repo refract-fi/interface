@@ -1,4 +1,4 @@
-import { RefractLayout } from 'layouts';
+import { Layout, RefractLayout } from 'layouts';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';
 
@@ -7,7 +7,11 @@ const Stats: NextPageWithLayout = () => {
 };
 
 Stats.getLayout = function getLayout(page: ReactNode) {
-  return <RefractLayout>{page}</RefractLayout>;
+  return (
+    <Layout>
+      <RefractLayout>{page}</RefractLayout>
+    </Layout>
+  );
 };
 
 export default Stats;
