@@ -15,6 +15,7 @@ export const buttonWrapperVariants = styleVariants({
     background: vars.background.spectrum,
     padding: '1px',
   },
+  secondary: {},
   hero: {},
   nav: {},
   none: {},
@@ -30,13 +31,23 @@ export const buttonVariants = styleVariants({
       color: 'white',
     },
   ],
+  secondary: [
+    baseButton,
+    {
+      background: vars.background.darkBlue,
+      color: vars.color.primary,
+      fontWeight: '700',
+      textTransform: 'uppercase',
+    },
+  ],
   hero: [
     baseButton,
     {
       color: vars.color.tertiary,
       background: vars.background.spectrum,
       fontWeight: 700,
-      padding: '10px 70px',
+      paddingRight: '70px',
+      paddingLeft: '70px',
     },
   ],
   nav: [
@@ -57,5 +68,19 @@ export const buttonVariants = styleVariants({
       },
     },
   ],
-  none: [baseButton],
+  none: [
+    baseButton,
+    {
+      color: vars.color.primary,
+    },
+  ],
+});
+
+export const buttonSizes = styleVariants({
+  none: {},
+  small: {
+    padding: '4px 10px',
+  },
+  medium: { paddingTop: '8px', paddingBottom: '8px' },
+  large: { paddingTop: '10px', paddingBottom: '10px' },
 });

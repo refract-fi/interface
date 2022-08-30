@@ -20,10 +20,10 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
     <Box>
       <FlexRow gap='2x' justifyContent={'center'} marginY='6x'>
         <Button
-          label='SPECTRUM'
+          label='REFRACTION'
           variant='nav'
-          active={isActive('spectrum')}
-          onClick={() => changeRoute('spectrum')}
+          active={isActive('refraction')}
+          onClick={() => changeRoute('refraction')}
         />
         <Button
           label='ALLOCATIONS'

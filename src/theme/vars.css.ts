@@ -160,6 +160,8 @@ export const vars = createGlobalTheme(':root', {
     'bg-primary': '#131314',
     'bg-sec': '#1C1C1E',
     'bg-primary-half': '#0A0A0A',
+    'bg-fill-secondary': '#424347',
+    'bg-fill-tertiary': '#292A2C',
     'bg-fill-quarter': '#151517',
 
     separator: '#545458B3',
@@ -171,6 +173,7 @@ export const vars = createGlobalTheme(':root', {
     blue: '#253ABD',
 
     'tint-active': '#FBFBFB',
+    'overlay-ultrathin': '#00000080',
   },
   borderRadius: {},
   fontFamily: {
@@ -243,6 +246,7 @@ export const vars = createGlobalTheme(':root', {
     spectrum:
       'linear-gradient(90deg, #D55535 1.04%, #E9B047 29.17%, #F8EC8B 42.71%, #F4F3CB 52.6%, #BBEEF0 63.02%, #88E3F0 73.53%, #4FC1DE 83.8%, #2439BC 100%)',
     blue: 'linear-gradient(270deg, #2F53C3 -1.84%, #73D3E8 100%)',
+    darkBlue: 'linear-gradient(90deg, #4EBEDE -2.63%, #2846C0 100%)',
     red: 'linear-gradient(270deg, #D55535 -1.84%, #F8EC8B 100%)',
     green: 'linear-gradient(270deg, #E6FF6C -1.84%, #8BF8A3 100%)',
     secondary: '#868686',

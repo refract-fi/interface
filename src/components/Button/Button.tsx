@@ -8,8 +8,8 @@ import { text, vars } from 'theme/vars.css';
 import * as styles from './Button.css';
 
 interface ButtonStyleProps {
-  variant?: 'nav' | 'hero' | 'primary' | 'none';
-  size?: 'none' | 'large' | 'small';
+  variant?: 'nav' | 'hero' | 'primary' | 'secondary' | 'none';
+  size?: 'medium' | 'large' | 'small' | 'none';
 }
 
 interface ButtonProps extends BoxProps, ButtonStyleProps {
@@ -27,12 +27,16 @@ interface ButtonProps extends BoxProps, ButtonStyleProps {
   fixedHeight?: Sprinkles['height'];
 }
 
-const useButtonStyles = ({ variant = 'primary' }: ButtonStyleProps) =>
+const useButtonStyles = ({ variant = 'primary', size = 'small' }: ButtonStyleProps) =>
   clsx(
     variant === 'primary' && styles.buttonVariants.primary,
+    variant === 'secondary' && styles.buttonVariants.secondary,
     variant === 'hero' && styles.buttonVariants.hero,
     variant === 'nav' && styles.buttonVariants.nav,
-    variant === 'none' && styles.buttonVariants.none
+    variant === 'none' && styles.buttonVariants.none,
+    size === 'small' && styles.buttonSizes.small,
+    size === 'medium' && styles.buttonSizes.medium,
+    size === 'large' && styles.buttonSizes.large
   );
 
 const Button = ({
@@ -63,7 +67,7 @@ const Button = ({
       <Box
         component={href ? 'a' : 'button'}
         onClick={onClick}
-        className={clsx(useButtonStyles({ variant }))}
+        className={clsx(useButtonStyles({ variant, size }))}
         height='full'
         width='full'
       >

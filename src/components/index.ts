@@ -6,5 +6,7 @@ import Chips from './Chips/Chips';
 import Option from './Option/Option';
 import Switch from './Switch/Switch';
 import AddressInput from './AddressInput/AddressInput';
+import Modal from './Modal/Modal';
+import Checkbox from './Checkbox/Checkbox';
 
-export { Button, Input, Text, Title, Chips, Option, Switch, AddressInput };
+export { Button, Input, Text, Title, Chips, Option, Switch, AddressInput, Modal, Checkbox };

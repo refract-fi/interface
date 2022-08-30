@@ -2,7 +2,7 @@ import { Input, Chips, Text } from 'components';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { formState, useFormActions } from 'states/formState';
-import { Box, Flex, FlexRow } from 'theme/components';
+import { Box, Flex } from 'theme/components';
 import { vars } from 'theme/vars.css';
 import { IForm } from 'utils/types';
 import { addressInfo } from 'utils/types/form';

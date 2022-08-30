@@ -1,19 +1,18 @@
-import { AddressInput, Button, Text, Title } from 'components';
+import { AddressInput, Button, Modal, Text, Title } from 'components';
 import { Layout } from 'layouts';
 import { AdvancedForm } from 'modules/home';
-import type { NextPage } from 'next';
 import Head from 'next/head';
 import { ReactNode, useState } from 'react';
-import { useRecoilValue } from 'recoil';
-import { formState, useFormActions } from 'states/formState';
+import { useModalActions } from 'states/modalState';
 import { FlexCol, FlexRow } from 'theme/components';
 import { vars } from 'theme/vars.css';
-import { IForm } from 'utils/types';
 import { NextPageWithLayout } from './_app';
 import Arrow from '/public/icons/arrow.svg';
+import Multichain from '/public/icons/multichain.svg';
 
 const Home: NextPageWithLayout = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { isModalVisible, setVisibleModal } = useModalActions();
 
   return (
     <>
@@ -26,7 +25,7 @@ const Home: NextPageWithLayout = () => {
           Conceal your wealth, share your choices
         </Title>
         <AddressInput />
-        <Button label='GENERATE YOUR REFRACT' variant='hero' marginTop='8x' />
+        <Button label='GENERATE YOUR REFRACT' variant='hero' marginTop='8x' size='large' />
         <Button color='secondary' marginTop={'7x'}>
           <FlexRow alignItems={'center'} gap='1x' onClick={() => setIsVisible(!isVisible)}>
             <Text level='f4' color={'secondary'}>
@@ -36,6 +35,14 @@ const Home: NextPageWithLayout = () => {
           </FlexRow>
         </Button>
         <AdvancedForm isVisible={isVisible} />
+        <Button label='test' onClick={() => setVisibleModal('CHAIN_SELECT')} />
+        <Modal
+          title={'CHAIN SELECT'}
+          icon={<Multichain />}
+          // isVisible={isModalVisible('CHAIN_SELECT')}
+          isVisible
+          hasSave
+        ></Modal>
       </FlexCol>
     </>
   );
