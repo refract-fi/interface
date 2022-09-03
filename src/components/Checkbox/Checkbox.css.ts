@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { style, styleVariants } from '@vanilla-extract/css';
 import { vars } from 'theme/vars.css';
 
 export const checkbox = style({
@@ -27,8 +27,26 @@ export const checkbox = style({
       backgroundSize: 'contain',
       backgroundRepeat: 'no-repeat',
     },
+    '&.checkmark-line&::before': {
+      top: '80%',
+      backgroundImage: 'url(/icons/checkmark-line.svg)',
+    },
     '&:checked::before': {
       display: 'block',
+    },
+  },
+});
+
+export const checkboxWrapperVariants = styleVariants({
+  none: {
+    cursor: 'pointer',
+  },
+  button: {
+    cursor: 'pointer',
+    selectors: {
+      '&.active': {
+        backgroundColor: vars.color['gray-5'],
+      },
     },
   },
 });

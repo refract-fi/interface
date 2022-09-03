@@ -3,17 +3,13 @@ import { Layout } from 'layouts';
 import { AdvancedForm } from 'modules/home';
 import Head from 'next/head';
 import { ReactNode, useState } from 'react';
-import { useModalActions } from 'states/modalState';
 import { FlexCol, FlexRow } from 'theme/components';
 import { vars } from 'theme/vars.css';
 import { NextPageWithLayout } from './_app';
 import Arrow from '/public/icons/arrow.svg';
-import Multichain from '/public/icons/multichain.svg';
 
 const Home: NextPageWithLayout = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const { isModalVisible, setVisibleModal } = useModalActions();
-
   return (
     <>
       <Head>
@@ -35,14 +31,6 @@ const Home: NextPageWithLayout = () => {
           </FlexRow>
         </Button>
         <AdvancedForm isVisible={isVisible} />
-        <Button label='test' onClick={() => setVisibleModal('CHAIN_SELECT')} />
-        <Modal
-          title={'CHAIN SELECT'}
-          icon={<Multichain />}
-          // isVisible={isModalVisible('CHAIN_SELECT')}
-          isVisible
-          hasSave
-        ></Modal>
       </FlexCol>
     </>
   );

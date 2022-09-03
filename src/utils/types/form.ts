@@ -1,19 +1,19 @@
-export enum SupportedChains {
-  ETHEREUM,
-  ARBITRUM,
-  AVALANCHE,
-  BSC,
-  BITCOIN,
-  CELO,
-  FANTOM,
-  GNOSIS_CHAIN,
-  HARMONY_ONE,
-  MOONRIVER,
-  OPTIMISM,
-  POLYGON,
-  CRONOS,
-  AURORA,
-  EVMOS,
+export enum SupportedNetworks {
+  ETHEREUM = 'Ethereum',
+  ARBITRUM = 'Arbitrum',
+  AVALANCHE = 'Avalanche',
+  BSC = 'Binance Smart Chain',
+  BITCOIN = 'Bitcoin',
+  CELO = 'Celo',
+  FANTOM = 'Fantom',
+  GNOSIS_CHAIN = 'Gnosis Chain',
+  HARMONY_ONE = 'Harmony One',
+  MOONRIVER = 'Moonriver',
+  OPTIMISM = 'Optimism',
+  POLYGON = 'Polygon',
+  CRONOS = 'Cronos',
+  AURORA = 'Aurora',
+  EVMOS = 'Evmos',
 }
 
 export interface addressInfo {
@@ -25,7 +25,7 @@ export default interface IForm {
   addresses: addressInfo[]; // Need to figure out how we process CEX API keys/secrets
   name?: string | null; // Feature added later
   duration?: number | null; //duration in seconds, null => never expires
-  chains: SupportedChains[] | ['all']; // lowercase characters
+  networks: SupportedNetworks[];
   groupAssetsUnder: number; // [0, 100]
   isGroupAssetsUnder: boolean;
   includeNFTs: boolean;

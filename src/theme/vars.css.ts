@@ -157,6 +157,15 @@ export const vars = createGlobalTheme(':root', {
     warning: '#FFC929',
     negative: '#E6164A',
 
+    transparent: '#00000000',
+
+    'gray-1': '#8E8E93',
+    'gray-2': '#636366',
+    'gray-3': '#48484A',
+    'gray-4': '#3A3A3C',
+    'gray-5': '#2C2C2E',
+    'gray-6': '#1C1C1E',
+
     'bg-primary': '#131314',
     'bg-sec': '#1C1C1E',
     'bg-primary-half': '#0A0A0A',
@@ -165,6 +174,7 @@ export const vars = createGlobalTheme(':root', {
     'bg-fill-quarter': '#151517',
 
     separator: '#545458B3',
+    'separator-non-opaque': '#545458B3',
 
     red: '#EC5C38',
     orange: '#E9B047',

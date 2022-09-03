@@ -59,6 +59,10 @@ export const Box = ({
   alignSelf,
   listStyleType,
   textTransform,
+  maxWidth,
+  borderColor,
+  borderWidth,
+  borderStyle,
   ...restProps
 }: BoxProps) => {
   const atomClasses = clsx(
@@ -108,6 +112,10 @@ export const Box = ({
       alignSelf,
       listStyleType,
       textTransform,
+      maxWidth,
+      borderColor,
+      borderWidth,
+      borderStyle,
     }),
     className
   );

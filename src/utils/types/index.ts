@@ -1,5 +1,5 @@
 import IForm from './form';
-import { SupportedChains } from './form';
+import { SupportedNetworks } from './form';
 
 export type { IForm };
-export {SupportedChains}
+export { SupportedNetworks };

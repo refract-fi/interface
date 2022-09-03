@@ -4,19 +4,21 @@ import { Button, Switch, Text, Title } from 'components';
 import { vars } from 'theme/vars.css';
 import { ReactNode, useMemo } from 'react';
 import * as styles from './FormTitle.css';
+import { ModalStateType, useModalActions } from 'states/modalState';
 
 interface FormTitleProps {
   title: string;
   icon: ReactNode;
   activeOption?: string;
   optionDetails?: string;
-  variant?: 'group' | 'switch' | 'verify';
+  variant?: 'group' | 'switch' | 'modal';
   toggled?: boolean;
   extend?: boolean;
   setExtend?: (extend: boolean) => void;
   setToggle?: (toggled: boolean) => void;
   percent?: number;
   setPercent?: (percent: number) => void;
+  modal?: ModalStateType['visibleModal'];
 }
 
 const FormTitle = ({
@@ -31,14 +33,17 @@ const FormTitle = ({
   setToggle,
   percent,
   setPercent,
+  modal,
 }: FormTitleProps) => {
-  const { isVerify, isGroup, isSwitch } = useMemo(() => {
+  const { isModal, isGroup, isSwitch } = useMemo(() => {
     return {
-      isVerify: variant === 'verify',
+      isModal: variant === 'modal',
       isGroup: variant === 'group',
       isSwitch: variant === 'switch',
     };
   }, [variant]);
+
+  const { setVisibleModal } = useModalActions();
 
   return (
     <FlexRow justifyContent={'space-between'}>
@@ -73,15 +78,19 @@ const FormTitle = ({
               <Text level='b3'>will</Text>
             </>
           )}
-          <Text color='primary' weight='bold' level='f4' marginLeft={'0x'}>
+          <Text
+            component={isModal ? 'button' : 'span'}
+            cursor={isModal ? 'pointer' : 'auto'}
+            color={isModal ? 'action' : 'primary'}
+            weight='bold'
+            level='f4'
+            marginLeft={'0x'}
+            onClick={() => isModal && modal && setVisibleModal(modal)}
+          >
             {activeOption}
           </Text>
         </Text>
-        {!isVerify ? (
-          !isGroup && !isSwitch && <Arrow stroke={vars.color.primary} />
-        ) : (
-          <Button variant='none' color='action' level='f4' label='VERIFY ADDRESSES' />
-        )}
+        {!isModal && !isGroup && !isSwitch && <Arrow stroke={vars.color.primary} />}
         {(isSwitch || isGroup) && (
           <Switch toggled={toggled} onClick={() => setToggle && setToggle(!toggled)} />
         )}

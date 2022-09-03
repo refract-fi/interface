@@ -44,6 +44,8 @@ const responsiveProperties = defineProperties({
       0: '0px',
       ...vars.space,
     },
+    maxWidth: vars.space,
+    maxHeight: vars.space,
     height: {
       full: '100%',
       fit: 'fit-content',
@@ -93,8 +95,10 @@ const unresponsiveProperties = defineProperties({
     flexGrow: [0, 1],
     zIndex: [-1, 0, 1, 2, 3, 4, 5],
 
-    cursor: ['pointer'],
+    cursor: ['pointer', 'auto'],
     listStyleType: ['circle', 'disc', 'square'],
+    borderWidth: ['1px', '2px'],
+    borderStyle: ['solid'],
   },
 });
 
@@ -110,6 +114,7 @@ const colorModeProperties = defineProperties({
     background: vars.background,
     fill: vars.color,
     backgroundColor: vars.color,
+    borderColor: vars.color,
   },
 });
 
