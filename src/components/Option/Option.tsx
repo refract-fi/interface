@@ -19,6 +19,7 @@ const Option = ({ isSelected, label, details, variant, ...restProps }: OptionPro
     <Button
       padding={isDetailed && !isSelected ? 'none' : 1}
       background={isSelected ? 'spectrum' : 'secondary'}
+      size='none'
       {...restProps}
     >
       <Flex

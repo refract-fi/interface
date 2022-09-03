@@ -25,7 +25,13 @@ const Chips = ({ label, isLocked, onClear, isVerified, background }: ChipsProps)
       >
         <Text level='b1'>{label}</Text>
         {!isLocked && (
-          <Button marginLeft={'1x'} variant='none' fixedHeight={'icon'} onClick={() => onClear()}>
+          <Button
+            marginLeft={'1x'}
+            variant='none'
+            size='none'
+            fixedHeight={'icon'}
+            onClick={() => onClear()}
+          >
             <Close stroke={vars.color.white} />
           </Button>
         )}

@@ -11,7 +11,7 @@ interface FormTitleProps {
   icon: ReactNode;
   activeOption?: string;
   optionDetails?: string;
-  variant?: 'group' | 'switch' | 'modal';
+  variant?: 'group' | 'switch';
   toggled?: boolean;
   extend?: boolean;
   setExtend?: (extend: boolean) => void;
@@ -35,13 +35,14 @@ const FormTitle = ({
   setPercent,
   modal,
 }: FormTitleProps) => {
-  const { isModal, isGroup, isSwitch } = useMemo(() => {
+  const { isModal, isGroup, isSwitch, isOther } = useMemo(() => {
     return {
-      isModal: variant === 'modal',
+      isModal: modal,
       isGroup: variant === 'group',
       isSwitch: variant === 'switch',
+      isOther: !modal && variant !== 'group' && variant !== 'switch',
     };
-  }, [variant]);
+  }, [variant, modal]);
 
   const { setVisibleModal } = useModalActions();
 
@@ -56,7 +57,7 @@ const FormTitle = ({
       <FlexRow
         alignItems={'center'}
         gap='2x'
-        cursor='pointer'
+        cursor={isSwitch || isGroup || isModal ? 'auto' : 'pointer'}
         onClick={() => setExtend && setExtend(!extend)}
       >
         <Text color='secondary' level='b3'>
@@ -80,8 +81,8 @@ const FormTitle = ({
           )}
           <Text
             component={isModal ? 'button' : 'span'}
-            cursor={isModal ? 'pointer' : 'auto'}
             color={isModal ? 'action' : 'primary'}
+            cursor={isOther || isModal ? 'pointer' : 'auto'}
             weight='bold'
             level='f4'
             marginLeft={'0x'}
@@ -90,7 +91,7 @@ const FormTitle = ({
             {activeOption}
           </Text>
         </Text>
-        {!isModal && !isGroup && !isSwitch && <Arrow stroke={vars.color.primary} />}
+        {isOther && <Arrow stroke={vars.color.primary} />}
         {(isSwitch || isGroup) && (
           <Switch toggled={toggled} onClick={() => setToggle && setToggle(!toggled)} />
         )}

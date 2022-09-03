@@ -1,3 +1,3 @@
-import NetworkSelectModal from './ChainSelectModal.tsx/NetworkSelectModal';
+import NetworkSelectModal from './NetworkSelectModal';
 
 export { NetworkSelectModal };

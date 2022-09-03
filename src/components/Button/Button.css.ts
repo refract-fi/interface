@@ -1,6 +1,5 @@
 import { style, styleVariants } from '@vanilla-extract/css';
 import { vars } from '../../theme/vars.css';
-
 const baseButton = style({
   cursor: 'pointer',
   flexDirection: 'row',
@@ -38,6 +37,12 @@ export const buttonVariants = styleVariants({
       color: vars.color.primary,
       fontWeight: '700',
       textTransform: 'uppercase',
+      selectors: {
+        '&.disabled': {
+          opacity: 0.3,
+          cursor: 'auto',
+        },
+      },
     },
   ],
   hero: [

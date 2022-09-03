@@ -13,6 +13,7 @@ interface ModalProps {
   children: ReactNode;
   onCancel?: Function;
   onSave?: () => void;
+  saveDisabled?: boolean;
   maxWidth?: Sprinkles['maxWidth'];
 }
 
@@ -22,6 +23,7 @@ const Modal = ({
   isVisible,
   children,
   onSave,
+  saveDisabled,
   onCancel,
   maxWidth = '104x',
 }: ModalProps) => {
@@ -55,10 +57,17 @@ const Modal = ({
           {onSave ? (
             <FlexRow gap='1x'>
               <Button label='CANCEL' onClick={() => onCancel && onCancel()} />
-              <Button label='SAVE' variant='secondary' onClick={() => onSave()} />
+              <Button
+                label='SAVE'
+                variant='secondary'
+                onClick={() => onSave()}
+                disabled={saveDisabled}
+              />
             </FlexRow>
           ) : (
-            <Close stroke='white' />
+            <Button onClick={() => resetModalStatus()} size='none'>
+              <Close stroke='white' />
+            </Button>
           )}
         </FlexRow>
         {children}

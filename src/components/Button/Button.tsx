@@ -4,18 +4,18 @@ import { weight } from 'components/Typography/typography.css';
 import { ReactNode } from 'react';
 import { Box, BoxProps } from 'theme/components';
 import { Sprinkles } from 'theme/sprinkles.css';
-import { text, vars } from 'theme/vars.css';
+import { text } from 'theme/vars.css';
 import * as styles from './Button.css';
 
 interface ButtonStyleProps {
   variant?: 'nav' | 'hero' | 'primary' | 'secondary' | 'none';
   size?: 'medium' | 'large' | 'small' | 'none';
+  disabled?: boolean;
 }
 
 interface ButtonProps extends BoxProps, ButtonStyleProps {
   label?: string;
   href?: string;
-  disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLElement>;
   className?: string;
   level?: keyof typeof text;
@@ -27,17 +27,8 @@ interface ButtonProps extends BoxProps, ButtonStyleProps {
   fixedHeight?: Sprinkles['height'];
 }
 
-const useButtonStyles = ({ variant = 'primary', size = 'small' }: ButtonStyleProps) =>
-  clsx(
-    variant === 'primary' && styles.buttonVariants.primary,
-    variant === 'secondary' && styles.buttonVariants.secondary,
-    variant === 'hero' && styles.buttonVariants.hero,
-    variant === 'nav' && styles.buttonVariants.nav,
-    variant === 'none' && styles.buttonVariants.none,
-    size === 'small' && styles.buttonSizes.small,
-    size === 'medium' && styles.buttonSizes.medium,
-    size === 'large' && styles.buttonSizes.large
-  );
+const useButtonStyles = ({ variant = 'primary', size = 'small', disabled }: ButtonStyleProps) =>
+  clsx(styles.buttonVariants[variant], styles.buttonSizes[size], disabled && 'disabled');
 
 const Button = ({
   variant = 'none',
@@ -67,7 +58,7 @@ const Button = ({
       <Box
         component={href ? 'a' : 'button'}
         onClick={onClick}
-        className={clsx(useButtonStyles({ variant, size }))}
+        className={clsx(useButtonStyles({ variant, size, disabled }))}
         height='full'
         width='full'
       >

@@ -1,7 +1,7 @@
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 export type ModalStateType = {
-  visibleModal: 'NONE' | 'NETWORK_SELECT';
+  visibleModal: 'NONE' | 'NETWORK_SELECT' | 'VERIFY_ACCOUNTS';
 };
 
 const initialState: ModalStateType = {

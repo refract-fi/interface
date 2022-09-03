@@ -1,10 +1,10 @@
 import Button from 'components/Button/Button';
 import Checkbox from 'components/Checkbox/Checkbox';
 import Modal from 'components/Modal/Modal';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { formState, initialNetworksState, useFormActions } from 'states/formState';
-import { modalState, useModalActions } from 'states/modalState';
+import { useModalActions } from 'states/modalState';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import { IForm, SupportedNetworks } from 'utils/types';
 import Multichain from '/public/icons/multichain.svg';
@@ -43,13 +43,16 @@ const NetworkSelectModal = () => {
       icon={<Multichain />}
       isVisible={isModalVisible('NETWORK_SELECT')}
       onSave={() => {
-        setNetworks(selectedNetworks);
-        resetModalStatus();
+        if (selectedNetworks.length >= 1) {
+          setNetworks(selectedNetworks);
+          resetModalStatus();
+        }
       }}
       onCancel={() => {
         setSelectedNetworks(networks);
         resetModalStatus();
       }}
+      saveDisabled={selectedNetworks.length === 0}
     >
       <FlexCol gap='0x'>
         <FlexRow justifyContent={'space-between'} marginTop='2x'>

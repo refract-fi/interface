@@ -15,6 +15,7 @@ import { useRecoilValue } from 'recoil';
 import moment, { duration } from 'moment';
 import { NetworkSelectModal } from 'components/Modals';
 import { useModalActions } from 'states/modalState';
+import VerifyAccountsModal from 'components/Modals/VerifyAccountsModal/VerifyAccountsModal';
 
 interface AdvancedFormProps {
   isVisible: boolean;
@@ -164,7 +165,6 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
           title='MULTICHAIN'
           icon={<Multichain />}
           optionDetails='Allocations will include'
-          variant='modal'
           activeOption={
             form.networks.length === Object.values(SupportedNetworks).length
               ? 'ALL SUPPORTED NETWORKS'
@@ -177,11 +177,12 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
           title='VERIFICATION'
           icon={<Verified />}
           optionDetails='Your addresses are unverified.'
-          variant='modal'
-          activeOption='VERIFY ADDRESSES'
+          modal='VERIFY_ACCOUNTS'
+          activeOption='VERIFY ACCOUNTS'
         />
       </FlexCol>
       <NetworkSelectModal />
+      <VerifyAccountsModal />
     </>
   );
 };
