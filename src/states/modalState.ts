@@ -1,3 +1,4 @@
+import { ethers } from 'ethers';
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 export type ModalStateType = {

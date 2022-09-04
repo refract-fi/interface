@@ -17,6 +17,7 @@
     "@vanilla-extract/sprinkles": "^1.4.1",
     "clsx": "^1.2.1",
     "csstype": "^3.1.0",
+    "ethers": "^5.7.0",
     "moment": "^2.29.4",
     "next": "12.2.3",
     "next-plausible": "^3.2.0",

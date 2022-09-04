@@ -18,6 +18,7 @@ export enum SupportedNetworks {
 
 export interface addressInfo {
   address: string;
+  ens?: string;
   signature?: string;
 }
 
