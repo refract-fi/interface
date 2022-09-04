@@ -19,6 +19,7 @@ export enum SupportedNetworks {
 export interface addressInfo {
   address: string;
   ens?: string;
+  type?: 'ethereum' | 'bitcoin';
   signature?: string;
 }
 

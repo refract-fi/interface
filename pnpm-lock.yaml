@@ -10,6 +10,7 @@ specifiers:
   '@vanilla-extract/next-plugin': ^2.0.2
   '@vanilla-extract/recipes': ^0.2.5
   '@vanilla-extract/sprinkles': ^1.4.1
+  bitcoin-address-validation: ^2.2.1
   clsx: ^1.2.1
   csstype: ^3.1.0
   eslint: 8.20.0
@@ -30,6 +31,7 @@ dependencies:
   '@vanilla-extract/next-plugin': 2.0.2_next@12.2.3+webpack@5.74.0
   '@vanilla-extract/recipes': 0.2.5_@vanilla-extract+css@1.7.2
   '@vanilla-extract/sprinkles': 1.4.1_@vanilla-extract+css@1.7.2
+  bitcoin-address-validation: 2.2.1
   clsx: 1.2.1
   csstype: 3.1.0
   ethers: 5.7.0
@@ -2508,12 +2510,29 @@ packages:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
     dev: true
 
+  /base58-js/1.0.4:
+    resolution: {integrity: sha512-DQtWOeY+JwAUyFaL1KBqL0L81LWUj5S92N39LCiQwBouHz1GNZBqyhJz9ZtIDEtwaBYyoF63x27oqFL0Lu7DUg==}
+    engines: {node: '>= 8'}
+    dev: false
+
   /bech32/1.1.4:
     resolution: {integrity: sha512-s0IrSOzLlbvX7yp4WBfPITzpAU8sqQcpsmwXDiKwrG4r491vwCO/XpejasRNl0piBMe/DvP4Tz0mIS/X1DPJBQ==}
     dev: false
 
+  /bech32/2.0.0:
+    resolution: {integrity: sha512-LcknSilhIGatDAsY1ak2I8VtGaHNhgMSYVxFrGLXv+xLHytaKZKcaUJJUE7qmBr7h33o5YQwP55pMI0xmkpJwg==}
+    dev: false
+
   /big.js/5.2.2:
     resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
+    dev: false
+
+  /bitcoin-address-validation/2.2.1:
+    resolution: {integrity: sha512-f6LXNpvRKlTbHWb37N9tHoAbYGbshzM8FPWvCtloh++hxZ0/dmkokvKNVLz6HkG82zVwo8w6Sq4JmfO2timzyg==}
+    dependencies:
+      base58-js: 1.0.4
+      bech32: 2.0.0
+      sha256-uint8array: 0.10.3
     dev: false
 
   /bn.js/4.12.0:
@@ -4342,6 +4361,10 @@ packages:
     resolution: {integrity: sha512-Qr3TosvguFt8ePWqsvRfrKyQXIiW+nGbYpy8XK24NQHE83caxWt+mIymTT19DGFbNWNLfEwsrkSmN64lVWB9ag==}
     dependencies:
       randombytes: 2.1.0
+    dev: false
+
+  /sha256-uint8array/0.10.3:
+    resolution: {integrity: sha512-SFTs87RfXVulKrhhP6B5/qcFruOKQZaKf6jY9V4PJ7NOG0qIlQP6XL4pQq5xagsuP/Wd55S7tUBJpRajEsDUEQ==}
     dev: false
 
   /shebang-command/2.0.0:

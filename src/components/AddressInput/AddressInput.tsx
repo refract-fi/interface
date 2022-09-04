@@ -1,5 +1,6 @@
 import { Input, Chips, Text } from 'components';
-import { ethers, providers } from 'ethers';
+import { ethers } from 'ethers';
+import { validate } from 'bitcoin-address-validation';
 import { useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { formState, useFormActions } from 'states/formState';
@@ -32,31 +33,40 @@ const AddressInput = () => {
         setError('DUPLICATE_ADDRESS');
         return;
       }
-      //Check if valid ethereum address or ENS
-      if (!ethers.utils.isAddress(targetVal)) {
-        if (`${targetVal.slice(-4)}` === '.eth') {
-          try {
-            const targetAddress = await provider.resolveName(targetVal);
-            if (targetAddress) {
-              setError('');
-              setValue('');
-              setAddress([...addresses, { address: targetAddress, ens: targetVal }]);
-              return;
-            }
-          } catch (e) {
-            setError('ERROR_ENS_FETCH');
-            console.log('error retrieving ens address');
-            return;
-          }
-        }
-        //Here we can add checks for the binance keys
-
-        setError('INVALID_ADDRESS');
+      //Check if valid ethereum address
+      if (ethers.utils.isAddress(targetVal)) {
+        setError('');
+        setValue('');
+        setAddress([...addresses, { address: targetVal, type: 'ethereum' }]);
         return;
       }
-      setError('');
-      setValue('');
-      setAddress([...addresses, { address: targetVal }]);
+      //or check if valid ENS
+      if (`${targetVal.slice(-4)}` === '.eth') {
+        try {
+          const targetAddress = await provider.resolveName(targetVal);
+          if (targetAddress) {
+            setError('');
+            setValue('');
+            setAddress([
+              ...addresses,
+              { address: targetAddress, ens: targetVal, type: 'ethereum' },
+            ]);
+            return;
+          }
+        } catch (e) {
+          setError('ERROR_ENS_FETCH');
+          console.log('error retrieving ens address');
+          return;
+        }
+      }
+      //or check if valid btc address
+      if (validate(targetVal)) {
+        setError('');
+        setValue('');
+        setAddress([...addresses, { address: targetVal, type: 'bitcoin' }]);
+        return;
+      }
+      setError('INVALID_ADDRESS');
       return;
     }
 
@@ -101,7 +111,7 @@ const AddressInput = () => {
         variant='hero'
         marginTop={'10x'}
         value={value}
-        placeholder='0x... or ENS name'
+        placeholder='Enter address[es] (0x, btc, .eth)'
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
         onBlur={() => onBlur()}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => onKeydown(e)}
