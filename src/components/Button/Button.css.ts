@@ -18,6 +18,7 @@ export const buttonWrapperVariants = styleVariants({
   hero: {},
   nav: {},
   none: {},
+  text: {},
 });
 
 export const buttonVariants = styleVariants({
@@ -77,6 +78,13 @@ export const buttonVariants = styleVariants({
     baseButton,
     {
       color: vars.color.primary,
+    },
+  ],
+  text: [
+    baseButton,
+    {
+      color: vars.color.action,
+      fontWeight: 'bold',
     },
   ],
 });

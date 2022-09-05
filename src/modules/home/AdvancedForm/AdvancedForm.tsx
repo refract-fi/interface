@@ -2,20 +2,14 @@ import { Option } from 'components';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './AdvancedForm.css';
 import FormTitle from './FormTitle/FormTitle';
-import Hourglass from '/public/icons/hourglass.svg';
-import Snapshot from '/public/icons/snapshot.svg';
-import NFT from '/public/icons/nft.svg';
-import Group from '/public/icons/group.svg';
-import Multichain from '/public/icons/multichain.svg';
-import Verified from '/public/icons/verified.svg';
 import { useState } from 'react';
 import { IForm, SupportedNetworks } from 'utils/types';
 import { formState, useFormActions } from 'states/formState';
 import { useRecoilValue } from 'recoil';
-import moment, { duration } from 'moment';
+import moment from 'moment';
 import { NetworkSelectModal } from 'components/Modals';
-import { useModalActions } from 'states/modalState';
 import VerifyAccountsModal from 'components/Modals/VerifyAccountsModal/VerifyAccountsModal';
+import { formatMoment } from 'utils/func';
 
 interface AdvancedFormProps {
   isVisible: boolean;
@@ -29,10 +23,6 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
 
   const { setDuration, setGroupAssetsUnder, setIsGroupAssetsUnder, setIncludeNFTs, setIsSnapshot } =
     useFormActions();
-
-  const formatMoment = (moment: string) => {
-    return moment.replace('an ', '1 ').replace('a ', '1 ').toUpperCase();
-  };
   return (
     <>
       <FlexCol
@@ -44,7 +34,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         <Box>
           <FormTitle
             title='expiration'
-            icon={<Hourglass />}
+            icon='hourglass'
             optionDetails='Your refract link will'
             activeOption={
               !form.duration
@@ -105,7 +95,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         <Box>
           <FormTitle
             title='portfolio data'
-            icon={<Snapshot />}
+            icon='snapshot'
             optionDetails='Portfolio data will be'
             activeOption={form.isSnapshot ? 'STATIC' : 'REAL TIME'}
             extend={showDataOptions}
@@ -140,7 +130,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         <Box width='full' backgroundColor={'separator'} height={1} />
         <FormTitle
           title='nft allocations'
-          icon={<NFT />}
+          icon='nft'
           optionDetails='Allocations will'
           activeOption={`${form.includeNFTs ? 'INCLUDE' : 'EXCLUDE'} NFTS`}
           variant='switch'
@@ -151,7 +141,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
 
         <FormTitle
           title='group assets'
-          icon={<Group />}
+          icon='group'
           optionDetails='Assets under'
           activeOption={`${form.isGroupAssetsUnder ? '' : 'NOT '}BE GROUPED`}
           variant='group'
@@ -163,7 +153,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         <Box width='full' backgroundColor={'separator'} height={1} />
         <FormTitle
           title='MULTICHAIN'
-          icon={<Multichain />}
+          icon='multichain'
           optionDetails='Allocations will include'
           activeOption={
             form.networks.length === Object.values(SupportedNetworks).length
@@ -175,7 +165,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         <Box width='full' backgroundColor={'separator'} height={1} />
         <FormTitle
           title='VERIFICATION'
-          icon={<Verified />}
+          icon='verified'
           optionDetails='Your addresses are unverified.'
           modal='VERIFY_ACCOUNTS'
           activeOption='VERIFY ACCOUNTS'

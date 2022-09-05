@@ -8,7 +8,7 @@ import { text } from 'theme/vars.css';
 import * as styles from './Button.css';
 
 interface ButtonStyleProps {
-  variant?: 'nav' | 'hero' | 'primary' | 'secondary' | 'none';
+  variant?: 'nav' | 'hero' | 'primary' | 'secondary' | 'text' | 'none';
   size?: 'medium' | 'large' | 'small' | 'none';
   disabled?: boolean;
 }

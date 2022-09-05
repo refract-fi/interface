@@ -7,7 +7,7 @@ import Button from 'components/Button/Button';
 interface ChipsProps {
   label: string;
   isLocked?: boolean;
-  onClear: Function;
+  onClear?: Function;
   isVerified?: boolean;
   background: keyof typeof vars.background;
 }
@@ -30,7 +30,7 @@ const Chips = ({ label, isLocked, onClear, isVerified, background }: ChipsProps)
             variant='none'
             size='none'
             fixedHeight={'icon'}
-            onClick={() => onClear()}
+            onClick={() => onClear && onClear()}
           >
             <Close stroke={vars.color.white} />
           </Button>

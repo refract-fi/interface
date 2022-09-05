@@ -143,6 +143,9 @@ export const vars = createGlobalTheme(':root', {
     '92x': spaceIncrements(92),
     '104x': spaceIncrements(104),
     '116x': spaceIncrements(116),
+    '124x': spaceIncrements(124),
+    '136x': spaceIncrements(136),
+    '148x': spaceIncrements(148),
   },
   color: {
     white: '#fff',

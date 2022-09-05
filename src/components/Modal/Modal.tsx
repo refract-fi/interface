@@ -1,4 +1,5 @@
 import Button from 'components/Button/Button';
+import Icon, { iconNames } from 'components/Icon/Icon';
 import { Title } from 'components/Typography/Title';
 import { ReactNode } from 'react';
 import { useModalActions } from 'states/modalState';
@@ -8,7 +9,7 @@ import Close from '/public/icons/close.svg';
 
 interface ModalProps {
   title: string;
-  icon?: ReactNode;
+  icon?: iconNames;
   isVisible: boolean;
   children: ReactNode;
   onCancel?: Function;
@@ -49,7 +50,7 @@ const Modal = ({
       >
         <FlexRow width={'full'} justifyContent='space-between' alignItems={'center'}>
           <FlexRow gap='0x' alignItems={'center'}>
-            {icon}
+            {icon && <Icon name={icon} stroke='white' fill='white' />}
             <Title level='6' textTransform={'uppercase'}>
               {title}
             </Title>

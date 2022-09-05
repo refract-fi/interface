@@ -113,6 +113,7 @@ const colorModeProperties = defineProperties({
     color: vars.color,
     background: vars.background,
     fill: vars.color,
+    stroke: vars.color,
     backgroundColor: vars.color,
     borderColor: vars.color,
   },

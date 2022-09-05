@@ -40,7 +40,7 @@ const NetworkSelectModal = () => {
   return (
     <Modal
       title={'NETWORK SELECT'}
-      icon={<Multichain />}
+      icon='multichain'
       isVisible={isModalVisible('NETWORK_SELECT')}
       onSave={() => {
         if (selectedNetworks.length >= 1) {

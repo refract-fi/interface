@@ -7,7 +7,7 @@ import { formState, useFormActions } from 'states/formState';
 import { Box, Flex } from 'theme/components';
 import { vars } from 'theme/vars.css';
 import { IForm } from 'utils/types';
-import { addressInfo } from 'utils/types/form';
+import { IAddressInfo } from 'utils/types/form';
 
 const AddressInput = () => {
   const { addresses } = useRecoilValue<IForm>(formState);
@@ -27,7 +27,7 @@ const AddressInput = () => {
       const targetVal = e.target.value.replaceAll(',', '').replaceAll(' ', '');
       //Check for duplicates
       const indexOfDuplicate = [...addresses].findIndex(
-        (address: addressInfo) => address.address === value
+        (address: IAddressInfo) => address.address === value
       );
       if (indexOfDuplicate !== -1 && addresses[indexOfDuplicate].address.length === value.length) {
         setError('DUPLICATE_ADDRESS');

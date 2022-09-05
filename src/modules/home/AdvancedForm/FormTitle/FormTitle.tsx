@@ -1,16 +1,13 @@
 import { Box, FlexRow } from 'theme/components';
 import Arrow from '/public/icons/arrow.svg';
-import { Button, Switch, Text, Title } from 'components';
+import { Icon, Switch, Text, Title } from 'components';
 import { vars } from 'theme/vars.css';
-import { ReactNode, useMemo } from 'react';
+import { useMemo } from 'react';
 import * as styles from './FormTitle.css';
 import { ModalStateType, useModalActions } from 'states/modalState';
+import { IFormOption } from 'utils/types/form';
 
-interface FormTitleProps {
-  title: string;
-  icon: ReactNode;
-  activeOption?: string;
-  optionDetails?: string;
+interface FormTitleProps extends IFormOption {
   variant?: 'group' | 'switch';
   toggled?: boolean;
   extend?: boolean;
@@ -49,7 +46,7 @@ const FormTitle = ({
   return (
     <FlexRow justifyContent={'space-between'}>
       <FlexRow gap='2x'>
-        {icon}
+        <Icon stroke={'white'} fill='white' name={icon} />
         <Title level='6' textTransform={'uppercase'}>
           {title}
         </Title>

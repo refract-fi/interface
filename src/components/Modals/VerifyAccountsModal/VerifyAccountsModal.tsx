@@ -13,7 +13,7 @@ const VerifyAccountsModal = () => {
     <Modal
       title={'VERIFICATION'}
       isVisible={isModalVisible('VERIFY_ACCOUNTS')}
-      icon={<Verified />}
+      icon='verified'
       onSave={() => resetModalStatus()}
       onCancel={() => resetModalStatus()}
     >
@@ -46,11 +46,11 @@ const VerifyAccountsModal = () => {
           </FlexRow>
           <FlexRow justifyContent={'space-between'} paddingX='2x' paddingY='1x'>
             <Text level='b2'>0x2453...b324</Text>
-            <Button variant='none' size='none' label='Verify' color='action' level='b2' />
+            <Button variant='text' size='none' label='Verify' level='b2' />
           </FlexRow>
           <FlexRow justifyContent={'space-between'} paddingX='2x' paddingY='1x'>
             <Text level='b2'>Refract.eth</Text>
-            <Button variant='none' size='none' label='Verify' color='action' level='b2' />
+            <Button variant='text' size='none' label='Verify' level='b2' />
           </FlexRow>
         </FlexCol>
       </FlexCol>

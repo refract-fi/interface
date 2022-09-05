@@ -63,6 +63,7 @@ export const Box = ({
   borderColor,
   borderWidth,
   borderStyle,
+  stroke,
   ...restProps
 }: BoxProps) => {
   const atomClasses = clsx(
@@ -116,6 +117,7 @@ export const Box = ({
       borderColor,
       borderWidth,
       borderStyle,
+      stroke,
     }),
     className
   );
