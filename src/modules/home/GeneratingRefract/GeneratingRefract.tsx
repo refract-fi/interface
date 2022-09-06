@@ -1,16 +1,19 @@
 import { Button, Chips, Text, Title } from 'components';
 import moment from 'moment';
 import { useRecoilValue } from 'recoil';
+import { useFormPhaseActions } from 'states/formPhasesState';
 import { formState } from 'states/formState';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import { formatMoment } from 'utils/func';
 import { IForm, SupportedNetworks } from 'utils/types';
-import RefractOption from './FormOption';
+import { FormPhases } from 'utils/types/formPhase';
+import FormOption from './components/FormOption/FormOption';
 
 const GeneratingRefract = () => {
   const form = useRecoilValue<IForm>(formState);
+  const { setPhase, setShowParams } = useFormPhaseActions();
   return (
-    <FlexCol alignItems={'center'} marginTop='72x'>
+    <FlexCol alignItems={'center'} marginTop='48x'>
       <Title marginBottom={'11x'}>GENERATING YOUR REFRACT</Title>
       <FlexRow gap='2x'>
         <Chips label='0x2345...1231' isLocked background='blue' />
@@ -22,7 +25,7 @@ const GeneratingRefract = () => {
         Anonymizing Accounts...
       </Text>
       <FlexCol maxWidth={'124x'} width='full' marginTop={'0x'}>
-        <RefractOption
+        <FormOption
           title={'expiration'}
           icon='hourglass'
           activeOption={
@@ -32,19 +35,19 @@ const GeneratingRefract = () => {
           }
         />
         <Box height={1} width={'full'} backgroundColor='separator-non-opaque' />
-        <RefractOption
+        <FormOption
           title={'portfolio data'}
           icon='snapshot'
           activeOption={form.isSnapshot ? 'STATIC' : 'REAL TIME'}
         />
         <Box height={1} width={'full'} backgroundColor='separator-non-opaque' />
-        <RefractOption
+        <FormOption
           title={'nft allocations'}
           icon='nft'
           activeOption={`${form.includeNFTs ? 'INCLUDE' : 'EXCLUDE'} NFTS`}
         />
         <Box height={1} width={'full'} backgroundColor='separator-non-opaque' />
-        <RefractOption
+        <FormOption
           title={'group assets'}
           icon='group'
           activeOption={
@@ -54,7 +57,7 @@ const GeneratingRefract = () => {
           }
         />
         <Box height={1} width={'full'} backgroundColor='separator-non-opaque' />
-        <RefractOption
+        <FormOption
           title={'multichain'}
           icon='multichain'
           activeOption={
@@ -64,10 +67,19 @@ const GeneratingRefract = () => {
           }
         />
         <Box height={1} width={'full'} backgroundColor='separator-non-opaque' />
-        <RefractOption title={'verification'} icon='verified' activeOption={'NOT VERIFIED'} />
+        <FormOption title={'verification'} icon='verified' activeOption={'NOT VERIFIED'} />
         <Box height={1} width={'full'} backgroundColor='separator-non-opaque' />
-        <Box height={'0x'} width={'full'} backgroundColor='separator-non-opaque' marginTop={'8x'} />
-        <Button level='f4' label='MODIFY REFRACT' variant='text' size='large' marginTop={'4x'} />
+        <Button
+          level='f4'
+          label='MODIFY REFRACT'
+          variant='text'
+          size='large'
+          marginTop={'4x'}
+          onClick={() => {
+            setPhase(FormPhases.CREATE);
+            setShowParams(true);
+          }}
+        />
       </FlexCol>
     </FlexCol>
   );

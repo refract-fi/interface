@@ -1,3 +1,3 @@
-import AdvancedForm from './AdvancedForm/AdvancedForm';
-import GeneratingRefract from './GeneratingRefract/RefractGeneration';
-export { AdvancedForm, GeneratingRefract };
+import Landing from './Landing/Landing';
+import GeneratingRefract from './GeneratingRefract/GeneratingRefract';
+export { Landing, GeneratingRefract };

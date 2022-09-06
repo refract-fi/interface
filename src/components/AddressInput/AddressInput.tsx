@@ -16,7 +16,52 @@ const AddressInput = () => {
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
 
-  const provider = new ethers.providers.InfuraProvider('homestead', process.env.INFURA_API_KEY);
+  const checkInput = async (targetVal: string) => {
+    //Check for duplicates
+    const indexOfDuplicate = [...addresses].findIndex(
+      (address: IAddressInfo) => address.address === value
+    );
+    if (indexOfDuplicate !== -1 && addresses[indexOfDuplicate].address.length === value.length) {
+      setError('DUPLICATE_ADDRESS');
+      return;
+    }
+    //Check if valid ethereum address
+    if (ethers.utils.isAddress(targetVal)) {
+      setError('');
+      setValue('');
+      setAddress([...addresses, { address: targetVal, type: 'ethereum' }]);
+      return;
+    }
+    if (validate(targetVal)) {
+      setError('');
+      setValue('');
+      setAddress([...addresses, { address: targetVal, type: 'bitcoin' }]);
+      return;
+    }
+    //or check if valid ENS
+    if (`${targetVal.slice(-4)}` === '.eth') {
+      try {
+        const provider = new ethers.providers.InfuraProvider(
+          'homestead',
+          process.env.INFURA_API_KEY
+        );
+        const targetAddress = await provider.resolveName(targetVal);
+        if (targetAddress) {
+          setError('');
+          setValue('');
+          setAddress([...addresses, { address: targetAddress, ens: targetVal, type: 'ethereum' }]);
+          return;
+        }
+      } catch (e) {
+        setError('ERROR_ENS_FETCH');
+        console.log('error retrieving ens address');
+        return;
+      }
+    }
+    //or check if valid btc address
+    setError('INVALID_ADDRESS');
+    return;
+  };
 
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (
@@ -25,51 +70,8 @@ const AddressInput = () => {
       e.target.value.length > 3
     ) {
       const targetVal = e.target.value.replaceAll(',', '').replaceAll(' ', '');
-      //Check for duplicates
-      const indexOfDuplicate = [...addresses].findIndex(
-        (address: IAddressInfo) => address.address === value
-      );
-      if (indexOfDuplicate !== -1 && addresses[indexOfDuplicate].address.length === value.length) {
-        setError('DUPLICATE_ADDRESS');
-        return;
-      }
-      //Check if valid ethereum address
-      if (ethers.utils.isAddress(targetVal)) {
-        setError('');
-        setValue('');
-        setAddress([...addresses, { address: targetVal, type: 'ethereum' }]);
-        return;
-      }
-      //or check if valid ENS
-      if (`${targetVal.slice(-4)}` === '.eth') {
-        try {
-          const targetAddress = await provider.resolveName(targetVal);
-          if (targetAddress) {
-            setError('');
-            setValue('');
-            setAddress([
-              ...addresses,
-              { address: targetAddress, ens: targetVal, type: 'ethereum' },
-            ]);
-            return;
-          }
-        } catch (e) {
-          setError('ERROR_ENS_FETCH');
-          console.log('error retrieving ens address');
-          return;
-        }
-      }
-      //or check if valid btc address
-      if (validate(targetVal)) {
-        setError('');
-        setValue('');
-        setAddress([...addresses, { address: targetVal, type: 'bitcoin' }]);
-        return;
-      }
-      setError('INVALID_ADDRESS');
-      return;
+      checkInput(targetVal);
     }
-
     setValue(e.target.value);
   };
 
@@ -81,11 +83,8 @@ const AddressInput = () => {
 
   const onKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' || e.key === 'Tab') {
-      setValue('');
-      setAddress([
-        ...addresses,
-        { address: e.target.value.replaceAll(',', '').replaceAll(' ', '') },
-      ]);
+      const targetVal = e.target.value.replaceAll(',', '').replaceAll(' ', '');
+      checkInput(targetVal);
       e.preventDefault();
     } else if (e.key === 'Backspace' && value.length === 0) {
       onClear(addresses.length - 1);

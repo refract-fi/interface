@@ -1,7 +1,7 @@
 import { Option } from 'components';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './AdvancedForm.css';
-import FormTitle from './FormTitle/FormTitle';
+import FormTitle from '../FormTitle/FormTitle';
 import { useState } from 'react';
 import { IForm, SupportedNetworks } from 'utils/types';
 import { formState, useFormActions } from 'states/formState';
