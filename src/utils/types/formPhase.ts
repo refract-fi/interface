@@ -1,5 +1,6 @@
 export enum FormPhases {
   CREATE = 'CREATE',
+  REVIEW = 'REVIEW',
   GENERATING = 'GENERATING',
   COMPLETED = 'COMPLETED',
 }
@@ -7,4 +8,5 @@ export enum FormPhases {
 export interface IFormPhase {
   phase: FormPhases;
   showParams: boolean;
+  // formID: string;
 }

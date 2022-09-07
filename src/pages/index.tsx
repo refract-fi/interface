@@ -1,13 +1,15 @@
 import { Layout } from 'layouts';
-import { GeneratingRefract, Landing } from 'modules/home';
+import { Generating, Landing, Review } from 'modules/home';
 import Head from 'next/head';
 import { ReactNode, useState } from 'react';
-import { Box } from 'theme/components';
+import { Box, FlexCol } from 'theme/components';
 import { FormPhases } from 'utils/types/formPhase';
 import { NextPageWithLayout } from './_app';
 import * as styles from 'modules/home/index.css';
 import { useRecoilValue } from 'recoil';
 import { formPhaseState } from 'states/formPhasesState';
+import { Title } from 'components';
+import Completed from 'modules/home/Completed/Completed';
 
 const Home: NextPageWithLayout = () => {
   const { phase } = useRecoilValue(formPhaseState);
@@ -28,7 +30,14 @@ const Home: NextPageWithLayout = () => {
       </Head>
       <Box className={isFadingOut ? styles.fadeOutAnim : styles.fadeInAnim}>
         {phase === FormPhases.CREATE && <Landing fadeOut={fadeOut} fadeIn={fadeIn} />}
-        {phase === FormPhases.GENERATING && <GeneratingRefract />}
+        {(phase === FormPhases.REVIEW || phase === FormPhases.GENERATING) && (
+          <FlexCol alignItems={'center'} marginTop='48x'>
+            <Title special>GENERATING YOUR REFRACT</Title>
+            {phase === FormPhases.REVIEW && <Review />}
+            {phase === FormPhases.GENERATING && <Generating />}
+          </FlexCol>
+        )}
+        {phase === FormPhases.COMPLETED && <Completed />}
       </Box>
     </>
   );

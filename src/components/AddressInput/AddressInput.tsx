@@ -109,6 +109,7 @@ const AddressInput = () => {
       <Input
         variant='hero'
         marginTop={'10x'}
+        size='large'
         value={value}
         placeholder='Enter address[es] (0x, btc, .eth)'
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}

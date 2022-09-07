@@ -92,8 +92,8 @@ export const text = {
     letterSpacing: '0.5px',
   },
   f5: {
-    fontSize: '14px',
-    lineHeight: '20px',
+    fontSize: '11px',
+    lineHeight: 'normal',
     letterSpacing: '0.5px',
   },
   r1: {
@@ -132,6 +132,7 @@ export const vars = createGlobalTheme(':root', {
     '12x': spaceIncrements(12),
     '14x': spaceIncrements(14),
     '16x': spaceIncrements(16),
+    '17x': spaceIncrements(17),
     '18x': spaceIncrements(18),
     '24x': spaceIncrements(24),
     '36x': spaceIncrements(36),
@@ -191,6 +192,7 @@ export const vars = createGlobalTheme(':root', {
   borderRadius: {},
   fontFamily: {
     title: "'IBM Plex Sans', sans-serif",
+    specialTitle: "'Cammron', serif",
     body: "'IBM Plex Sans', sans-serif",
     func: "'Inter', sans-serif",
     rubric: "'Inter', sans-serif",
@@ -205,6 +207,7 @@ export const vars = createGlobalTheme(':root', {
     f2: text.f2.fontSize,
     f3: text.f3.fontSize,
     f4: text.f4.fontSize,
+    f5: text.f5.fontSize,
     '0': title.hero.fontSize,
     '1': title.h1.fontSize,
     '2': title.h2.fontSize,
@@ -236,6 +239,7 @@ export const vars = createGlobalTheme(':root', {
     f2: text.f2.lineHeight,
     f3: text.f3.lineHeight,
     f4: text.f4.lineHeight,
+    f5: text.f5.lineHeight,
     '0': title.hero.lineHeight,
     '1': title.h1.lineHeight,
     '2': title.h2.lineHeight,

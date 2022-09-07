@@ -15,6 +15,7 @@ export const buttonWrapperVariants = styleVariants({
     padding: '1px',
   },
   secondary: {},
+  tertiary: {},
   hero: {},
   nav: {},
   none: {},
@@ -36,6 +37,22 @@ export const buttonVariants = styleVariants({
     {
       background: vars.background.darkBlue,
       color: vars.color.primary,
+      fontWeight: '700',
+      textTransform: 'uppercase',
+      selectors: {
+        '&.disabled': {
+          opacity: 0.3,
+          cursor: 'auto',
+        },
+      },
+    },
+  ],
+  tertiary: [
+    baseButton,
+    {
+      backgroundColor: vars.color['bg-fill-quarter'],
+      color: vars.color.primary,
+      border: `1px solid ${vars.color['bg-fill-tertiary']}`,
       fontWeight: '700',
       textTransform: 'uppercase',
       selectors: {

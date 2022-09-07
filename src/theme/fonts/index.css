@@ -20,6 +20,20 @@
   src: url(./IBMPlexSans-SemiBold.ttf) format('truetype');
 }
 @font-face {
+  font-family: 'Cammron';
+  font-style: normal;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+  src: url(./Cammron-Bold.woff) format('woff');
+}
+@font-face {
+  font-family: 'Cammron';
+  font-style: normal;
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  src: url(./Cammron-Regular.woff) format('woff');
+}
+@font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;

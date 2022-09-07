@@ -6,7 +6,7 @@ import * as styles from './Input.css';
 
 interface InputStyleProps {
   variant?: 'hero' | 'primary';
-  size?: 'none' | 'large' | 'small';
+  size?: 'none' | 'large';
 }
 
 interface InputProps extends BoxProps, InputStyleProps {
@@ -15,6 +15,7 @@ interface InputProps extends BoxProps, InputStyleProps {
   className?: string;
   placeholder?: string;
   children?: ReactNode;
+  hideInput?: boolean;
 }
 
 const useInputStyles = ({ variant = 'hero' }: InputStyleProps) =>
@@ -26,10 +27,16 @@ const Input = ({
   children,
   value,
   onChange,
+  disabled,
+  size = 'none',
+  hideInput,
   ...restProps
 }: InputProps) => {
   return (
-    <Box className={styles.inputWrapperVariants[variant]} {...restProps}>
+    <Box
+      className={clsx(styles.inputWrapperVariants[variant], styles.inputSizeVariants[size])}
+      {...restProps}
+    >
       <FlexRow
         width='full'
         height='full'
@@ -47,6 +54,8 @@ const Input = ({
           onChange={onChange}
           className={clsx(useInputStyles({ variant }), useTextStyles({ level: 'b1' }))}
           placeholder={placeholder}
+          disabled={disabled}
+          display={hideInput ? 'none' : 'block'}
         />
       </FlexRow>
     </Box>

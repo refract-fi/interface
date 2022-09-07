@@ -1,3 +1,4 @@
 import Landing from './Landing/Landing';
-import GeneratingRefract from './GeneratingRefract/GeneratingRefract';
-export { Landing, GeneratingRefract };
+import Review from './Review/Review';
+import Generating from './Generating/Generating';
+export { Landing, Review, Generating };

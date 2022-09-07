@@ -1,4 +1,4 @@
-import { style, styleVariants } from '@vanilla-extract/css';
+import { createVar, style, styleVariants } from '@vanilla-extract/css';
 import { vars } from 'theme/vars.css';
 
 const baseInput = style({
@@ -14,7 +14,6 @@ export const inputWrapperVariants = styleVariants({
   hero: {
     background: vars.background.spectrum,
     padding: '1px',
-    width: '800px',
   },
   primary: {},
 });
@@ -35,4 +34,11 @@ export const inputVariants = styleVariants({
     },
   ],
   primary: [baseInput, {}],
+});
+
+export const inputSizeVariants = styleVariants({
+  large: {
+    width: '800px',
+  },
+  none: {},
 });

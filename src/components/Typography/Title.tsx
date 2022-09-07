@@ -1,6 +1,6 @@
 import { ElementType, ReactNode } from 'react';
 import clsx from 'clsx';
-
+import * as styles from './typography.css';
 import { Box, BoxProps } from '../../theme/components';
 import { sprinkles, Sprinkles } from '../../theme/sprinkles.css';
 
@@ -43,18 +43,23 @@ export interface TitleProps extends BoxProps {
   color?: Sprinkles['color'];
   component?: ElementType;
   className?: string;
+  special?: boolean;
+  weight?: keyof typeof styles.weight;
 }
 
 export const useTitleStyles = (
   level: TitleSizeLevel | any,
   align?: Sprinkles['textAlign'],
-  color: Sprinkles['color'] = 'primary'
+  color: Sprinkles['color'] = 'primary',
+  special?: boolean,
+  weight?: keyof typeof styles.weight
 ) =>
   clsx(
+    special ? styles.fonts['specialTitle'] : styles.fonts['title'],
+    weight && styles.weight[weight],
     sprinkles({
       textAlign: align,
       color: color,
-      fontFamily: 'title',
       fontSize: {
         sm: level?.sm || level,
         md: level?.md && level.md,
@@ -93,12 +98,14 @@ export const Title = ({
   color,
   children,
   className,
+  special,
+  weight,
   ...restProps
 }: TitleProps) => {
   return (
     <Box
       component={component || getTitleComponent(level)}
-      className={clsx(useTitleStyles(level, align, color), className)}
+      className={clsx(useTitleStyles(level, align, color, special, weight), className)}
       {...restProps}
     >
       {children}
