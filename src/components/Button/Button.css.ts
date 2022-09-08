@@ -9,19 +9,6 @@ const baseButton = style({
 
 export const active = style({});
 
-export const buttonWrapperVariants = styleVariants({
-  primary: {
-    background: vars.background.spectrum,
-    padding: '1px',
-  },
-  secondary: {},
-  tertiary: {},
-  hero: {},
-  nav: {},
-  none: {},
-  text: {},
-});
-
 export const buttonVariants = styleVariants({
   primary: [
     baseButton,

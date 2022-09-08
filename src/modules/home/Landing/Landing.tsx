@@ -23,7 +23,7 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
         REFRACT
       </Title>
       <Title level='4' marginTop={'6x'} textTransform='uppercase'>
-        Conceal your wealth, share your choices
+        Anonymize & Share your web3
       </Title>
       <AddressInput />
       <Button

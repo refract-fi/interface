@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import Text from 'components/Typography/Text';
+import Text, { useTextStyles } from 'components/Typography/Text';
 import { weight } from 'components/Typography/typography.css';
 import { ReactNode } from 'react';
 import { Box, BoxProps } from 'theme/components';
@@ -13,7 +13,7 @@ interface ButtonStyleProps {
   disabled?: boolean;
 }
 
-interface ButtonProps extends BoxProps, ButtonStyleProps {
+export interface ButtonProps extends BoxProps, ButtonStyleProps {
   label?: string;
   href?: string;
   onClick?: React.MouseEventHandler<HTMLElement>;
@@ -27,7 +27,11 @@ interface ButtonProps extends BoxProps, ButtonStyleProps {
   fixedHeight?: Sprinkles['height'];
 }
 
-const useButtonStyles = ({ variant = 'primary', size = 'small', disabled }: ButtonStyleProps) =>
+export const useButtonStyles = ({
+  variant = 'primary',
+  size = 'small',
+  disabled,
+}: ButtonStyleProps) =>
   clsx(styles.buttonVariants[variant], styles.buttonSizes[size], disabled && 'disabled');
 
 const Button = ({
@@ -49,27 +53,16 @@ const Button = ({
 }: ButtonProps) => {
   return (
     <Box
-      className={clsx(active && styles.active, styles.buttonWrapperVariants[variant])}
-      height={fixedHeight}
-      background={background}
-      fill={fill}
+      component={href ? 'a' : 'button'}
+      onClick={onClick}
+      className={clsx(
+        useButtonStyles({ variant, size, disabled }),
+        useTextStyles({ level, color })
+      )}
       {...restProps}
     >
-      <Box
-        component={href ? 'a' : 'button'}
-        onClick={onClick}
-        className={clsx(useButtonStyles({ variant, size, disabled }))}
-        height='full'
-        width='full'
-      >
-        {/* Improve text variants in buttons */}
-        {label && (
-          <Text level={variant === 'hero' ? 'f4' : level} color={color}>
-            {label}
-          </Text>
-        )}
-        {children && children}
-      </Box>
+      {label}
+      {children}
     </Box>
   );
 };

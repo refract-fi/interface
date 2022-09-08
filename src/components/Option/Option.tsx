@@ -1,3 +1,4 @@
+import BorderButton from 'components/BorderButton/BorderButton';
 import Button from 'components/Button/Button';
 import Text from 'components/Typography/Text';
 import { useMemo } from 'react';
@@ -16,7 +17,7 @@ const Option = ({ isSelected, label, details, variant, ...restProps }: OptionPro
     return { isDetailed: variant === 'detailed' };
   }, [variant]);
   return (
-    <Button
+    <BorderButton
       padding={isDetailed && !isSelected ? 'none' : 1}
       background={isSelected ? 'spectrum' : 'secondary'}
       size='none'
@@ -43,7 +44,7 @@ const Option = ({ isSelected, label, details, variant, ...restProps }: OptionPro
         )}
         {isSelected && !isDetailed && <Check />}
       </Flex>
-    </Button>
+    </BorderButton>
   );
 };
 
