@@ -1,3 +1,4 @@
+import { Text } from 'components';
 import { useEffect } from 'react';
 import { useFormPhaseActions } from 'states/formPhasesState';
 import { Box } from 'theme/components';
@@ -14,6 +15,9 @@ const GeneratingRefract = () => {
   }, []);
   return (
     <Box marginTop={'12x'} className={styles.generatingAnim}>
+      {/* <Text level='f4' color='secondary' textTransform={'uppercase'} marginTop='5x'>
+        Anonymizing Accounts...
+      </Text> */}
       <iframe
         src='https://giphy.com/embed/l0HlNYMuXXFViXTSE'
         width='480'

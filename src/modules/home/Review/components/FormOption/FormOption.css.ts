@@ -15,7 +15,7 @@ const fadeIn = keyframes({
 
 export const fadeInAnimTranslateY = style({
   animationFillMode: 'both',
-  animationDuration: '0.7s',
+  animationDuration: '0.6s',
   animationTimingFunction: 'ease',
   animationIterationCount: 1,
   animationDelay: componentIndex,

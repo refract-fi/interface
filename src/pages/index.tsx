@@ -32,7 +32,6 @@ const Home: NextPageWithLayout = () => {
         {phase === FormPhases.CREATE && <Landing fadeOut={fadeOut} fadeIn={fadeIn} />}
         {(phase === FormPhases.REVIEW || phase === FormPhases.GENERATING) && (
           <FlexCol alignItems={'center'} marginTop='48x'>
-            <Title special>GENERATING YOUR REFRACT</Title>
             {phase === FormPhases.REVIEW && <Review />}
             {phase === FormPhases.GENERATING && <Generating />}
           </FlexCol>

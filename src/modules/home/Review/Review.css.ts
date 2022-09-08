@@ -10,7 +10,7 @@ export const fadeOut = keyframes({
 });
 
 export const reviewFormAnim = style({
-  animationDelay: '8s',
+  animationDelay: '6.3s',
   animationName: fadeOut,
   animationFillMode: 'both',
   animationDuration: '1s',
@@ -27,6 +27,8 @@ export const progressAnimFrames = keyframes({
 
 export const progressAnim = style({
   animationName: progressAnimFrames,
-  animationDuration: '8s',
+  animationDuration: '2.5s',
+  animationDelay: '3.8s',
   animationTimingFunction: 'linear',
+  animationFillMode: 'both',
 });

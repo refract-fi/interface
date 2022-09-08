@@ -18,24 +18,19 @@ const ReviewForm = () => {
   useEffect(() => {
     const generatingTimeout = setTimeout(() => {
       setPhase(FormPhases.GENERATING);
-    }, 9000);
+    }, 7300);
     return () => clearTimeout(generatingTimeout);
   }, []);
 
   return (
     <FlexCol alignItems={'center'} className={styles.reviewFormAnim}>
-      <Title level='4' marginTop={'5x'}>
-        REVIEW YOUR PARAMETERS
-      </Title>
+      <Title special>REVIEW YOUR PARAMETERS</Title>
       <FlexRow gap='2x' marginTop={'9x'}>
         <Chips label='0x2345...1231' isLocked background='blue' />
         <Chips label='0x2345...1231' isLocked background='red' />
         <Chips label='Jabun.eth' isLocked background='green' />
         <Chips label='0skis.eth' isLocked background='darkBlue' />
       </FlexRow>
-      <Text level='f4' color='secondary' textTransform={'uppercase'} marginTop='5x'>
-        Anonymizing Accounts...
-      </Text>
       <FlexCol maxWidth={'124x'} width='full' marginTop={'0x'}>
         <FormOption
           title={'expiration'}
@@ -45,19 +40,19 @@ const ReviewForm = () => {
               ? 'NEVER EXPIRE'
               : 'EXPIRE IN ' + formatMoment(moment.duration(form.duration * 1000).humanize())
           }
-          animDelay={'1s'}
+          animDelay={'0.3s'}
         />
         <FormOption
           title={'portfolio data'}
           icon='snapshot'
           activeOption={form.isSnapshot ? 'STATIC' : 'REAL TIME'}
-          animDelay={'2s'}
+          animDelay={'0.9s'}
         />
         <FormOption
           title={'nft allocations'}
           icon='nft'
           activeOption={`${form.includeNFTs ? 'INCLUDE' : 'EXCLUDE'} NFTS`}
-          animDelay={'3s'}
+          animDelay={'1.5s'}
         />
         <FormOption
           title={'group assets'}
@@ -67,7 +62,7 @@ const ReviewForm = () => {
               ? `Assets under ${form.groupAssetsUnder}% ARE GROUPED`
               : 'NOT GROUPED'
           }
-          animDelay={'4s'}
+          animDelay={'2.1s'}
         />
         <FormOption
           title={'multichain'}
@@ -77,23 +72,36 @@ const ReviewForm = () => {
               ? 'ALL SUPPORTED NETWORKS'
               : `${form.networks.length} NETWORK${form.networks.length === 1 ? '' : 'S'}`
           }
-          animDelay={'5s'}
+          animDelay={'2.7s'}
         />
         <FormOption
           title={'verification'}
           icon='verified'
           activeOption={'NOT VERIFIED'}
-          animDelay={'6s'}
+          animDelay={'3.3s'}
         />
         <Box height='0x' backgroundColor='separator-non-opaque' marginTop={'8x'}>
           <Box height='full' background={'spectrum'} className={styles.progressAnim} />
         </Box>
         <Button
           level='f4'
-          label='MODIFY REFRACT'
+          label='modify refract'
           variant='text'
-          size='large'
+          // size='large'
           marginTop={'4x'}
+          textTransform='uppercase'
+          onClick={() => {
+            setPhase(FormPhases.CREATE);
+            setShowParams(true);
+          }}
+        />
+        <Button
+          level='f4'
+          label='skip'
+          variant='text'
+          // size='large'
+          marginTop={'4x'}
+          textTransform='uppercase'
           onClick={() => {
             setPhase(FormPhases.CREATE);
             setShowParams(true);
