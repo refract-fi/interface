@@ -66,7 +66,12 @@ const Modal = ({
               />
             </FlexRow>
           ) : (
-            <Button onClick={() => resetModalStatus()} size='none'>
+            <Button
+              onClick={() => resetModalStatus()}
+              size='none'
+              alignItems={'center'}
+              display='flex'
+            >
               <Close stroke='white' />
             </Button>
           )}

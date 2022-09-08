@@ -1,6 +1,4 @@
-import BorderButton from 'components/BorderButton/BorderButton';
-import Button from 'components/Button/Button';
-import Text from 'components/Typography/Text';
+import { BorderButton, Text } from 'components';
 import { useMemo } from 'react';
 import { BoxProps, Flex } from 'theme/components';
 import Check from '/public/icons/check.svg';

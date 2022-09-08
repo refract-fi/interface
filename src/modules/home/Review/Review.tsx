@@ -15,15 +15,18 @@ const ReviewForm = () => {
   const form = useRecoilValue<IForm>(formState);
   const { setPhase, setShowParams } = useFormPhaseActions();
 
-  useEffect(() => {
-    const generatingTimeout = setTimeout(() => {
-      setPhase(FormPhases.GENERATING);
-    }, 7300);
-    return () => clearTimeout(generatingTimeout);
-  }, []);
+  // useEffect(() => {
+  //   const generatingTimeout = setTimeout(() => {
+  //     setPhase(FormPhases.GENERATING);
+  //   }, 7300);
+  //   return () => clearTimeout(generatingTimeout);
+  // }, []);
 
   return (
-    <FlexCol alignItems={'center'} className={styles.reviewFormAnim}>
+    <FlexCol
+      alignItems={'center'}
+      // className={styles.reviewFormAnim}
+    >
       <Title special>REVIEW YOUR PARAMETERS</Title>
       <FlexRow gap='2x' marginTop={'9x'}>
         <Chips label='0x2345...1231' isLocked background='blue' />
@@ -83,30 +86,33 @@ const ReviewForm = () => {
         <Box height='0x' backgroundColor='separator-non-opaque' marginTop={'8x'}>
           <Box height='full' background={'spectrum'} className={styles.progressAnim} />
         </Box>
-        <Button
-          level='f4'
-          label='modify refract'
-          variant='text'
-          // size='large'
-          marginTop={'4x'}
-          textTransform='uppercase'
-          onClick={() => {
-            setPhase(FormPhases.CREATE);
-            setShowParams(true);
-          }}
-        />
-        <Button
-          level='f4'
-          label='skip'
-          variant='text'
-          // size='large'
-          marginTop={'4x'}
-          textTransform='uppercase'
-          onClick={() => {
-            setPhase(FormPhases.CREATE);
-            setShowParams(true);
-          }}
-        />
+        <FlexCol alignItems={'center'} marginTop={'4x'} gap='2x'>
+          <Button
+            level='f4'
+            label='modify refract'
+            variant='text'
+            width='fit-content'
+            textTransform='uppercase'
+            color='action'
+            weight='bold'
+            onClick={() => {
+              setPhase(FormPhases.CREATE);
+              setShowParams(true);
+            }}
+          />
+          <Button
+            level='f4'
+            label='skip'
+            variant='text'
+            width='fit-content'
+            textTransform='uppercase'
+            color='tertiary'
+            weight='bold'
+            onClick={() => {
+              setPhase(FormPhases.GENERATING);
+            }}
+          />
+        </FlexCol>
       </FlexCol>
     </FlexCol>
   );

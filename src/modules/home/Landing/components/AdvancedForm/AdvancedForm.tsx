@@ -1,4 +1,4 @@
-import { Option } from 'components';
+import { Button, Option, Title } from 'components';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './AdvancedForm.css';
 import FormTitle from '../FormTitle/FormTitle';
@@ -7,7 +7,7 @@ import { IForm, SupportedNetworks } from 'utils/types';
 import { formState, useFormActions } from 'states/formState';
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
-import { NetworkSelectModal } from 'components/Modals';
+import { AddCEXModal, NetworkSelectModal } from 'components/Modals';
 import VerifyAccountsModal from 'components/Modals/VerifyAccountsModal/VerifyAccountsModal';
 import { formatMoment } from 'utils/func';
 
@@ -21,8 +21,14 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
 
   const form = useRecoilValue<IForm>(formState);
 
-  const { setDuration, setGroupAssetsUnder, setIsGroupAssetsUnder, setIncludeNFTs, setIsSnapshot } =
-    useFormActions();
+  const {
+    setDuration,
+    setGroupAssetsUnder,
+    setIsGroupAssetsUnder,
+    setIncludeNFTs,
+    setIsSnapshot,
+    resetForm,
+  } = useFormActions();
   return (
     <>
       <FlexCol
@@ -31,6 +37,18 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         marginBottom={'24x'}
         display={isVisible ? 'flex' : 'none'}
       >
+        <FlexCol marginTop={'4x'}>
+          <FlexRow justifyContent={'space-between'} width='full'>
+            <Title level='6' textTransform={'uppercase'} weight='regular'>
+              advanced parameters
+            </Title>
+            <FlexRow gap='3x'>
+              <Button variant='text' label='Help' color='secondary' size='none' />
+              <Button variant='text' label='Reset' color='action' size='none' onClick={resetForm} />
+            </FlexRow>
+          </FlexRow>
+          <Box height={1} background='spectrum' marginTop={'1x'} />
+        </FlexCol>
         <Box>
           <FormTitle
             title='expiration'
@@ -173,6 +191,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
       </FlexCol>
       <NetworkSelectModal />
       <VerifyAccountsModal />
+      <AddCEXModal />
     </>
   );
 };

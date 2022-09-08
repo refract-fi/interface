@@ -18,7 +18,7 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
     fadeOut(() => setTimeout(() => fadeIn(), 150));
   };
   return (
-    <FlexCol alignItems={'center'} marginTop='72x'>
+    <FlexCol alignItems={'center'} marginTop='60x'>
       <Title special level='0' weight={'bold'}>
         REFRACT
       </Title>

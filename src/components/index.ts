@@ -9,5 +9,19 @@ import AddressInput from './AddressInput/AddressInput';
 import Modal from './Modal/Modal';
 import Checkbox from './Checkbox/Checkbox';
 import Icon from './Icon/Icon';
+import BorderButton from './BorderButton/BorderButton';
 
-export { Button, Input, Text, Title, Chips, Option, Switch, AddressInput, Modal, Checkbox, Icon };
+export {
+  Button,
+  Input,
+  Text,
+  Title,
+  Chips,
+  Option,
+  Switch,
+  AddressInput,
+  Modal,
+  Checkbox,
+  Icon,
+  BorderButton,
+};

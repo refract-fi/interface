@@ -2,7 +2,7 @@ import { ethers } from 'ethers';
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 export type ModalStateType = {
-  visibleModal: 'NONE' | 'NETWORK_SELECT' | 'VERIFY_ACCOUNTS';
+  visibleModal: 'NONE' | 'NETWORK_SELECT' | 'VERIFY_ACCOUNTS' | 'ADD_CEX';
 };
 
 const initialState: ModalStateType = {

@@ -1,4 +1,4 @@
-import { Input, Chips, Text } from 'components';
+import { Input, Chips, Text, Button } from 'components';
 import { ethers } from 'ethers';
 import { validate } from 'bitcoin-address-validation';
 import { useState } from 'react';
@@ -8,10 +8,12 @@ import { Box, Flex } from 'theme/components';
 import { vars } from 'theme/vars.css';
 import { IForm } from 'utils/types';
 import { IAddressInfo } from 'utils/types/form';
+import { useModalActions } from 'states/modalState';
 
 const AddressInput = () => {
   const { addresses } = useRecoilValue<IForm>(formState);
   const { setAddress } = useFormActions();
+  const { setVisibleModal } = useModalActions();
 
   const [value, setValue] = useState('');
   const [error, setError] = useState('');
@@ -111,7 +113,8 @@ const AddressInput = () => {
         marginTop={'10x'}
         size='large'
         value={value}
-        placeholder='Enter address[es] (0x, btc, .eth)'
+        placeholder='Enter addresses (0x, btc, .eth)'
+        background={error ? 'error' : 'spectrum'}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
         onBlur={() => onBlur()}
         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => onKeydown(e)}
@@ -126,10 +129,17 @@ const AddressInput = () => {
             />
           ))}
       </Input>
-      <Flex position='absolute' marginTop={'0x'} width='full' justifyContent={'center'}>
-        <Text color='negative' level='f4'>
+      <Flex marginTop={'1x'} width='full' justifyContent={'space-between'} alignItems='center'>
+        <Text color='negative' level='f4' textTransform={'uppercase'}>
           {error}
         </Text>
+        <Button
+          label='Add Centralized Exchange'
+          size='none'
+          color='action'
+          variant='text'
+          onClick={() => setVisibleModal('ADD_CEX')}
+        />
       </Flex>
     </Box>
   );

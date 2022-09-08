@@ -49,6 +49,7 @@ const Button = ({
   active,
   background,
   color,
+  weight,
   ...restProps
 }: ButtonProps) => {
   return (
@@ -57,7 +58,7 @@ const Button = ({
       onClick={onClick}
       className={clsx(
         useButtonStyles({ variant, size, disabled }),
-        useTextStyles({ level, color })
+        useTextStyles({ level, color, weight })
       )}
       {...restProps}
     >

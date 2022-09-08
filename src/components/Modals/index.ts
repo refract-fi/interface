@@ -1,3 +1,5 @@
-import NetworkSelectModal from './NetworkSelectModal';
+import NetworkSelectModal from './NetworkSelectModal/NetworkSelectModal';
+import AddCEXModal from './AddCEXModal/AddCEXModal';
+import VerifyAccountsModal from './VerifyAccountsModal/VerifyAccountsModal';
 
-export { NetworkSelectModal };
+export { NetworkSelectModal, AddCEXModal, VerifyAccountsModal };

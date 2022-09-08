@@ -84,13 +84,7 @@ export const buttonVariants = styleVariants({
       color: vars.color.primary,
     },
   ],
-  text: [
-    baseButton,
-    {
-      color: vars.color.action,
-      fontWeight: 'bold',
-    },
-  ],
+  text: [baseButton, {}],
 });
 
 export const buttonSizes = styleVariants({
