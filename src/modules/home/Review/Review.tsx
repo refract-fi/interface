@@ -6,6 +6,7 @@ import { useFormPhaseActions } from 'states/formPhasesState';
 import { formState } from 'states/formState';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import { formatMoment } from 'utils/func';
+import { getBorderColor } from 'utils/func/getBorderColor';
 import { IForm, SupportedNetworks } from 'utils/types';
 import { FormPhases } from 'utils/types/formPhase';
 import FormOption from './components/FormOption/FormOption';
@@ -15,24 +16,25 @@ const ReviewForm = () => {
   const form = useRecoilValue<IForm>(formState);
   const { setPhase, setShowParams } = useFormPhaseActions();
 
-  // useEffect(() => {
-  //   const generatingTimeout = setTimeout(() => {
-  //     setPhase(FormPhases.GENERATING);
-  //   }, 7300);
-  //   return () => clearTimeout(generatingTimeout);
-  // }, []);
+  useEffect(() => {
+    const generatingTimeout = setTimeout(() => {
+      setPhase(FormPhases.GENERATING);
+    }, 7300);
+    return () => clearTimeout(generatingTimeout);
+  }, []);
 
   return (
-    <FlexCol
-      alignItems={'center'}
-      // className={styles.reviewFormAnim}
-    >
+    <FlexCol alignItems={'center'} className={styles.reviewFormAnim}>
       <Title special>REVIEW YOUR PARAMETERS</Title>
       <FlexRow gap='2x' marginTop={'9x'}>
-        <Chips label='0x2345...1231' isLocked background='blue' />
-        <Chips label='0x2345...1231' isLocked background='red' />
-        <Chips label='Jabun.eth' isLocked background='green' />
-        <Chips label='0skis.eth' isLocked background='darkBlue' />
+        {form.addresses.map(({ address, ens, type, exchange }, index) => (
+          <Chips
+            key={address}
+            label={type === 'exchange' && exchange ? exchange : ens ? ens : address}
+            isLocked
+            background={getBorderColor(index)}
+          />
+        ))}
       </FlexRow>
       <FlexCol maxWidth={'124x'} width='full' marginTop={'0x'}>
         <FormOption
