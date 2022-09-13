@@ -9,9 +9,11 @@ import { vars } from 'theme/vars.css';
 import { IForm } from 'utils/types';
 import { IAddressInfo } from 'utils/types/form';
 import { useModalActions } from 'states/modalState';
+import BorderInput from 'components/BorderInput/BorderInput';
+import * as styles from './AddressInput.css';
 
 const AddressInput = () => {
-  const { addresses } = useRecoilValue<IForm>(formState);
+  const { addresses, CEXs } = useRecoilValue<IForm>(formState);
   const { setAddress } = useFormActions();
   const { setVisibleModal } = useModalActions();
 
@@ -108,27 +110,30 @@ const AddressInput = () => {
 
   return (
     <Box position={'relative'}>
-      <Input
-        variant='hero'
-        marginTop={'10x'}
-        size='large'
-        value={value}
-        placeholder='Enter addresses (0x, btc, .eth)'
-        background={error ? 'error' : 'spectrum'}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
-        onBlur={() => onBlur()}
-        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => onKeydown(e)}
-      >
-        {addresses.length >= 1 &&
-          addresses.map(({ address, signature, ens }, index) => (
-            <Chips
-              label={ens ? ens : address}
-              key={address}
-              background={getBorderColor(index)}
-              onClear={() => onClear(index)}
-            />
-          ))}
-      </Input>
+      <Box className={styles.addressInputWrapper}>
+        <BorderInput
+          variant='hero'
+          marginTop={'10x'}
+          size='large'
+          value={value}
+          placeholder='Enter addresses (0x, btc, .eth)'
+          width='full'
+          background={error ? 'error' : 'spectrum'}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
+          onBlur={() => onBlur()}
+          onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => onKeydown(e)}
+        >
+          {addresses.length >= 1 &&
+            addresses.map(({ address, ens, type, exchange }, index) => (
+              <Chips
+                label={type === 'exchange' && exchange ? exchange : ens ? ens : address}
+                key={address}
+                background={getBorderColor(index)}
+                onClear={() => onClear(index)}
+              />
+            ))}
+        </BorderInput>
+      </Box>
       <Flex marginTop={'1x'} width='full' justifyContent={'space-between'} alignItems='center'>
         <Text color='negative' level='f4' textTransform={'uppercase'}>
           {error}

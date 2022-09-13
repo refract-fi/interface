@@ -26,6 +26,7 @@ const Chips = ({ label, isLocked, onClear, isVerified, background }: ChipsProps)
         <Text level='b1'>{label}</Text>
         {!isLocked && (
           <Button
+            display='flex'
             marginLeft={'1x'}
             variant='none'
             size='none'

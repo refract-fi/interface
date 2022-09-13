@@ -10,19 +10,12 @@ const baseInput = style({
   },
 });
 
-export const inputWrapperVariants = styleVariants({
-  hero: {
-    padding: '1px',
-  },
-  primary: {},
-});
-
 export const inputVariants = styleVariants({
   hero: [
     baseInput,
     {
       height: '100%',
-      minWidth: 'max-content',
+      minWidth: '260px',
       padding: '7.5px 8px',
       selectors: {
         '&:focus': {
@@ -32,12 +25,30 @@ export const inputVariants = styleVariants({
       flex: '1',
     },
   ],
-  primary: [baseInput, {}],
+  primary: [
+    baseInput,
+    {
+      backgroundColor: vars.color['bg-fill-tertiary'],
+      '::placeholder': {
+        color: vars.color.secondary,
+        opacity: 1,
+      },
+      ':-ms-input-placeholder': {
+        color: vars.color.secondary,
+      },
+      '::-ms-input-placeholder': {
+        color: vars.color.secondary,
+      },
+    },
+  ],
 });
 
 export const inputSizeVariants = styleVariants({
   large: {
     width: '800px',
+  },
+  medium: {
+    padding: '8px 12px',
   },
   none: {},
 });

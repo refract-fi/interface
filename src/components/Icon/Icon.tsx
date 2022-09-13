@@ -1,5 +1,7 @@
 import { Box, Flex } from 'theme/components';
 import { Sprinkles } from 'theme/sprinkles.css';
+import { assignInlineVars } from '@vanilla-extract/dynamic';
+
 import Hourglass from '/public/icons/hourglass.svg';
 import Group from '/public/icons/group.svg';
 import Multichain from '/public/icons/multichain.svg';
@@ -15,6 +17,8 @@ import Binance from '/public/exchanges/binance.svg';
 import Kraken from '/public/exchanges/kraken.svg';
 import Coinbase from '/public/exchanges/coinbase.svg';
 import Gemini from '/public/exchanges/Gemini.svg';
+import { rotate, rotation } from './Icon.css';
+import Chevron from '/public/icons/chevron.svg';
 
 const standardIcons = {
   hourglass: <Hourglass />,
@@ -28,6 +32,7 @@ const standardIcons = {
   checkmark: <Checkmark />,
   close: <Close />,
   'verified-chromatic': <VerifiedChromatic />,
+  chevron: <Chevron />,
 };
 
 const exchangeIcons = {
@@ -45,11 +50,18 @@ interface IconProps {
   name: iconNames;
   fill?: Sprinkles['color'];
   stroke?: Sprinkles['color'];
+  rotate?: '90deg' | '180deg' | '270deg';
 }
 
 const Icon = ({ name, fill, stroke }: IconProps) => {
   return (
-    <Flex fill={fill} stroke={stroke} alignItems='center' justifyContent={'center'}>
+    <Flex
+      fill={fill}
+      stroke={stroke}
+      alignItems='center'
+      justifyContent={'center'}
+      style={assignInlineVars({ [rotation]: rotate })}
+    >
       {icons[name]}
     </Flex>
   );

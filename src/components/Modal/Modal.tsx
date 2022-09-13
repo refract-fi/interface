@@ -12,7 +12,8 @@ interface ModalProps {
   icon?: iconNames;
   isVisible: boolean;
   children: ReactNode;
-  onCancel?: Function;
+  onCancel?: Function | null;
+  onReturn?: Function | null;
   onSave?: () => void;
   saveDisabled?: boolean;
   maxWidth?: Sprinkles['maxWidth'];
@@ -24,8 +25,9 @@ const Modal = ({
   isVisible,
   children,
   onSave,
-  saveDisabled,
+  onReturn,
   onCancel,
+  saveDisabled,
   maxWidth = '104x',
 }: ModalProps) => {
   const { resetModalStatus } = useModalActions();
@@ -51,30 +53,42 @@ const Modal = ({
         <FlexRow width={'full'} justifyContent='space-between' alignItems={'center'}>
           <FlexRow gap='0x' alignItems={'center'}>
             {icon && <Icon name={icon} stroke='white' fill='white' />}
+            {onReturn && (
+              <Button onClick={() => onReturn()}>
+                <Icon name='chevron' stroke='white' />
+              </Button>
+            )}
             <Title level='6' textTransform={'uppercase'}>
               {title}
             </Title>
           </FlexRow>
-          {onSave ? (
-            <FlexRow gap='1x'>
-              <Button label='CANCEL' onClick={() => onCancel && onCancel()} />
-              <Button
-                label='SAVE'
-                variant='secondary'
-                onClick={() => onSave()}
-                disabled={saveDisabled}
-              />
-            </FlexRow>
-          ) : (
-            <Button
-              onClick={() => resetModalStatus()}
-              size='none'
-              alignItems={'center'}
-              display='flex'
-            >
-              <Close stroke='white' />
-            </Button>
-          )}
+          {!onReturn &&
+            (onSave ? (
+              <FlexRow gap='1x'>
+                {onCancel && <Button label='CANCEL' onClick={() => onCancel && onCancel()} />}
+                <Button
+                  label='SAVE'
+                  variant='secondary'
+                  onClick={() => onSave()}
+                  disabled={saveDisabled}
+                />
+              </FlexRow>
+            ) : (
+              <>
+                {onCancel ? (
+                  <Button label='CANCEL' onClick={() => onCancel && onCancel()} />
+                ) : (
+                  <Button
+                    onClick={() => resetModalStatus()}
+                    size='none'
+                    alignItems={'center'}
+                    display='flex'
+                  >
+                    <Close stroke='white' />
+                  </Button>
+                )}
+              </>
+            ))}
         </FlexRow>
         {children}
       </Box>

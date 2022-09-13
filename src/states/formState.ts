@@ -10,6 +10,7 @@ export const initialFormState: IForm = {
   isGroupAssetsUnder: true,
   includeNFTs: true,
   isSnapshot: true,
+  CEXs: [],
 };
 
 export const formState = atom<IForm>({

@@ -147,6 +147,11 @@ export const vars = createGlobalTheme(':root', {
     '124x': spaceIncrements(124),
     '136x': spaceIncrements(136),
     '148x': spaceIncrements(148),
+    '160x': spaceIncrements(160),
+    '172x': spaceIncrements(172),
+    '184x': spaceIncrements(184),
+    '196x': spaceIncrements(196),
+    '208x': spaceIncrements(208),
   },
   color: {
     white: '#fff',

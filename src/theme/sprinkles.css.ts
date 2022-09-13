@@ -44,6 +44,7 @@ const responsiveProperties = defineProperties({
       0: '0px',
       ...vars.space,
     },
+    minWidth: vars.space,
     maxWidth: vars.space,
     maxHeight: vars.space,
     height: {

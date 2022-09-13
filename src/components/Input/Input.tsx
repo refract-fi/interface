@@ -1,25 +1,27 @@
 import clsx from 'clsx';
 import { useTextStyles } from 'components/Typography/Text';
 import { ReactNode } from 'react';
-import { Box, BoxProps, FlexRow } from 'theme/components';
+import { Box, BoxProps } from 'theme/components';
+import { text } from 'theme/vars.css';
 import * as styles from './Input.css';
 
 interface InputStyleProps {
   variant?: 'hero' | 'primary';
-  size?: 'none' | 'large';
+  size?: 'none' | 'medium' | 'large';
 }
 
-interface InputProps extends BoxProps, InputStyleProps {
+export interface InputProps extends BoxProps, InputStyleProps {
   disabled?: boolean;
   onClick?: React.MouseEventHandler<HTMLElement>;
   className?: string;
   placeholder?: string;
   children?: ReactNode;
   hideInput?: boolean;
+  level?: keyof typeof text;
 }
 
-const useInputStyles = ({ variant = 'hero' }: InputStyleProps) =>
-  clsx(variant === 'hero' && styles.inputVariants.hero);
+const useInputStyles = ({ variant = 'hero', size = 'none' }: InputStyleProps) =>
+  clsx(styles.inputVariants[variant], styles.inputSizeVariants[size]);
 
 const Input = ({
   variant = 'primary',
@@ -29,36 +31,21 @@ const Input = ({
   onChange,
   disabled,
   size = 'none',
+  level = 'b1',
   hideInput,
   ...restProps
 }: InputProps) => {
   return (
     <Box
-      className={clsx(styles.inputWrapperVariants[variant], styles.inputSizeVariants[size])}
+      component='input'
+      value={value}
+      onChange={onChange}
+      className={clsx(useInputStyles({ variant, size }), useTextStyles({ level: level }))}
+      placeholder={placeholder}
+      disabled={disabled}
+      display={hideInput ? 'none' : 'block'}
       {...restProps}
-    >
-      <FlexRow
-        width='full'
-        height='full'
-        backgroundColor={'black'}
-        alignItems='center'
-        flexWrap={'wrap'}
-        gap='1x'
-        paddingX={'1x'}
-        paddingY='1x'
-      >
-        {children}
-        <Box
-          component='input'
-          value={value}
-          onChange={onChange}
-          className={clsx(useInputStyles({ variant }), useTextStyles({ level: 'b1' }))}
-          placeholder={placeholder}
-          disabled={disabled}
-          display={hideInput ? 'none' : 'block'}
-        />
-      </FlexRow>
-    </Box>
+    />
   );
 };
 

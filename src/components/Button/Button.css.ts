@@ -78,6 +78,19 @@ export const buttonVariants = styleVariants({
       },
     },
   ],
+  exchange: [
+    baseButton,
+    {
+      color: vars.color.primary,
+      backgroundColor: vars.color['gray-5'],
+    },
+  ],
+  inline: [
+    baseButton,
+    {
+      color: vars.color.action,
+    },
+  ],
   none: [
     baseButton,
     {

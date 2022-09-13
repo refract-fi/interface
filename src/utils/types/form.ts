@@ -1,4 +1,5 @@
 import { iconNames } from 'components/Icon/Icon';
+import { SupportedExchanges } from './exchanges';
 
 export enum SupportedNetworks {
   ETHEREUM = 'Ethereum',
@@ -21,8 +22,15 @@ export enum SupportedNetworks {
 export interface IAddressInfo {
   address: string;
   ens?: string;
-  type?: 'ethereum' | 'bitcoin';
+  type?: 'ethereum' | 'bitcoin' | 'exchange';
+  exchange?: SupportedExchanges;
   signature?: string;
+}
+
+export interface ICEXInfo {
+  publicKey: string;
+  privateKey: string;
+  exchange: SupportedExchanges | null;
 }
 
 export interface IFormOption {
@@ -42,6 +50,7 @@ export default interface IForm {
   isGroupAssetsUnder: boolean;
   includeNFTs: boolean;
   isSnapshot: boolean;
+  CEXs: ICEXInfo[];
 }
 
 // const expirationEntity: IFormOption = {
