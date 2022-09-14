@@ -7,9 +7,10 @@ import { fadeInAnimTranslateY } from './FormOption.css';
 
 interface FormOptionProps extends IFormOption {
   animDelay: string;
+  inactive?: boolean;
 }
 
-const FormOption = ({ title, icon, activeOption, animDelay }: FormOptionProps) => {
+const FormOption = ({ title, icon, activeOption, animDelay, inactive }: FormOptionProps) => {
   return (
     <FlexCol
       className={fadeInAnimTranslateY}
@@ -22,7 +23,12 @@ const FormOption = ({ title, icon, activeOption, animDelay }: FormOptionProps) =
             {title}
           </Title>
         </Flex>
-        <Text level='f4' weight='bold' textTransform={'uppercase'}>
+        <Text
+          level='f4'
+          weight='bold'
+          textTransform={'uppercase'}
+          color={inactive ? 'secondary' : 'primary'}
+        >
           {activeOption}
         </Text>
       </FlexRow>

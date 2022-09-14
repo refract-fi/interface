@@ -1,7 +1,7 @@
 import { Text } from 'components';
 import { useEffect } from 'react';
 import { useFormPhaseActions } from 'states/formPhasesState';
-import { Box } from 'theme/components';
+import { Box, FlexCol } from 'theme/components';
 import { FormPhases } from 'utils/types/formPhase';
 import * as styles from './Generating.css';
 
@@ -14,10 +14,15 @@ const GeneratingRefract = () => {
     return () => clearTimeout(generatingTimeout);
   }, []);
   return (
-    <Box marginTop={'12x'} className={styles.generatingAnim}>
-      {/* <Text level='f4' color='secondary' textTransform={'uppercase'} marginTop='5x'>
+    <FlexCol
+      marginTop={'12x'}
+      className={styles.generatingAnim}
+      alignItems='center'
+      justifyContent={'center'}
+    >
+      <Text level='f4' color='secondary' textTransform={'uppercase'} marginTop='5x'>
         Anonymizing Accounts...
-      </Text> */}
+      </Text>
       <iframe
         src='https://giphy.com/embed/l0HlNYMuXXFViXTSE'
         width='480'
@@ -26,7 +31,7 @@ const GeneratingRefract = () => {
         className='giphy-embed'
         allowFullScreen
       ></iframe>
-    </Box>
+    </FlexCol>
   );
 };
 

@@ -9,10 +9,18 @@ interface ChipsProps {
   isLocked?: boolean;
   onClear?: Function;
   isVerified?: boolean;
+  invisibleLabel?: boolean;
   background: keyof typeof vars.background;
 }
 
-const Chips = ({ label, isLocked, onClear, isVerified, background }: ChipsProps) => {
+const Chips = ({
+  label,
+  isLocked,
+  onClear,
+  isVerified,
+  background,
+  invisibleLabel,
+}: ChipsProps) => {
   return (
     <Box padding={1} background={background} height='fit'>
       <FlexRow
@@ -23,7 +31,9 @@ const Chips = ({ label, isLocked, onClear, isVerified, background }: ChipsProps)
         paddingX='1x'
         alignItems='center'
       >
-        <Text level='b1'>{label}</Text>
+        <Text level='b1' opacity={invisibleLabel ? 0 : 1}>
+          {label}
+        </Text>
         {!isLocked && (
           <Button
             display='flex'

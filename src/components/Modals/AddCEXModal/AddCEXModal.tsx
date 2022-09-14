@@ -27,6 +27,7 @@ const AddCEXModal = () => {
     if (CEXInfo.address && CEXInfo.signature && CEXInfo?.exchange) {
       setAddress([...addresses, { ...CEXInfo, type: 'exchange' }]);
       setCEXInfo(initialAddressInfo);
+      resetModalStatus();
     } else {
       setError('ERROR');
     }
@@ -44,21 +45,26 @@ const AddCEXModal = () => {
       {!CEXInfo?.exchange ? (
         <>
           <FlexCol gap='2x'>
-            {Object.values(SupportedExchanges).map((exchange: SupportedExchanges) => (
-              <Button
-                backgroundColor={'action'}
-                variant='exchange'
-                width='full'
-                key={exchange}
-                disabled={addresses.findIndex(CEX => CEX.type?.toUpperCase() === exchange) === -1}
-                onClick={() => setCEXInfo({ ...CEXInfo, exchange: exchange })}
-              >
-                <FlexRow alignItems={'center'} gap='2x' paddingY='1x'>
-                  <Icon name={exchange} />
-                  <Text level='b2'>{exchange.charAt(0).toUpperCase() + exchange.slice(1)}</Text>
-                </FlexRow>
-              </Button>
-            ))}
+            {Object.values(SupportedExchanges).map((exchange: SupportedExchanges) => {
+              const isDisabled = !(addresses.findIndex(CEX => CEX.exchange === exchange) === -1);
+              return (
+                <Button
+                  backgroundColor={'action'}
+                  variant='exchange'
+                  width='full'
+                  key={exchange}
+                  disabled={isDisabled}
+                  onClick={() =>
+                    isDisabled ? null : setCEXInfo({ ...CEXInfo, exchange: exchange })
+                  }
+                >
+                  <FlexRow alignItems={'center'} gap='2x' paddingY='1x'>
+                    <Icon name={exchange} />
+                    <Text level='b2'>{exchange.charAt(0).toUpperCase() + exchange.slice(1)}</Text>
+                  </FlexRow>
+                </Button>
+              );
+            })}
           </FlexCol>
           <Flex justifyContent={'center'} marginY='2x'>
             <Text level='b2' color='secondary'>
@@ -114,7 +120,7 @@ const AddCEXModal = () => {
             />
           </FlexCol>
           <Button
-            label={`add ${CEXInfo?.type}`}
+            label={`add ${CEXInfo?.exchange}`}
             variant='secondary'
             size='large'
             marginTop={'3x'}

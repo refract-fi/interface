@@ -12,6 +12,7 @@ interface TextStyleProps {
   baseline?: boolean;
   level?: keyof typeof text | any;
   className?: string;
+  spectrum?: boolean;
 }
 
 export interface TextProps extends TextStyleProps, BoxProps {
@@ -19,11 +20,19 @@ export interface TextProps extends TextStyleProps, BoxProps {
   children: ReactNode;
 }
 
-export const useTextStyles = ({ level = 'b1', color, weight, align, className }: TextStyleProps) =>
+export const useTextStyles = ({
+  level = 'b1',
+  color,
+  weight,
+  align,
+  spectrum,
+  className,
+}: TextStyleProps) =>
   clsx(
     (level[0] === 'b' || (level?.sm && level?.sm[0] === 'b')) && styles.fonts['body'],
     (level[0] === 'f' || (level?.sm && level?.sm[0] === 'f')) && styles.fonts['func'],
     (level[0] === 'f' || (level?.sm && level?.sm[0] === 'f')) && styles.funcFont,
+    spectrum && styles.spectrum,
     sprinkles({
       color: color,
       textAlign: align,
@@ -54,6 +63,7 @@ export const Text = ({
   level,
   children,
   className,
+  spectrum,
   ...restProps
 }: TextProps) => (
   <Box
@@ -64,6 +74,7 @@ export const Text = ({
       level,
       align,
       baseline,
+      spectrum,
       className,
     })}
     {...restProps}

@@ -5,6 +5,11 @@ const baseButton = style({
   flexDirection: 'row',
   alignItems: 'center',
   // height: 'fit-content',
+  selectors: {
+    '&.disabled': {
+      cursor: 'auto',
+    },
+  },
 });
 
 export const active = style({});
@@ -83,6 +88,11 @@ export const buttonVariants = styleVariants({
     {
       color: vars.color.primary,
       backgroundColor: vars.color['gray-5'],
+      selectors: {
+        '&.disabled': {
+          opacity: 0.4,
+        },
+      },
     },
   ],
   inline: [
