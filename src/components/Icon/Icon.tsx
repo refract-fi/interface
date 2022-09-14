@@ -1,24 +1,23 @@
 import { Box, Flex } from 'theme/components';
 import { Sprinkles } from 'theme/sprinkles.css';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
-
-import Hourglass from '/public/icons/hourglass.svg';
-import Group from '/public/icons/group.svg';
-import Multichain from '/public/icons/multichain.svg';
-import NFT from '/public/icons/nft.svg';
-import Snapshot from '/public/icons/snapshot.svg';
-import Verified from '/public/icons/verified.svg';
-import Arrow from '/public/icons/arrow.svg';
-import Check from '/public/icons/check.svg';
-import Checkmark from '/public/icons/checkmark.svg';
-import Close from '/public/icons/close.svg';
-import VerifiedChromatic from '/public/icons/verified-chromatic.svg';
-import Binance from '/public/exchanges/binance.svg';
-import Kraken from '/public/exchanges/kraken.svg';
-import Coinbase from '/public/exchanges/coinbase.svg';
-import Gemini from '/public/exchanges/Gemini.svg';
-import { rotate, rotation } from './Icon.css';
-import Chevron from '/public/icons/chevron.svg';
+import Hourglass from './icons/Hourglass';
+import Group from './icons/Group';
+import Multichain from './icons/Multichain';
+import NFT from './icons/NFT';
+import Snapshot from './icons/Snapshot';
+import Verified from './icons/Verified';
+import Chevron from './icons/Chevron';
+import VerifiedChromatic from './icons/VerifiedChromatic';
+import Close from './icons/Close';
+import Check from './icons/Check';
+import Gemini from './icons/Gemini';
+import Binance from './icons/Binance';
+import Kraken from './icons/Kraken';
+import Coinbase from './icons/Coinbase';
+import { rotation } from './Icon.css';
+import RefractLogo from './icons/RefractLogo';
+import * as styles from './Icon.css';
 
 const standardIcons = {
   hourglass: <Hourglass />,
@@ -27,12 +26,14 @@ const standardIcons = {
   nft: <NFT />,
   snapshot: <Snapshot />,
   verified: <Verified />,
-  arrow: <Arrow />,
   check: <Check />,
-  checkmark: <Checkmark />,
   close: <Close />,
   'verified-chromatic': <VerifiedChromatic />,
   chevron: <Chevron />,
+};
+
+const brandIcons = {
+  'refract-logo': <RefractLogo />,
 };
 
 const exchangeIcons = {
@@ -42,7 +43,7 @@ const exchangeIcons = {
   coinbase: <Coinbase />,
 };
 
-const icons = { ...standardIcons, ...exchangeIcons };
+const icons = { ...standardIcons, ...exchangeIcons, ...brandIcons };
 
 export type iconNames = keyof typeof icons;
 
@@ -50,19 +51,30 @@ interface IconProps {
   name: iconNames;
   fill?: Sprinkles['color'];
   stroke?: Sprinkles['color'];
-  rotate?: '90deg' | '180deg' | '270deg';
+  rotate?: '0deg' | '90deg' | '180deg' | '270deg';
+  size?: number;
 }
 
-const Icon = ({ name, fill, stroke }: IconProps) => {
+const Icon = ({ name, fill, stroke, size, rotate = '0deg' }: IconProps) => {
   return (
     <Flex
       fill={fill}
       stroke={stroke}
       alignItems='center'
       justifyContent={'center'}
+      className={styles.rotate}
       style={assignInlineVars({ [rotation]: rotate })}
     >
-      {icons[name]}
+      <svg
+        width={size ? size : '24'}
+        height={size ? size : '24'}
+        viewBox='0 0 24 24'
+        // fill='current'
+        // stroke='current'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        {icons[name]}
+      </svg>
     </Flex>
   );
 };

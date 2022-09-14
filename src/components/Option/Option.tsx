@@ -1,7 +1,6 @@
-import { BorderButton, Text } from 'components';
+import { BorderButton, Text, Icon } from 'components';
 import { useMemo } from 'react';
 import { BoxProps, Flex } from 'theme/components';
-import Check from '/public/icons/check.svg';
 
 interface OptionProps extends BoxProps {
   isSelected?: boolean;
@@ -40,7 +39,7 @@ const Option = ({ isSelected, label, details, variant, ...restProps }: OptionPro
             {details}
           </Text>
         )}
-        {isSelected && !isDetailed && <Check />}
+        {isSelected && !isDetailed && <Icon name='check' fill='white' rotate='0deg' />}
       </Flex>
     </BorderButton>
   );

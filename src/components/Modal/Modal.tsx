@@ -39,7 +39,7 @@ const Modal = ({
       backgroundColor={'overlay-ultrathin'}
       justifyContent='center'
       alignItems={'center'}
-      top={0}
+      top={'0'}
       display={isVisible ? 'flex' : 'none'}
     >
       <Box
@@ -52,7 +52,7 @@ const Modal = ({
       >
         <FlexRow width={'full'} justifyContent='space-between' alignItems={'center'}>
           <FlexRow gap='0x' alignItems={'center'}>
-            {icon && <Icon name={icon} stroke='white' fill='white' />}
+            {icon && <Icon name={icon} stroke='white' />}
             {onReturn && (
               <Button onClick={() => onReturn()}>
                 <Icon name='chevron' stroke='white' />
@@ -84,7 +84,7 @@ const Modal = ({
                     alignItems={'center'}
                     display='flex'
                   >
-                    <Close stroke='white' />
+                    <Icon name='close' stroke='white' />
                   </Button>
                 )}
               </>

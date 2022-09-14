@@ -6,6 +6,7 @@ import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import Verified from '/public/icons/verified.svg';
 import VerifiedChromatic from '/public/icons/verified-chromatic.svg';
 import * as styles from './VerifyAccountsModal.css';
+import Icon from 'components/Icon/Icon';
 
 const VerifyAccountsModal = () => {
   const { isModalVisible, resetModalStatus } = useModalActions();
@@ -41,16 +42,16 @@ const VerifyAccountsModal = () => {
               <Text className={styles.textGradient} level='b2'>
                 Verified
               </Text>
-              <VerifiedChromatic />
+              <Icon name='verified-chromatic' />
             </Flex>
           </FlexRow>
           <FlexRow justifyContent={'space-between'} paddingX='2x' paddingY='1x'>
             <Text level='b2'>0x2453...b324</Text>
-            <Button variant='text' size='none' label='Verify' level='b2' />
+            <Button variant='text' size='none' label='Verify' level='b2' color='action' />
           </FlexRow>
           <FlexRow justifyContent={'space-between'} paddingX='2x' paddingY='1x'>
             <Text level='b2'>Refract.eth</Text>
-            <Button variant='text' size='none' label='Verify' level='b2' />
+            <Button variant='text' size='none' label='Verify' level='b2' color='action' />
           </FlexRow>
         </FlexCol>
       </FlexCol>

@@ -18,7 +18,7 @@ const FormOption = ({ title, icon, activeOption, animDelay, inactive }: FormOpti
     >
       <FlexRow justifyContent='space-between' alignItems={'center'} paddingY='5x'>
         <Flex gap='2x' alignItems={'center'}>
-          <Icon name={icon} stroke='secondary' fill='secondary' />
+          <Icon name={icon} stroke='secondary' />
           <Title level={'6'} color='secondary' textTransform={'uppercase'}>
             {title}
           </Title>

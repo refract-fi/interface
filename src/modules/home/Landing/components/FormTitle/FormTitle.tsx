@@ -46,7 +46,7 @@ const FormTitle = ({
   return (
     <FlexRow justifyContent={'space-between'}>
       <FlexRow gap='2x'>
-        <Icon stroke={'white'} fill='white' name={icon} />
+        <Icon stroke={'white'} name={icon} />
         <Title level='6' textTransform={'uppercase'}>
           {title}
         </Title>
@@ -88,7 +88,9 @@ const FormTitle = ({
             {activeOption}
           </Text>
         </Text>
-        {isOther && <Arrow stroke={vars.color.primary} />}
+        {isOther && (
+          <Icon name='chevron' stroke={'primary'} size={20} rotate={extend ? '0deg' : '180deg'} />
+        )}
         {(isSwitch || isGroup) && (
           <Switch toggled={toggled} onClick={() => setToggle && setToggle(!toggled)} />
         )}

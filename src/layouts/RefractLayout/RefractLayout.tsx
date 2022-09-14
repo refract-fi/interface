@@ -1,4 +1,4 @@
-import { BorderButton, Button, Text, Title } from 'components';
+import { BorderButton, Button, Icon, Text, Title } from 'components';
 import { useRouter } from 'next/router';
 import { ReactNode, useCallback } from 'react';
 import { Box, Flex, FlexRow } from 'theme/components';
@@ -20,8 +20,8 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
   return (
     <Box>
       <FlexRow gap='2x' justifyContent={'center'} marginY='6x'>
-        <Flex position={'absolute'} left='7x'>
-          <RefractLogo />
+        <Flex position={'absolute'} left='7x' gap='2x'>
+          <Icon name='refract-logo' />
           <Title level='4' special weight='bold' className={styles.title}>
             REFRACT
           </Title>

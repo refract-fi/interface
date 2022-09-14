@@ -3,6 +3,7 @@ import { Box, FlexRow } from 'theme/components';
 import Close from '/public/icons/close.svg';
 import { vars } from 'theme/vars.css';
 import Button from 'components/Button/Button';
+import Icon from 'components/Icon/Icon';
 
 interface ChipsProps {
   label: string;
@@ -43,7 +44,7 @@ const Chips = ({
             fixedHeight={'icon'}
             onClick={() => onClear && onClear()}
           >
-            <Close stroke={vars.color.white} />
+            <Icon name='close' stroke={'primary'} />
           </Button>
         )}
       </FlexRow>

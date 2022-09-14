@@ -67,7 +67,6 @@ const Button = ({
   weight,
   ...restProps
 }: ButtonProps) => {
-  console.log(`${label}-${active}`);
   return (
     <Box
       component={href ? 'a' : variant === 'inline' ? 'span' : 'button'}

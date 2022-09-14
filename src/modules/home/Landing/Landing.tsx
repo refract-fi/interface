@@ -39,7 +39,12 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
           <Text level='f4' color={'secondary'}>
             ADVANCED PARAMETERS
           </Text>
-          <Icon name='arrow' stroke={'secondary'} />
+          <Icon
+            name='chevron'
+            stroke={'secondary'}
+            size={20}
+            rotate={showParams ? '0deg' : '180deg'}
+          />
         </FlexRow>
       </Button>
       <AdvancedForm isVisible={showParams} />
