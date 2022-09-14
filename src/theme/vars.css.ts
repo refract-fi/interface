@@ -185,8 +185,9 @@ export const vars = createGlobalTheme(':root', {
     separator: '#545458B3',
     'separator-non-opaque': '#545458B3',
 
-    red: '#EC5C38',
-    orange: '#E9B047',
+    red: 'E9164E',
+    orange: '#EC5C38',
+    gold: '#E9B047',
     arctic: '#88E3F0',
     yellow: '#F8EC8B',
     blue: '#253ABD',
