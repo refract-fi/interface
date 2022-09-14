@@ -20,6 +20,7 @@ interface ButtonStyleProps {
     | 'inline';
   size?: 'medium' | 'large' | 'small' | 'none';
   disabled?: boolean;
+  active?: boolean;
 }
 
 export interface ButtonProps extends BoxProps, ButtonStyleProps {
@@ -32,7 +33,6 @@ export interface ButtonProps extends BoxProps, ButtonStyleProps {
   color?: Sprinkles['color'];
   fill?: Sprinkles['color'];
   weight?: keyof typeof weight;
-  active?: boolean;
   fixedHeight?: Sprinkles['height'];
 }
 
@@ -40,8 +40,14 @@ export const useButtonStyles = ({
   variant = 'primary',
   size = 'small',
   disabled,
+  active,
 }: ButtonStyleProps) =>
-  clsx(styles.buttonVariants[variant], styles.buttonSizes[size], disabled && 'disabled');
+  clsx(
+    styles.buttonVariants[variant],
+    styles.buttonSizes[size],
+    disabled && 'disabled',
+    active && 'active'
+  );
 
 const Button = ({
   variant = 'none',
@@ -61,12 +67,13 @@ const Button = ({
   weight,
   ...restProps
 }: ButtonProps) => {
+  console.log(`${label}-${active}`);
   return (
     <Box
       component={href ? 'a' : variant === 'inline' ? 'span' : 'button'}
       onClick={onClick}
       className={clsx(
-        useButtonStyles({ variant, size, disabled }),
+        useButtonStyles({ variant, size, disabled, active }),
         useTextStyles({ level, color, weight })
       )}
       {...restProps}

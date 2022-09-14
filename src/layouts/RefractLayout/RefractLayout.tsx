@@ -10,20 +10,21 @@ interface RefractLayoutProps {
 
 const RefractLayout = ({ children }: RefractLayoutProps) => {
   const { pathname, push, query } = useRouter();
+  const router = useRouter();
 
   const isActive = useCallback((route: string) => pathname.includes(route), [pathname]);
 
   const changeRoute = (route: string) =>
-    push({ pathname: `/rfct/[refractId]/${route}`, query: { refractId: query.refractId } });
+    push({ pathname: `/rfct/[rfctId]/${route}`, query: { rfctId: query.rfctId } });
 
   return (
     <Box>
       <FlexRow gap='2x' justifyContent={'center'} marginY='6x'>
         <Button
-          label='REFRACTION'
+          label='REFRACT'
           variant='nav'
-          active={isActive('refraction')}
-          onClick={() => changeRoute('refraction')}
+          active={isActive('refract')}
+          onClick={() => changeRoute('refract')}
         />
         <Button
           label='ALLOCATIONS'
@@ -37,7 +38,7 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
           active={isActive('stats')}
           onClick={() => changeRoute('stats')}
         />
-        <Button label='NEW LINK' variant='primary' />
+        {/* <Button label='NEW LINK' variant='primary' /> */}
       </FlexRow>
       <Flex justifyContent={'center'} paddingTop='12x' className={styles.childWrapper}>
         {children}

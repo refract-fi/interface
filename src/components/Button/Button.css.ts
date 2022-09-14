@@ -70,15 +70,15 @@ export const buttonVariants = styleVariants({
     {
       color: vars.color.secondary,
       textTransform: 'uppercase',
-      backgroundColor: vars.color['bg-primary'],
       width: 200,
       paddingTop: 5,
       paddingBottom: 5,
       selectors: {
-        [`${active} &`]: {
-          color: 'white',
-          fontWeight: '600',
-          backgroundColor: vars.color['bg-sec'],
+        [`&.active`]: {
+          background: vars.background.spectrum,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          fontWeight: 'bold',
         },
       },
     },
