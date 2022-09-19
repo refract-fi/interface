@@ -23,14 +23,9 @@ const GeneratingRefract = () => {
       <Text level='f4' color='secondary' textTransform={'uppercase'} marginTop='5x'>
         Anonymizing Accounts...
       </Text>
-      <iframe
-        src='https://giphy.com/embed/l0HlNYMuXXFViXTSE'
-        width='480'
-        height='480'
-        frameBorder='0'
-        className='giphy-embed'
-        allowFullScreen
-      ></iframe>
+      <video width='500' height='500' autoPlay muted loop>
+        <source src='/animation.mp4' type='video/mp4' />
+      </video>
     </FlexCol>
   );
 };
