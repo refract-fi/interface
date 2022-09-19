@@ -24,9 +24,9 @@ const VerifyAccountsModal = () => {
           <Text component={'p'} level='b2' color='secondary'>
             Remember that you need to verify all the wallets to display the verified badge on your
             Refract.{' '}
-            <Text component={'button'} color='action' level='b2' cursor='pointer'>
+            <Button size='none' color='action'>
               Learn More
-            </Text>
+            </Button>
           </Text>
         </FlexCol>
         <Box height={1} width='full' backgroundColor='separator-non-opaque' />
@@ -47,11 +47,11 @@ const VerifyAccountsModal = () => {
           </FlexRow>
           <FlexRow justifyContent={'space-between'} paddingX='2x' paddingY='1x'>
             <Text level='b2'>0x2453...b324</Text>
-            <Button variant='text' size='none' label='Verify' level='b2' color='action' />
+            <Button size='none' label='Verify' level='b2' color='action' />
           </FlexRow>
           <FlexRow justifyContent={'space-between'} paddingX='2x' paddingY='1x'>
             <Text level='b2'>Refract.eth</Text>
-            <Button variant='text' size='none' label='Verify' level='b2' color='action' />
+            <Button size='none' label='Verify' level='b2' color='action' />
           </FlexRow>
         </FlexCol>
       </FlexCol>
