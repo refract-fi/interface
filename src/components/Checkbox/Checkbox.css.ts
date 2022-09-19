@@ -40,6 +40,9 @@ export const checkbox = style({
 export const checkboxWrapperVariants = styleVariants({
   none: {
     cursor: 'pointer',
+    ':hover': {
+      color: '#FFFFFFB3',
+    },
   },
   button: {
     cursor: 'pointer',
@@ -47,6 +50,13 @@ export const checkboxWrapperVariants = styleVariants({
       '&.active': {
         backgroundColor: vars.color['gray-5'],
       },
+      '&:hover&.active': {
+        backgroundColor: '#2C2C2EB3',
+        color: vars.color.primary,
+      },
+    },
+    ':hover': {
+      color: '#FFFFFFB3',
     },
   },
 });

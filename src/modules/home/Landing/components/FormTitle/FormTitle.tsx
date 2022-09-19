@@ -1,6 +1,6 @@
 import { Box, FlexRow } from 'theme/components';
 import Arrow from '/public/icons/arrow.svg';
-import { Icon, Switch, Text, Title } from 'components';
+import { Button, Icon, Switch, Text, Title } from 'components';
 import { vars } from 'theme/vars.css';
 import { useMemo } from 'react';
 import * as styles from './FormTitle.css';
@@ -53,9 +53,9 @@ const FormTitle = ({
       </FlexRow>
       <FlexRow
         alignItems={'center'}
-        gap='2x'
         cursor={isSwitch || isGroup || isModal ? 'auto' : 'pointer'}
         onClick={() => setExtend && setExtend(!extend)}
+        gap='1x'
       >
         <Text color='secondary' level='b3'>
           {optionDetails}
@@ -76,23 +76,46 @@ const FormTitle = ({
               <Text level='b3'>will</Text>
             </>
           )}
-          <Text
-            component={isModal ? 'button' : 'span'}
+        </Text>
+        {(isOther || isModal) && (
+          <Button
             color={isModal ? 'action' : 'primary'}
             cursor={isOther || isModal ? 'pointer' : 'auto'}
             weight='bold'
             level='f4'
-            marginLeft={'0x'}
+            size='none'
+            display='flex'
+            gap='1x'
+            alignItems={'center'}
+            flexDirection={'row'}
             onClick={() => isModal && modal && setVisibleModal(modal)}
           >
             {activeOption}
-          </Text>
-        </Text>
-        {isOther && (
-          <Icon name='chevron' stroke={'primary'} size={20} rotate={extend ? '0deg' : '180deg'} />
+            {isOther && (
+              <Icon
+                name='chevron'
+                stroke={'primary'}
+                size={20}
+                rotate={extend ? '0deg' : '180deg'}
+              />
+            )}
+          </Button>
         )}
         {(isSwitch || isGroup) && (
-          <Switch toggled={toggled} onClick={() => setToggle && setToggle(!toggled)} />
+          <Text
+            color={'primary'}
+            cursor={isOther || isModal ? 'pointer' : 'auto'}
+            weight='bold'
+            level='f4'
+            display='flex'
+            gap='1x'
+            alignItems={'center'}
+            flexDirection={'row'}
+            onClick={() => isModal && modal && setVisibleModal(modal)}
+          >
+            {activeOption}
+            <Switch toggled={toggled} onClick={() => setToggle && setToggle(!toggled)} />
+          </Text>
         )}
       </FlexRow>
     </FlexRow>

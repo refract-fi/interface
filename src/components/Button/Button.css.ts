@@ -8,7 +8,15 @@ const baseButton = style({
   selectors: {
     '&.disabled': {
       cursor: 'auto',
+      opacity: 0.3,
     },
+  },
+});
+
+const defaultHover = style({
+  transition: 'all 0.2s ease',
+  ':hover': {
+    opacity: 0.7,
   },
 });
 
@@ -28,13 +36,26 @@ export const buttonVariants = styleVariants({
     baseButton,
     {
       background: vars.background.darkBlue,
+      position: 'relative',
       color: vars.color.primary,
       fontWeight: '700',
       textTransform: 'uppercase',
+      zIndex: 1,
+      '::before': {
+        position: 'absolute',
+        content: '',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: -1,
+        transition: 'all 0.4s ease',
+        background: vars.background['inverse-darkBlue'],
+        opacity: 0,
+      },
       selectors: {
-        '&.disabled': {
-          opacity: 0.3,
-          cursor: 'auto',
+        '&:hover::before': {
+          opacity: 1,
         },
       },
     },
@@ -58,11 +79,30 @@ export const buttonVariants = styleVariants({
   hero: [
     baseButton,
     {
-      color: vars.color.tertiary,
+      position: 'relative',
+      color: vars.color.black,
       background: vars.background.spectrum,
       fontWeight: 700,
       paddingRight: '70px',
       paddingLeft: '70px',
+      zIndex: 1,
+      '::before': {
+        position: 'absolute',
+        content: '',
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        zIndex: -1,
+        transition: 'all 0.4s ease',
+        background: vars.background['inverse-spectrum'],
+        opacity: 0,
+      },
+      selectors: {
+        '&:hover::before': {
+          opacity: 1,
+        },
+      },
     },
   ],
   nav: [
@@ -79,6 +119,9 @@ export const buttonVariants = styleVariants({
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           fontWeight: 'bold',
+          ':hover': {
+            // transform: 'matrix(-1, 0, 0, 1, 0, 0)',
+          },
         },
       },
     },
@@ -88,26 +131,19 @@ export const buttonVariants = styleVariants({
     {
       color: vars.color.primary,
       backgroundColor: vars.color['gray-5'],
+      transition: 'all 0.2s ease',
       selectors: {
         '&.disabled': {
           opacity: 0.4,
         },
       },
+      ':hover': {
+        backgroundColor: '#2C2C2EB3',
+      },
     },
   ],
-  inline: [
-    baseButton,
-    {
-      color: vars.color.action,
-    },
-  ],
-  none: [
-    baseButton,
-    {
-      color: vars.color.primary,
-    },
-  ],
-  text: [baseButton, {}],
+  default: [baseButton, defaultHover],
+  none: [baseButton, {}],
 });
 
 export const buttonSizes = styleVariants({

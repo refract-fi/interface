@@ -8,16 +8,7 @@ import { text } from 'theme/vars.css';
 import * as styles from './Button.css';
 
 interface ButtonStyleProps {
-  variant?:
-    | 'nav'
-    | 'hero'
-    | 'primary'
-    | 'secondary'
-    | 'tertiary'
-    | 'text'
-    | 'none'
-    | 'exchange'
-    | 'inline';
+  variant?: 'nav' | 'hero' | 'primary' | 'secondary' | 'tertiary' | 'exchange' | 'default' | 'none';
   size?: 'medium' | 'large' | 'small' | 'none';
   disabled?: boolean;
   active?: boolean;
@@ -34,6 +25,7 @@ export interface ButtonProps extends BoxProps, ButtonStyleProps {
   fill?: Sprinkles['color'];
   weight?: keyof typeof weight;
   fixedHeight?: Sprinkles['height'];
+  inline?: boolean;
 }
 
 export const useButtonStyles = ({
@@ -50,7 +42,7 @@ export const useButtonStyles = ({
   );
 
 const Button = ({
-  variant = 'none',
+  variant = 'default',
   size,
   label,
   href,
@@ -65,11 +57,12 @@ const Button = ({
   background,
   color,
   weight,
+  inline,
   ...restProps
 }: ButtonProps) => {
   return (
     <Box
-      component={href ? 'a' : variant === 'inline' ? 'span' : 'button'}
+      component={href ? 'a' : inline ? 'span' : 'button'}
       onClick={onClick}
       className={clsx(
         useButtonStyles({ variant, size, disabled, active }),

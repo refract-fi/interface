@@ -34,11 +34,9 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
         size='large'
         onClick={() => onGenerateClick()}
       />
-      <Button color='secondary' marginTop={'7x'}>
+      <Button marginTop={'7x'} color='secondary'>
         <FlexRow alignItems={'center'} gap='1x' onClick={() => setShowParams(!showParams)}>
-          <Text level='f4' color={'secondary'}>
-            ADVANCED PARAMETERS
-          </Text>
+          ADVANCED PARAMETERS
           <Icon
             name='chevron'
             stroke={'secondary'}

@@ -69,10 +69,10 @@ const AddCEXModal = () => {
           <Flex justifyContent={'center'} marginY='2x'>
             <Text level='b2' color='secondary'>
               Don&apos;t see your Centralized Exchange?
-              <Box component={'span'} color='action' cursor='pointer'>
+              <Button component={'span'} color='action' cursor='pointer' size='none'>
                 {' '}
                 Request
-              </Box>
+              </Button>
             </Text>
           </Flex>
           <Box height={1} backgroundColor='separator-non-opaque' />
@@ -89,7 +89,7 @@ const AddCEXModal = () => {
             Please provide only reading access.
             <Button
               marginLeft={'0x'}
-              variant='inline'
+              inline
               size='none'
               label='Learn how to add Centralized Exchanges'
             />

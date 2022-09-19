@@ -14,12 +14,7 @@ const Option = ({ isSelected, label, details, variant, ...restProps }: OptionPro
     return { isDetailed: variant === 'detailed' };
   }, [variant]);
   return (
-    <BorderButton
-      padding={isDetailed && !isSelected ? 'none' : 1}
-      background={isSelected ? 'spectrum' : 'secondary'}
-      size='none'
-      {...restProps}
-    >
+    <BorderButton padding={1} active={isSelected} variant='option' size='none' {...restProps}>
       <Flex
         width={'full'}
         height='full'

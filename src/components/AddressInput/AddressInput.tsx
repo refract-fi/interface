@@ -142,7 +142,6 @@ const AddressInput = () => {
           label='Add Centralized Exchange'
           size='none'
           color='action'
-          variant='text'
           onClick={() => setVisibleModal('ADD_CEX')}
         />
       </Flex>

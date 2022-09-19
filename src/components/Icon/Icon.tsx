@@ -69,8 +69,6 @@ const Icon = ({ name, fill, stroke, size, rotate = '0deg' }: IconProps) => {
         width={size ? size : '24'}
         height={size ? size : '24'}
         viewBox='0 0 24 24'
-        // fill='current'
-        // stroke='current'
         xmlns='http://www.w3.org/2000/svg'
       >
         {icons[name]}

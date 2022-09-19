@@ -1,13 +1,14 @@
 import clsx from 'clsx';
 import Button, { ButtonProps, useButtonStyles } from 'components/Button/Button';
-import { useTextStyles } from 'components/Typography/Text';
 import { Box } from 'theme/components';
 import * as styles from './BorderButton.css';
 
-interface BorderButtonProps extends ButtonProps {}
+interface BorderButtonProps extends Omit<ButtonProps, 'variant'> {
+  variant?: 'option' | 'default';
+}
 
 const BorderButton = ({
-  variant = 'none',
+  variant = 'default',
   size,
   label,
   href,
@@ -25,7 +26,7 @@ const BorderButton = ({
 }: BorderButtonProps) => {
   return (
     <Box
-      className={clsx(active && styles.active, styles.borderButtonVariants[variant])}
+      className={clsx(active && 'active', styles.borderButtonVariants[variant])}
       height={fixedHeight}
       background={background}
       fill={fill}

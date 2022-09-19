@@ -41,6 +41,7 @@ const Modal = ({
       alignItems={'center'}
       top={'0'}
       display={isVisible ? 'flex' : 'none'}
+      zIndex={4}
     >
       <Box
         backgroundColor={'bg-primary'}
@@ -54,8 +55,8 @@ const Modal = ({
           <FlexRow gap='0x' alignItems={'center'}>
             {icon && <Icon name={icon} stroke='white' />}
             {onReturn && (
-              <Button onClick={() => onReturn()}>
-                <Icon name='chevron' stroke='white' />
+              <Button onClick={() => onReturn()} size='none'>
+                <Icon name='chevron' stroke='white' rotate='90deg' />
               </Button>
             )}
             <Title level='6' textTransform={'uppercase'}>
@@ -65,7 +66,9 @@ const Modal = ({
           {!onReturn &&
             (onSave ? (
               <FlexRow gap='1x'>
-                {onCancel && <Button label='CANCEL' onClick={() => onCancel && onCancel()} />}
+                {onCancel && (
+                  <Button label='CANCEL' onClick={() => onCancel && onCancel()} color='primary' />
+                )}
                 <Button
                   label='SAVE'
                   variant='secondary'
@@ -76,7 +79,7 @@ const Modal = ({
             ) : (
               <>
                 {onCancel ? (
-                  <Button label='CANCEL' onClick={() => onCancel && onCancel()} />
+                  <Button label='CANCEL' onClick={() => onCancel && onCancel()} color='primary' />
                 ) : (
                   <Button
                     onClick={() => resetModalStatus()}

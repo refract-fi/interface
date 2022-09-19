@@ -43,8 +43,8 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
               advanced parameters
             </Title>
             <FlexRow gap='3x'>
-              <Button variant='text' label='Help' color='secondary' size='none' />
-              <Button variant='text' label='Reset' color='action' size='none' onClick={resetForm} />
+              <Button label='Help' color='secondary' size='none' />
+              <Button label='Reset' color='action' size='none' onClick={resetForm} />
             </FlexRow>
           </FlexRow>
           <Box height={1} background='spectrum' marginTop={'1x'} />

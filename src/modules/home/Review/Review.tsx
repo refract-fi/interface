@@ -92,7 +92,6 @@ const ReviewForm = () => {
           <Button
             level='f4'
             label='modify refract'
-            variant='text'
             width='fit-content'
             textTransform='uppercase'
             color='action'
@@ -105,11 +104,9 @@ const ReviewForm = () => {
           <Button
             level='f4'
             label='skip'
-            variant='text'
             width='fit-content'
             textTransform='uppercase'
             color='tertiary'
-            weight='bold'
             onClick={() => {
               setPhase(FormPhases.GENERATING);
             }}
