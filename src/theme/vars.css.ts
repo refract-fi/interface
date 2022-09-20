@@ -118,6 +118,8 @@ export const vars = createGlobalTheme(':root', {
   space: {
     none: '0px',
     1: '1px',
+    2: '2px',
+    3: '3px',
     '0x': spaceIncrements(0),
     '1x': spaceIncrements(1),
     '2x': spaceIncrements(2),

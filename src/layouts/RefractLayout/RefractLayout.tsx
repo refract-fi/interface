@@ -22,9 +22,9 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
       <FlexRow gap='2x' justifyContent={'center'} marginY='6x'>
         <Flex position={'absolute'} left='7x' gap='2x'>
           <Icon name='refract-logo' />
-          <Title level='4' special weight='bold' className={styles.title}>
+          {/* <Title level='4' special weight='bold' className={styles.title}>
             REFRACT
-          </Title>
+          </Title> */}
         </Flex>
         <Button
           label='REFRACT'
@@ -65,7 +65,7 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
           </Flex>
         </BorderButton>
       </FlexRow>
-      <Flex justifyContent={'center'} paddingTop='12x' className={styles.childWrapper}>
+      <Flex justifyContent={'center'} paddingTop='24x' className={styles.childWrapper}>
         {children}
       </Flex>
     </Box>

@@ -1,9 +1,11 @@
 import { Button, Input, Text, Title } from 'components';
+import { useRouter } from 'next/router';
 import { Box, Flex, FlexCol } from 'theme/components';
 import * as styles from './Completed.css';
 import RefractLogo from '/public/brand/refract_logo.svg';
 
 const Completed = () => {
+  const { push } = useRouter();
   return (
     <Flex height={'100vh'} width='100vw' alignItems={'center'} justifyContent='center'>
       <FlexCol className={styles.refract} alignItems='center' paddingTop={'6x'} gap='3x'>
@@ -31,6 +33,7 @@ const Completed = () => {
             </Flex>
           </Flex>
         </Input>
+        <Button label='view' variant='secondary' onClick={() => push('/rfct/asdasd/refract')} />
       </FlexCol>
     </Flex>
   );

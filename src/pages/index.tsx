@@ -24,9 +24,6 @@ const Home: NextPageWithLayout = () => {
 
   return (
     <>
-      <Head>
-        <title>Refract</title>
-      </Head>
       <Box className={isFadingOut ? styles.fadeOutAnim : styles.fadeInAnim}>
         {phase === FormPhases.CREATE && <Landing fadeOut={fadeOut} fadeIn={fadeIn} />}
         {(phase === FormPhases.REVIEW || phase === FormPhases.GENERATING) && (

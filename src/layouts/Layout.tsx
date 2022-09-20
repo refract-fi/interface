@@ -11,6 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Head>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/brand/refract_logo.svg' sizes='any' type='image/svg+xml' />
+        <title>Refract</title>
       </Head>
       {children}
     </>

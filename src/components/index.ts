@@ -10,6 +10,7 @@ import Modal from './Modal/Modal';
 import Checkbox from './Checkbox/Checkbox';
 import Icon from './Icon/Icon';
 import BorderButton from './BorderButton/BorderButton';
+import Refract from './Refract/Refract';
 
 export {
   Button,
@@ -24,4 +25,5 @@ export {
   Checkbox,
   Icon,
   BorderButton,
+  Refract,
 };

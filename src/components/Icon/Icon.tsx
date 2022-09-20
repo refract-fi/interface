@@ -18,6 +18,7 @@ import Coinbase from './icons/Coinbase';
 import { rotation } from './Icon.css';
 import RefractLogo from './icons/RefractLogo';
 import * as styles from './Icon.css';
+import Copy from './icons/Copy';
 
 const standardIcons = {
   hourglass: <Hourglass />,
@@ -30,6 +31,7 @@ const standardIcons = {
   close: <Close />,
   'verified-chromatic': <VerifiedChromatic />,
   chevron: <Chevron />,
+  copy: <Copy />,
 };
 
 const brandIcons = {

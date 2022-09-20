@@ -31,6 +31,15 @@ const ReviewForm = () => {
     return () => clearTimeout(generatingTimeout);
   }, []);
 
+  useEffect(() => {
+    if (isGenerating) {
+      const completeTimeout = setTimeout(() => {
+        setPhase(FormPhases.COMPLETED);
+      }, 6000);
+      return () => clearTimeout(completeTimeout);
+    }
+  }, [isGenerating]);
+
   return (
     <FlexCol alignItems={'center'}>
       {isReview && (
