@@ -25,13 +25,16 @@ export const switchWrapper = style({
     background: vars.background['inverse-spectrum'],
     opacity: 0,
   },
+  ':hover': {
+    transition: 'all 0.4s ease',
+    background: vars.color['bg-fill-secondary'],
+  },
   selectors: {
     '&.checked': {
       background: vars.background.spectrum,
     },
-    ':hover&.checked': {},
 
-    '&:hover::before': {
+    '.checked&:hover::before': {
       opacity: 1,
     },
   },
