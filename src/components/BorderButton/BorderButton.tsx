@@ -4,7 +4,7 @@ import { Box } from 'theme/components';
 import * as styles from './BorderButton.css';
 
 interface BorderButtonProps extends Omit<ButtonProps, 'variant'> {
-  variant?: 'option' | 'default';
+  variant?: 'option' | 'default' | 'secondary';
 }
 
 const BorderButton = ({
@@ -42,6 +42,7 @@ const BorderButton = ({
         size={size}
         weight={weight}
         fill={fill}
+        level={level}
         textTransform={textTransform}
       >
         {children}

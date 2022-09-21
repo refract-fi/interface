@@ -41,6 +41,25 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
           active={isActive('stats')}
           onClick={() => changeRoute('stats')}
         />
+        <FlexRow position={'absolute'} gap='1x' right='7x'>
+          <BorderButton
+            textTransform={'uppercase'}
+            label='create'
+            right='7x'
+            width='28x'
+            level='f4'
+            weight='bold'
+            variant='secondary'
+          />
+          <BorderButton
+            textTransform={'uppercase'}
+            label='share'
+            right='7x'
+            width='28x'
+            level='f4'
+            weight='bold'
+          />
+        </FlexRow>
       </FlexRow>
       <Flex justifyContent={'center'} paddingTop='24x' className={styles.childWrapper}>
         {children}

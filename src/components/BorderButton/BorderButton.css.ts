@@ -33,12 +33,24 @@ export const borderButtonVariants = styleVariants({
       },
     },
   ],
+  secondary: [
+    borderButton,
+    {
+      background: vars.color.secondary,
+      ':hover': {
+        background: vars.background['inverse-spectrum'],
+      },
+    },
+  ],
 });
 
-globalStyle(`${borderButtonVariants['default']} button`, {
-  backgroundColor: vars.color['bg-fill-quarter'],
-  color: vars.color.primary,
-});
+globalStyle(
+  `${borderButtonVariants['default']} button, ${borderButtonVariants['secondary']} button`,
+  {
+    backgroundColor: vars.color['bg-fill-quarter'],
+    color: vars.color.primary,
+  }
+);
 
 globalStyle(`${borderButtonVariants['default']}:hover button`, {
   backgroundColor: vars.color['bg-fill-quarter'],
