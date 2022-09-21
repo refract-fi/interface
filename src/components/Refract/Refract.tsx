@@ -1,8 +1,32 @@
+import { useState } from 'react';
 import { Box, Flex } from 'theme/components';
 import * as styles from './Refract.css';
 
 const Refract = () => {
-  const allocations = [0.5, 0.2, 0.11, 0.1, 0.06, 0.03];
+  const [topLeftScale, setTopLeftScale] = useState(10);
+  const [topMiddleScale, setTopMiddleScale] = useState(10);
+  const [topRightScale, setTopRightScale] = useState(10);
+  const [bottomLeftScale, setBottomLeftScale] = useState(10);
+  const [bottomMiddleScale, setBottomMiddleScale] = useState(10);
+  const [bottomRightScale, setBottomRightScale] = useState(10);
+
+  const topLeftPosX = 0;
+  const topLeftPosY = 0;
+
+  const topMiddlePosX = 450;
+  const topMiddlePosY = 0;
+
+  const topRightPosX = 900;
+  const topRightPosY = 0;
+
+  const bottomLeftPosX = 0;
+  const bottomLeftPosY = 450;
+
+  const bottomMiddlePosX = 450;
+  const bottomMiddlePosY = 450;
+
+  const bottomRightPosX = 900;
+  const bottomRightPosY = 450;
 
   return (
     <Flex position='relative' alignItems={'center'} justifyContent='center'>
@@ -17,54 +41,46 @@ const Refract = () => {
         >
           <g clipPath='url(#clip0_4667_3237)'>
             <rect width='900' height='450' fill='white' />
-
             <ellipse
-              cx='900'
-              cy='900'
-              rx='900'
-              ry='900'
-              transform='rotate(-90 900 900) scale(1) translate(950, -830)'
+              cx={topLeftPosX}
+              cy={topLeftPosY}
+              rx={topLeftScale * 100}
+              ry={topLeftScale * 100}
               fill='url(#top_left_gradient)'
             />
             <ellipse
-              cx='900'
-              cy='900'
-              rx='900'
-              ry='900'
-              transform='rotate(-90 900 900) scale(1) translate(950, -400)'
+              cx={topMiddlePosX}
+              cy={topMiddlePosY}
+              rx={topMiddleScale * 100}
+              ry={topMiddleScale * 100}
               fill='url(#top_middle_gradient)'
             />
             <ellipse
-              cx='900'
-              cy='900'
-              rx='900'
-              ry='900'
-              transform='rotate(-90 900 900) scale(1) translate(950, 0)'
+              cx={topRightPosX}
+              cy={topRightPosY}
+              rx={topRightScale * 100}
+              ry={topRightScale * 100}
               fill='url(#top_right_gradient)'
             />
             <ellipse
-              cx='900'
-              cy='900'
-              rx='900'
-              ry='900'
-              transform='rotate(-90 900 900) scale(1) translate(500, -830)'
+              cx={bottomLeftPosX}
+              cy={bottomLeftPosY}
+              rx={bottomLeftScale * 100}
+              ry={bottomLeftScale * 100}
               fill='url(#bottom_left_gradient)'
             />
             <ellipse
-              cx='900'
-              cy='900'
-              rx='900'
-              ry='900'
-              transform='rotate(-90 900 900) scale(1) translate(500, -400)'
+              cx={bottomMiddlePosX}
+              cy={bottomMiddlePosY}
+              rx={bottomMiddleScale * 100}
+              ry={bottomMiddleScale * 100}
               fill='url(#bottom_middle_gradient)'
             />
-
             <ellipse
-              cx='900'
-              cy='900'
-              rx='900'
-              ry='900'
-              transform='rotate(-90 900 900) scale(1) translate(500, 0)'
+              cx={bottomRightPosX}
+              cy={bottomRightPosY}
+              rx={bottomRightScale * 100}
+              ry={bottomRightScale * 100}
               fill='url(#bottom_right_gradient)'
             />
           </g>
@@ -75,7 +91,9 @@ const Refract = () => {
               cy='0'
               r='1'
               gradientUnits='userSpaceOnUse'
-              gradientTransform='translate(900 900) rotate(90) scale(900 900)'
+              gradientTransform={`translate(${topLeftPosX} ${topLeftPosY}) scale(${
+                topLeftScale * 100
+              })`}
             >
               <stop stopColor='#FF4343' />
               <stop offset='0.5' stopColor='#FF4343' stopOpacity='0' />
@@ -86,7 +104,9 @@ const Refract = () => {
               cy='0'
               r='1'
               gradientUnits='userSpaceOnUse'
-              gradientTransform='translate(900 900) rotate(90) scale(900 900)'
+              gradientTransform={`translate(${topMiddlePosX} ${topMiddlePosY}) scale(${
+                topMiddleScale * 100
+              })`}
             >
               <stop stopColor='#0024FF' />
               <stop offset='0.5' stopColor='#0024FF' stopOpacity='0' />
@@ -97,7 +117,9 @@ const Refract = () => {
               cy='0'
               r='1'
               gradientUnits='userSpaceOnUse'
-              gradientTransform='translate(900 900) rotate(90) scale(900 900)'
+              gradientTransform={`translate(${topRightPosX} ${topRightPosY}) scale(${
+                topRightScale * 100
+              })`}
             >
               <stop stopColor='#FFAB0F' />
               <stop offset='0.5' stopColor='#FFAB0F' stopOpacity='0' />
@@ -108,7 +130,9 @@ const Refract = () => {
               cy='0'
               r='1'
               gradientUnits='userSpaceOnUse'
-              gradientTransform='translate(900 900) rotate(90) scale(900 900)'
+              gradientTransform={`translate(${bottomLeftPosX} ${bottomLeftPosY}) scale(${
+                bottomLeftScale * 100
+              })`}
             >
               <stop stopColor='#886FF4' />
               <stop offset='0.5' stopColor='#886FF4' stopOpacity='0' />
@@ -120,7 +144,9 @@ const Refract = () => {
               cy='0'
               r='1'
               gradientUnits='userSpaceOnUse'
-              gradientTransform='translate(900 900) rotate(90) scale(900 900)'
+              gradientTransform={`translate(${bottomMiddlePosX} ${bottomMiddlePosY}) scale(${
+                bottomMiddleScale * 100
+              })`}
             >
               <stop stopColor='#9AF46F' />
               <stop offset='0.5' stopColor='#9AF46F' stopOpacity='0' />
@@ -131,7 +157,9 @@ const Refract = () => {
               cy='0'
               r='1'
               gradientUnits='userSpaceOnUse'
-              gradientTransform='translate(900 900) rotate(90) scale(900 900)'
+              gradientTransform={`translate(${bottomRightPosX} ${bottomRightPosY}) scale(${
+                bottomRightScale * 100
+              })`}
             >
               <stop stopColor='#88E3F0' />
               <stop offset='0.5' stopColor='#88E3F0' stopOpacity='0' />
@@ -148,5 +176,3 @@ const Refract = () => {
 };
 
 export default Refract;
-
-// <style>.j{fill:url(#e);}.k{fill:url(#d);}.l{fill:url(#g);}.m{fill:url(#f);}.n{fill:url(#i);}.o{fill:url(#h);}.p{fill:url(#c);}.q{fill:none;}.r{fill:#fff;}.s{clip-path:url(#b);}</style>
