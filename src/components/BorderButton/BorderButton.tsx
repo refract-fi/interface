@@ -22,17 +22,28 @@ const BorderButton = ({
   active,
   background,
   color,
+  weight,
+  textTransform,
   ...restProps
 }: BorderButtonProps) => {
   return (
     <Box
       className={clsx(active && 'active', styles.borderButtonVariants[variant])}
       height={fixedHeight}
-      background={background}
-      fill={fill}
+      background={background && background}
       {...restProps}
     >
-      <Button variant='none' onClick={onClick} width='full' height={'full'} size={size}>
+      <Button
+        variant='none'
+        label={label}
+        onClick={onClick}
+        width='full'
+        height={'full'}
+        size={size}
+        weight={weight}
+        fill={fill}
+        textTransform={textTransform}
+      >
         {children}
       </Button>
     </Box>
