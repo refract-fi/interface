@@ -3,7 +3,7 @@ import { Layout, RefractLayout } from 'layouts';
 import RefractBlock from 'modules/refract/RefractBlock';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';
-import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
+import { Box, FlexCol, FlexRow } from 'theme/components';
 
 const Refraction: NextPageWithLayout = () => {
   return (
@@ -20,7 +20,7 @@ const Refraction: NextPageWithLayout = () => {
           <FlexRow alignItems={'center'} gap='0x'>
             <Icon name='copy' stroke={'secondary'} />
             <Text level='f5' textTransform={'uppercase'} color='secondary'>
-              refract.fi/rfct/asdiua8sy98
+              refract.fi/rid/asdiua8sy98
             </Text>
           </FlexRow>
           <FlexRow alignItems={'center'} gap='0x'>
