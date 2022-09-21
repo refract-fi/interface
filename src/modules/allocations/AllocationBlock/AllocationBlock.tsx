@@ -1,4 +1,4 @@
-import { Text, Title } from 'components';
+import { Button, Text, Title } from 'components';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './AllocationBlock.css';
 
@@ -38,6 +38,12 @@ const AllocationBlock = ({ title, allocationShare, allocations }: AllocationBloc
               <Text level='f4'>{allocation.share * 100}%</Text>
             </FlexRow>
           ))}
+          <FlexRow justifyContent='space-between'>
+            <FlexRow alignItems='center' gap='2x'>
+              <Button color='action' level='b2' textTransform={'lowercase'} label='+ 2 assets' />
+            </FlexRow>
+            <Text level='f4'>{0.0233 * 100}%</Text>
+          </FlexRow>
         </FlexCol>
       </FlexCol>
     </FlexRow>

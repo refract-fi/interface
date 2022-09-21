@@ -4,7 +4,7 @@ import { Box } from 'theme/components';
 import * as styles from './BorderButton.css';
 
 interface BorderButtonProps extends Omit<ButtonProps, 'variant'> {
-  variant?: 'option' | 'default';
+  variant?: 'option' | 'default' | 'secondary';
 }
 
 const BorderButton = ({
@@ -22,17 +22,29 @@ const BorderButton = ({
   active,
   background,
   color,
+  weight,
+  textTransform,
   ...restProps
 }: BorderButtonProps) => {
   return (
     <Box
       className={clsx(active && 'active', styles.borderButtonVariants[variant])}
       height={fixedHeight}
-      background={background}
-      fill={fill}
+      background={background && background}
       {...restProps}
     >
-      <Button variant='none' onClick={onClick} width='full' height={'full'} size={size}>
+      <Button
+        variant='none'
+        label={label}
+        onClick={onClick}
+        width='full'
+        height={'full'}
+        size={size}
+        weight={weight}
+        fill={fill}
+        level={level}
+        textTransform={textTransform}
+      >
         {children}
       </Button>
     </Box>

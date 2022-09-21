@@ -14,16 +14,6 @@ const nextConfig = {
 
     return config;
   },
-  // Will need to replace this if we switch to static site
-  async redirects() {
-    return [
-      {
-        source: '/rfct/:refractId',
-        destination: '/rfct/:refractId/spectrum',
-        permanent: false,
-      },
-    ];
-  },
 };
 
 module.exports = withVanillaExtract(nextConfig);

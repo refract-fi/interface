@@ -31,6 +31,7 @@ const AllocationSegment = ({ label, percent }: AllocationSegmentProps) => {
       alignItems={'center'}
       className={styles.segmentWrapper}
       style={assignInlineVars({ [styles.proportion]: `${percent * 100}%` })}
+      gap='0x'
     >
       <Box
         width='full'

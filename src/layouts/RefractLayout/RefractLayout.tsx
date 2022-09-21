@@ -15,22 +15,19 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
   const isActive = useCallback((route: string) => pathname.includes(route), [pathname]);
 
   const changeRoute = (route: string) =>
-    push({ pathname: `/rfct/[rfctId]/${route}`, query: { rfctId: query.rfctId } });
+    push({ pathname: `/rid/[rid]/${route}`, query: { rid: query.rid } });
 
   return (
     <Box>
       <FlexRow gap='2x' justifyContent={'center'} marginY='6x'>
-        <Flex position={'absolute'} left='7x' gap='2x'>
+        <Button size='none' position={'absolute'} left='7x' gap='2x' onClick={() => push('/')}>
           <Icon name='refract-logo' />
-          <Title level='4' special weight='bold' className={styles.title}>
-            REFRACT
-          </Title>
-        </Flex>
+        </Button>
         <Button
           label='REFRACT'
           variant='nav'
-          active={isActive('refract')}
-          onClick={() => changeRoute('refract')}
+          active={!isActive('allocations') && !isActive('stats')}
+          onClick={() => changeRoute('')}
         />
         <Button
           label='ALLOCATIONS'
@@ -44,28 +41,27 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
           active={isActive('stats')}
           onClick={() => changeRoute('stats')}
         />
-        <BorderButton
-          padding={1}
-          size='none'
-          background='spectrum'
-          position={'absolute'}
-          right='7x'
-        >
-          <Flex
-            width='full'
-            height='full'
-            backgroundColor={'black'}
-            alignItems='center'
-            paddingX='5x'
-            paddingY='0x'
-          >
-            <Text level='f4' weight='bold' className={styles.textGradient}>
-              CREATE NEW REFRACT
-            </Text>
-          </Flex>
-        </BorderButton>
+        <FlexRow position={'absolute'} gap='1x' right='7x'>
+          <BorderButton
+            textTransform={'uppercase'}
+            label='create'
+            right='7x'
+            width='28x'
+            level='f4'
+            weight='bold'
+            variant='secondary'
+          />
+          <BorderButton
+            textTransform={'uppercase'}
+            label='share'
+            right='7x'
+            width='28x'
+            level='f4'
+            weight='bold'
+          />
+        </FlexRow>
       </FlexRow>
-      <Flex justifyContent={'center'} paddingTop='12x' className={styles.childWrapper}>
+      <Flex justifyContent={'center'} paddingTop='24x' className={styles.childWrapper}>
         {children}
       </Flex>
     </Box>

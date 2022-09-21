@@ -1,4 +1,4 @@
 import Landing from './Landing/Landing';
-import Review from './Review/Review';
-import Generating from './Generating/Generating';
-export { Landing, Review, Generating };
+import Generate from './Generate/Generate';
+import Completed from './Completed/Completed';
+export { Landing, Generate, Completed };
