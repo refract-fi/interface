@@ -1,8 +1,20 @@
+import clsx from 'clsx';
 import { useState } from 'react';
 import { Box, Flex } from 'theme/components';
 import * as styles from './Refract.css';
 
-const Refract = () => {
+export enum RefractPhases {
+  default = 'default',
+  topSkew = 'topSkew',
+  rightSkew = 'rightSkew',
+  leftSkew = 'leftSkew',
+}
+
+interface RefractProps {
+  phase: RefractPhases;
+}
+
+const Refract = ({ phase }: RefractProps) => {
   const [topLeftScale, setTopLeftScale] = useState(10);
   const [topMiddleScale, setTopMiddleScale] = useState(10);
   const [topRightScale, setTopRightScale] = useState(10);
@@ -29,9 +41,18 @@ const Refract = () => {
   const bottomRightPosY = 450;
 
   return (
-    <Flex position='relative' alignItems={'center'} justifyContent='center'>
-      <Box className={styles.grain} />
-      <Box position={'absolute'} top='0' className={styles.refract}>
+    <Flex
+      position='relative'
+      alignItems={'center'}
+      justifyContent='center'
+      className={clsx(styles.refractWrapper, phase !== RefractPhases.default && phase)}
+    >
+      <Box className={clsx(styles.grain, phase !== RefractPhases.default && phase)} />
+      <Box
+        position={'absolute'}
+        top='0'
+        className={clsx(styles.refract, phase !== RefractPhases.default && phase)}
+      >
         <svg
           width='900'
           height='450'

@@ -1,19 +1,17 @@
+import clsx from 'clsx';
 import { Refract } from 'components';
 import { RefractPhases } from 'components/Refract/Refract';
-import { Layout, RefractLayout } from 'layouts';
-import { fadeInAnim } from 'modules/refract/index.css';
+import { fadeInAnim, fadeOutAnim } from 'modules/refract/index.css';
 import RefractFadeZone from 'modules/refract/RefractFadeZone';
-import { NextPageWithLayout } from 'pages/_app';
-import { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 import { refractState } from 'states/refractState';
-import { Box } from 'theme/components';
+import { Box, FlexCol } from 'theme/components';
+import AllocationsFadeZone from './AllocationsFadeZone';
 
-const Stats: NextPageWithLayout = () => {
+const AllocationsModule = () => {
   const { refractPhase, refractFade } = useRecoilValue(refractState);
   return (
-    <>
-      {' '}
+    <FlexCol width={'full'} marginX='24x' alignItems={'center'}>
       <Box position={'absolute'}>
         <Refract phase={refractPhase} />
         {refractFade && (
@@ -22,17 +20,11 @@ const Stats: NextPageWithLayout = () => {
           </Box>
         )}
       </Box>
-      I like cheese
-    </>
+      <Box width={'full'} className={clsx(refractFade && fadeOutAnim)}>
+        <AllocationsFadeZone />
+      </Box>
+    </FlexCol>
   );
 };
 
-Stats.getLayout = function getLayout(page: ReactNode) {
-  return (
-    <Layout>
-      <RefractLayout>{page}</RefractLayout>
-    </Layout>
-  );
-};
-
-export default Stats;
+export default AllocationsModule;

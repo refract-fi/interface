@@ -1,21 +1,63 @@
 import { BorderButton, Button, Icon, Text, Title } from 'components';
+import { RefractPhases } from 'components/Refract/Refract';
 import { useRouter } from 'next/router';
 import { ReactNode, useCallback } from 'react';
+import { useRefractActions } from 'states/refractState';
 import { Box, Flex, FlexRow } from 'theme/components';
 import * as styles from './RefractLayout.css';
-import RefractLogo from '/public/brand/refract_logo.svg';
 interface RefractLayoutProps {
   children: ReactNode;
 }
 
 const RefractLayout = ({ children }: RefractLayoutProps) => {
+  const { setAllocationFade, setStatsFade, setRefractFade, setRefractPhase, resetFades } =
+    useRefractActions();
   const { pathname, push, query } = useRouter();
-  const router = useRouter();
 
   const isActive = useCallback((route: string) => pathname.includes(route), [pathname]);
 
   const changeRoute = (route: string) =>
     push({ pathname: `/rid/[rid]/${route}`, query: { rid: query.rid } });
+
+  const onRouteClick = (route: string) => {
+    if (!isActive('allocations') && !isActive('stats') && route === 'allocations') {
+      setRefractPhase(RefractPhases.leftSkew);
+      setAllocationFade(true);
+      const switchPage = setTimeout(async () => {
+        await changeRoute(route);
+        resetFades();
+      }, 500);
+      return () => clearTimeout(switchPage);
+    }
+    if (!isActive('allocations') && !isActive('stats') && route === 'stats') {
+      setRefractPhase(RefractPhases.rightSkew);
+      setStatsFade(true);
+      const switchPage = setTimeout(async () => {
+        await changeRoute(route);
+        resetFades();
+      }, 500);
+      return () => clearTimeout(switchPage);
+    }
+    if (isActive('allocations') && route === '') {
+      setRefractPhase(RefractPhases.default);
+      setRefractFade(true);
+      const switchPage = setTimeout(async () => {
+        await changeRoute(route);
+        resetFades();
+      }, 500);
+      return () => clearTimeout(switchPage);
+    }
+    if (isActive('stats') && route === '') {
+      setRefractPhase(RefractPhases.default);
+      setRefractFade(true);
+      const switchPage = setTimeout(async () => {
+        await changeRoute(route);
+        resetFades();
+      }, 500);
+      return () => clearTimeout(switchPage);
+    }
+    changeRoute(route);
+  };
 
   return (
     <Box>
@@ -24,23 +66,24 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
           <Icon name='refract-logo' />
         </Button>
         <Button
+          label='STATS'
+          variant='nav'
+          active={isActive('stats')}
+          onClick={() => onRouteClick('stats')}
+        />
+        <Button
           label='REFRACT'
           variant='nav'
           active={!isActive('allocations') && !isActive('stats')}
-          onClick={() => changeRoute('')}
+          onClick={() => onRouteClick('')}
         />
         <Button
           label='ALLOCATIONS'
           variant='nav'
           active={isActive('allocations')}
-          onClick={() => changeRoute('allocations')}
+          onClick={() => onRouteClick('allocations')}
         />
-        <Button
-          label='STATS'
-          variant='nav'
-          active={isActive('stats')}
-          onClick={() => changeRoute('stats')}
-        />
+
         <FlexRow position={'absolute'} gap='1x' right='7x'>
           <BorderButton
             textTransform={'uppercase'}
