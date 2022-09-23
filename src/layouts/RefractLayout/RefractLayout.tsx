@@ -1,21 +1,33 @@
-import { BorderButton, Button, Icon, Text, Title } from 'components';
+import clsx from 'clsx';
+import { BorderButton, Button, Icon, Refract } from 'components';
 import { useRouter } from 'next/router';
-import { ReactNode, useCallback } from 'react';
-import { Box, Flex, FlexRow } from 'theme/components';
+import { ReactNode, useCallback, useMemo, useState } from 'react';
+import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './RefractLayout.css';
-import RefractLogo from '/public/brand/refract_logo.svg';
+
 interface RefractLayoutProps {
   children: ReactNode;
 }
 
 const RefractLayout = ({ children }: RefractLayoutProps) => {
   const { pathname, push, query } = useRouter();
-  const router = useRouter();
+  const [isFading, fadePhase] = useState(false);
 
   const isActive = useCallback((route: string) => pathname.includes(route), [pathname]);
 
-  const changeRoute = (route: string) =>
+  const changeRoute = (route: string) => {
     push({ pathname: `/rid/[rid]/${route}`, query: { rid: query.rid } });
+  };
+
+  const page = useMemo(() => {
+    if (isActive('allocations')) {
+      return 'allocations';
+    } else if (isActive('stats')) {
+      return 'stats';
+    } else {
+      return 'refract';
+    }
+  }, [isActive]);
 
   return (
     <Box>
@@ -23,6 +35,12 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
         <Button size='none' position={'absolute'} left='7x' gap='2x' onClick={() => push('/')}>
           <Icon name='refract-logo' />
         </Button>
+        <Button
+          label='STATS'
+          variant='nav'
+          active={isActive('stats')}
+          onClick={() => changeRoute('stats')}
+        />
         <Button
           label='REFRACT'
           variant='nav'
@@ -34,12 +52,6 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
           variant='nav'
           active={isActive('allocations')}
           onClick={() => changeRoute('allocations')}
-        />
-        <Button
-          label='STATS'
-          variant='nav'
-          active={isActive('stats')}
-          onClick={() => changeRoute('stats')}
         />
         <FlexRow position={'absolute'} gap='1x' right='7x'>
           <BorderButton
@@ -61,9 +73,12 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
           />
         </FlexRow>
       </FlexRow>
-      <Flex justifyContent={'center'} paddingTop='24x' className={styles.childWrapper}>
-        {children}
-      </Flex>
+      <FlexCol paddingTop='24x' position={'relative'}>
+        <Refract page={page} />
+        <Flex justifyContent={'center'} className={clsx(styles.childWrapper, page)}>
+          {children}
+        </Flex>
+      </FlexCol>
     </Box>
   );
 };

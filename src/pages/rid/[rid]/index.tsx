@@ -3,12 +3,12 @@ import { Layout, RefractLayout } from 'layouts';
 import RefractBlock from 'modules/refract/RefractBlock';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';
+import { basicFadeIn } from 'theme/animations.css';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 
 const Refraction: NextPageWithLayout = () => {
   return (
-    <Box>
-      <Refract />
+    <Box className={basicFadeIn}>
       <FlexCol width='full' marginTop={'12x'} gap='4x'>
         <FlexRow gap='2x' width={'full'} justifyContent='space-between'>
           <FlexRow alignItems={'center'} gap='0x'>

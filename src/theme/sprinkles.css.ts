@@ -77,6 +77,7 @@ const responsiveProperties = defineProperties({
     right: { '0': 0, ...vars.space },
     whiteSpace: ['normal', 'nowrap'],
     alignSelf: ['flex-start'],
+    visibility: ['hidden', 'visible'],
   },
   shorthands: {
     padding: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],

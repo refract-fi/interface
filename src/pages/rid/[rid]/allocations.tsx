@@ -3,11 +3,12 @@ import AllocationBlocks from 'modules/allocations/AllocationBlocks/AllocationBlo
 import AllocationSpread from 'modules/allocations/AllocationSpread/AllocationSpread';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';
+import { basicFadeIn } from 'theme/animations.css';
 import { FlexCol } from 'theme/components';
 
 const Allocations: NextPageWithLayout = () => {
   return (
-    <FlexCol width={'full'} marginX='24x' alignItems={'center'}>
+    <FlexCol width={'full'} marginX='24x' alignItems={'center'} className={basicFadeIn}>
       <AllocationSpread />
       <AllocationBlocks />
     </FlexCol>
