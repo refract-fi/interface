@@ -7,14 +7,14 @@ import { formState, useFormActions } from 'states/formState';
 import { Box, Flex } from 'theme/components';
 import { vars } from 'theme/vars.css';
 import { IForm } from 'utils/types';
-import { IAddressInfo } from 'utils/types/form';
+import { IAccountInfo } from 'utils/types/form';
 import { useModalActions } from 'states/modalState';
 import BorderInput from 'components/BorderInput/BorderInput';
 import * as styles from './AddressInput.css';
 
 const AddressInput = () => {
-  const { addresses, CEXs } = useRecoilValue<IForm>(formState);
-  const { setAddress } = useFormActions();
+  const { accounts } = useRecoilValue<IForm>(formState);
+  const { setAccount } = useFormActions();
   const { setVisibleModal } = useModalActions();
 
   const [value, setValue] = useState('');
@@ -22,10 +22,10 @@ const AddressInput = () => {
 
   const checkInput = async (targetVal: string) => {
     //Check for duplicates
-    const indexOfDuplicate = [...addresses].findIndex(
-      (address: IAddressInfo) => address.address === value
+    const indexOfDuplicate = [...accounts].findIndex(
+      (account: IAccountInfo) => account.address === value
     );
-    if (indexOfDuplicate !== -1 && addresses[indexOfDuplicate].address.length === value.length) {
+    if (indexOfDuplicate !== -1 && accounts[indexOfDuplicate].address?.length === value.length) {
       setError('DUPLICATE_ADDRESS');
       return;
     }
@@ -33,13 +33,13 @@ const AddressInput = () => {
     if (ethers.utils.isAddress(targetVal)) {
       setError('');
       setValue('');
-      setAddress([...addresses, { address: targetVal, type: 'ethereum' }]);
+      setAccount([...accounts, { address: targetVal, type: 'ethereum' }]);
       return;
     }
     if (validate(targetVal)) {
       setError('');
       setValue('');
-      setAddress([...addresses, { address: targetVal, type: 'bitcoin' }]);
+      setAccount([...accounts, { address: targetVal, type: 'bitcoin' }]);
       return;
     }
     //or check if valid ENS
@@ -53,7 +53,7 @@ const AddressInput = () => {
         if (targetAddress) {
           setError('');
           setValue('');
-          setAddress([...addresses, { address: targetAddress, ens: targetVal, type: 'ethereum' }]);
+          setAccount([...accounts, { address: targetAddress, ens: targetVal, type: 'ethereum' }]);
           return;
         }
       } catch (e) {
@@ -80,9 +80,9 @@ const AddressInput = () => {
   };
 
   const onClear = (index: number) => {
-    const list = [...addresses];
+    const list = [...accounts];
     list.splice(index, 1);
-    setAddress(list);
+    setAccount(list);
   };
 
   const onKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -91,14 +91,14 @@ const AddressInput = () => {
       checkInput(targetVal);
       e.preventDefault();
     } else if (e.key === 'Backspace' && value.length === 0) {
-      onClear(addresses.length - 1);
+      onClear(accounts.length - 1);
     }
   };
 
   const onBlur = () => {
     if (value.length > 3) {
       setValue('');
-      setAddress([...addresses, { address: value.replaceAll(',', '').replaceAll(' ', '') }]);
+      setAccount([...accounts, { address: value.replaceAll(',', '').replaceAll(' ', '') }]);
     }
   };
 
@@ -116,17 +116,19 @@ const AddressInput = () => {
           marginTop={'10x'}
           size='large'
           value={value}
-          placeholder='Enter addresses (0x, btc, .eth)'
+          placeholder='Enter accounts (0x, btc, .eth)'
           width='full'
           background={error ? 'error' : 'spectrum'}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
           onBlur={() => onBlur()}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => onKeydown(e)}
         >
-          {addresses.length >= 1 &&
-            addresses.map(({ address, ens, type, exchange }, index) => (
+          {accounts.length >= 1 &&
+            accounts.map(({ address, ens, type, exchange }, index) => (
               <Chips
-                label={type === 'exchange' && exchange ? exchange : ens ? ens : address}
+                label={
+                  type === 'exchange' && exchange ? exchange : ens ? ens : address ? address : ''
+                }
                 key={address}
                 background={getBorderColor(index)}
                 onClear={() => onClear(index)}

@@ -52,16 +52,20 @@ const ReviewForm = () => {
           generating your refract
         </Title>
       )}
-      <FlexRow gap='2x' marginTop={'9x'}>
-        {form.addresses.map(({ address, ens, type, exchange }, index) => (
-          <Chips
-            key={address}
-            label={type === 'exchange' && exchange ? exchange : ens ? ens : address}
-            isLocked
-            background={getBorderColor(index)}
-          />
-        ))}
-      </FlexRow>
+      {isReview && (
+        <FlexRow gap='2x' marginTop={'9x'} className={styles.reviewFormAnim}>
+          {form.accounts.map(({ address, ens, type, exchange }, index) => (
+            <Chips
+              key={address}
+              label={
+                type === 'exchange' && exchange ? exchange : ens ? ens : address ? address : ''
+              }
+              isLocked
+              background={getBorderColor(index)}
+            />
+          ))}
+        </FlexRow>
+      )}
       <FlexCol maxWidth={'124x'} width='full' marginTop={'0x'}>
         {isGenerating && (
           <Flex className={styles.generatingAnim}>

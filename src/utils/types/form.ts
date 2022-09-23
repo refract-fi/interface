@@ -19,14 +19,17 @@ export enum SupportedNetworks {
   EVMOS = 'Evmos',
 }
 
-export interface IAddressInfo {
-  address: string;
+export interface IAccountInfo {
+  address?: string;
   ens?: string;
   type?: 'ethereum' | 'bitcoin' | 'exchange';
-  exchange?: SupportedExchanges;
+  // Verification done once in frontend and another signature verification in the backend
   signature?: string;
+  //below only if (type === 'exchange')
+  exchange?: SupportedExchanges;
+  apiKey?: string;
+  secretApiKey?: string;
 }
-
 export interface ICEXInfo {
   publicKey: string;
   privateKey: string;
@@ -42,7 +45,7 @@ export interface IFormOption {
 }
 
 export default interface IForm {
-  addresses: IAddressInfo[]; // Need to figure out how we process CEX API keys/secrets
+  accounts: IAccountInfo[]; // Need to figure out how we process CEX API keys/secrets
   name?: string | null; // Feature added later
   duration?: number | null; //duration in seconds, null => never expires
   networks: SupportedNetworks[];

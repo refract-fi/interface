@@ -4,7 +4,7 @@ import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import { Button, Icon, Text, Title, Input } from 'components';
 import { useState } from 'react';
 import { SupportedExchanges } from 'utils/types/exchanges';
-import { IAddressInfo, ICEXInfo } from 'utils/types/form';
+import { IAccountInfo } from 'utils/types/form';
 import { formState, useFormActions } from 'states/formState';
 import { useRecoilValue } from 'recoil';
 
@@ -17,15 +17,15 @@ const initialAddressInfo = {
 
 const AddCEXModal = () => {
   const { isModalVisible, resetModalStatus } = useModalActions();
-  const { addresses } = useRecoilValue(formState);
-  const { setAddress } = useFormActions();
+  const { accounts } = useRecoilValue(formState);
+  const { setAccount } = useFormActions();
   const [error, setError] = useState('');
-  const [CEXInfo, setCEXInfo] = useState<IAddressInfo>(initialAddressInfo);
+  const [CEXInfo, setCEXInfo] = useState<IAccountInfo>(initialAddressInfo);
 
   const onAdd = () => {
     setError('');
-    if (CEXInfo.address && CEXInfo.signature && CEXInfo?.exchange) {
-      setAddress([...addresses, { ...CEXInfo, type: 'exchange' }]);
+    if (CEXInfo.apiKey && CEXInfo.secretApiKey && CEXInfo?.exchange) {
+      setAccount([...accounts, { ...CEXInfo, type: 'exchange' }]);
       setCEXInfo(initialAddressInfo);
       resetModalStatus();
     } else {
@@ -46,7 +46,7 @@ const AddCEXModal = () => {
         <>
           <FlexCol gap='2x'>
             {Object.values(SupportedExchanges).map((exchange: SupportedExchanges) => {
-              const isDisabled = !(addresses.findIndex(CEX => CEX.exchange === exchange) === -1);
+              const isDisabled = !(accounts.findIndex(CEX => CEX.exchange === exchange) === -1);
               return (
                 <Button
                   backgroundColor={'action'}
@@ -101,9 +101,9 @@ const AddCEXModal = () => {
               size='medium'
               level='b2'
               height='9x'
-              value={CEXInfo?.address}
+              value={CEXInfo?.apiKey}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setCEXInfo({ ...CEXInfo, address: e.target.value })
+                setCEXInfo({ ...CEXInfo, apiKey: e.target.value })
               }
             />
             <Input
@@ -113,9 +113,9 @@ const AddCEXModal = () => {
               level='b2'
               height='9x'
               type='password'
-              value={CEXInfo?.signature}
+              value={CEXInfo?.secretApiKey}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setCEXInfo({ ...CEXInfo, signature: e.target.value })
+                setCEXInfo({ ...CEXInfo, secretApiKey: e.target.value })
               }
             />
           </FlexCol>

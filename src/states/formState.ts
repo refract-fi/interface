@@ -4,7 +4,7 @@ import { IForm, SupportedNetworks } from 'utils/types';
 export const initialNetworksState: SupportedNetworks[] = [...Object.values(SupportedNetworks)];
 
 export const initialFormState: IForm = {
-  addresses: [],
+  accounts: [],
   networks: initialNetworksState,
   groupAssetsUnder: 0.1,
   isGroupAssetsUnder: true,
@@ -22,8 +22,8 @@ export function useFormActions() {
   const setForm = useSetRecoilState(formState);
   const resetForm = () => setForm(initialFormState);
 
-  const setAddress = (addresses: IForm['addresses']) =>
-    setForm(prevState => ({ ...prevState, addresses }));
+  const setAccount = (accounts: IForm['accounts']) =>
+    setForm(prevState => ({ ...prevState, accounts }));
   const setName = (name: IForm['name']) => setForm(prevState => ({ ...prevState, name }));
   const setDuration = (duration: IForm['duration']) =>
     setForm(prevState => ({ ...prevState, duration }));
@@ -40,7 +40,7 @@ export function useFormActions() {
 
   return {
     resetForm,
-    setAddress,
+    setAccount,
     setName,
     setDuration,
     setNetworks,
