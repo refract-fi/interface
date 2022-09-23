@@ -46,6 +46,17 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
         </FlexRow>
       </Button>
       <AdvancedForm isVisible={showParams} />
+      <FlexRow
+        alignItems={'center'}
+        gap='1x'
+        color='secondary'
+        position={'absolute'}
+        bottom='4x'
+        display={showParams ? 'none' : 'flex'}
+      >
+        <Text level='b3'>Powered by</Text>
+        <img src='/brand/zapper_logo.svg' />
+      </FlexRow>
     </FlexCol>
   );
 };
