@@ -20,24 +20,23 @@ export const refractWrapper = style({
 export const grain = style({
   position: 'relative',
   background: `url('/refract-grain.png')`,
+  backgroundSize: 'cover',
   width: 900,
   height: 450,
-  opacity: 0.68,
+  opacity: 1,
+  filter: 'brightness(62%) contrast(150%)',
   transition: 'all 0.3s ease',
   top: 0,
   selectors: {
     '&.refract&.topSkew': {
-      opacity: 0.68,
       top: -75,
       transform: 'perspective(350px) rotateX(65deg) scale(0.65)',
     },
     '&.allocations': {
-      opacity: 0.68,
       top: 0,
       transform: 'perspective(3000px) rotateY(-88deg) scale(1)',
     },
     '&.stats': {
-      opacity: 0.68,
       top: 0,
       transform: 'perspective(1200px) rotateY(85deg) scale(1)',
     },
@@ -47,8 +46,9 @@ export const grain = style({
 export const refract = style({
   width: 900,
   height: 450,
-  mixBlendMode: 'color-burn',
   transition: 'all 0.3s ease',
+  mixBlendMode: 'color-burn',
+  filter: 'saturate(150%)',
   top: 0,
   selectors: {
     '&.refract&.topSkew': {
