@@ -4,7 +4,6 @@ import { FormPhases, IFormPhase } from 'utils/types/formPhase';
 export const initialFormPhaseState: IFormPhase = {
   phase: FormPhases.CREATE,
   showParams: false,
-  // formId: 'NONE'
 };
 
 export const formPhaseState = atom({

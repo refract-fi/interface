@@ -1,12 +1,17 @@
-import { Icon, Refract, Text } from 'components';
+import { Button, Icon, Text } from 'components';
+import StackedBarChart from 'components/StackedBarChart/StackedBarChart';
 import { Layout, RefractLayout } from 'layouts';
 import RefractBlock from 'modules/refract/RefractBlock';
 import { NextPageWithLayout } from 'pages/_app';
 import { ReactNode } from 'react';
+import { useRecoilValue } from 'recoil';
+import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
 import { basicFadeIn } from 'theme/animations.css';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 
 const Refraction: NextPageWithLayout = () => {
+  const { isTopSkew } = useRecoilValue(refractPhaseState);
+  const { setIsTopSkew } = useRefractPhaseActions();
   return (
     <Box className={basicFadeIn}>
       <FlexCol width='full' marginTop={'12x'} gap='4x'>
@@ -42,6 +47,13 @@ const Refraction: NextPageWithLayout = () => {
           <RefractBlock asset='TOKE' />
         </FlexRow>
       </FlexCol>
+      <StackedBarChart />
+      <Button
+        label='test'
+        variant='default'
+        color='action'
+        onClick={() => setIsTopSkew(!isTopSkew)}
+      />
     </Box>
   );
 };

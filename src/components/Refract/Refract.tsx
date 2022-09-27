@@ -1,6 +1,9 @@
 import clsx from 'clsx';
+import StackedBarChart from 'components/StackedBarChart/StackedBarChart';
 import { useState } from 'react';
-import { Box, Flex } from 'theme/components';
+import { useRecoilValue } from 'recoil';
+import { refractPhaseState } from 'states/refractPhaseState';
+import { Box, Flex, FlexCol } from 'theme/components';
 import * as styles from './Refract.css';
 
 interface RefractProps {
@@ -14,6 +17,8 @@ const Refract = ({ page }: RefractProps) => {
   const [bottomLeftScale, setBottomLeftScale] = useState(10);
   const [bottomMiddleScale, setBottomMiddleScale] = useState(10);
   const [bottomRightScale, setBottomRightScale] = useState(10);
+
+  const { isTopSkew } = useRecoilValue(refractPhaseState);
 
   const topLeftPosX = 0;
   const topLeftPosY = 0;
@@ -40,8 +45,12 @@ const Refract = ({ page }: RefractProps) => {
       justifyContent='center'
       className={clsx(styles.refractWrapper, page)}
     >
-      <Box className={clsx(styles.grain, page)} />
-      <Box position={'absolute'} top='0' className={clsx(styles.refract, page)}>
+      <Box className={clsx(styles.grain, page, isTopSkew && 'topSkew')} />
+      <Box
+        position={'absolute'}
+        top='0'
+        className={clsx(styles.refract, page, isTopSkew && 'topSkew')}
+      >
         <svg
           width='900'
           height='450'

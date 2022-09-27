@@ -22,20 +22,24 @@ export const grain = style({
   background: `url('/refract-grain.png')`,
   width: 900,
   height: 450,
-  opacity: 0.73,
+  opacity: 0.68,
   transition: 'all 0.3s ease',
+  top: 0,
   selectors: {
-    '&.topSkew': {
-      opacity: 0.4,
-      transform: 'perspective(400px) rotateX(70deg) scale(0.65)',
+    '&.refract&.topSkew': {
+      opacity: 0.68,
+      top: -75,
+      transform: 'perspective(350px) rotateX(65deg) scale(0.65)',
     },
     '&.allocations': {
-      opacity: 0.5,
+      opacity: 0.68,
+      top: 0,
       transform: 'perspective(3000px) rotateY(-88deg) scale(1)',
     },
     '&.stats': {
-      opacity: 0.5,
-      transform: 'perspective(3000px) rotateY(88deg) scale(1)',
+      opacity: 0.68,
+      top: 0,
+      transform: 'perspective(1200px) rotateY(85deg) scale(1)',
     },
   },
 });
@@ -45,18 +49,19 @@ export const refract = style({
   height: 450,
   mixBlendMode: 'color-burn',
   transition: 'all 0.3s ease',
+  top: 0,
   selectors: {
-    '&.topSkew': {
-      opacity: 1,
-      transform: 'perspective(400px) rotateX(70deg) scale(0.65)',
+    '&.refract&.topSkew': {
+      top: -75,
+      transform: 'perspective(350px) rotateX(65deg) scale(0.65)',
     },
     '&.allocations': {
-      opacity: 1,
+      top: 0,
       transform: 'perspective(3000px) rotateY(-88deg) scale(1)',
     },
     '&.stats': {
-      opacity: 1,
-      transform: 'perspective(3000px) rotateY(88deg) scale(1)',
+      top: 0,
+      transform: 'perspective(1200px) rotateY(85deg) scale(1)',
     },
   },
 });

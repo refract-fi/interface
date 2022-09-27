@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Text } from 'components';
+import { useRefractPhaseActions } from 'states/refractPhaseState';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './RefractBlock.css';
 
@@ -8,8 +9,9 @@ interface RefractBlockProps {
 }
 
 const RefractBlock = ({ asset }: RefractBlockProps) => {
+  const { setIsTopSkew } = useRefractPhaseActions();
   return (
-    <FlexCol gap='5x' className={styles.refractBlock}>
+    <FlexCol gap='5x' className={styles.refractBlock} onClick={() => setIsTopSkew(true)}>
       <FlexRow>
         <Box
           component='span'

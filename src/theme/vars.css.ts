@@ -280,6 +280,8 @@ export const vars = createGlobalTheme(':root', {
     red: 'linear-gradient(270deg, #D55535 -1.84%, #F8EC8B 100%)',
     green: 'linear-gradient(270deg, #E6FF6C -1.84%, #8BF8A3 100%)',
     secondary: '#868686',
+    white: 'linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 97.19%)',
+    'white-inverted': 'linear-gradient(0deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 97.19%)',
     error: '#E9164E',
   },
 

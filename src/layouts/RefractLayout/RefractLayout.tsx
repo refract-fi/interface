@@ -2,6 +2,8 @@ import clsx from 'clsx';
 import { BorderButton, Button, Icon, Refract } from 'components';
 import { useRouter } from 'next/router';
 import { ReactNode, useCallback, useMemo, useState } from 'react';
+import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
+import { useRecoilValue } from 'recoil';
 import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './RefractLayout.css';
 
@@ -11,7 +13,6 @@ interface RefractLayoutProps {
 
 const RefractLayout = ({ children }: RefractLayoutProps) => {
   const { pathname, push, query } = useRouter();
-  const [isFading, fadePhase] = useState(false);
 
   const isActive = useCallback((route: string) => pathname.includes(route), [pathname]);
 
