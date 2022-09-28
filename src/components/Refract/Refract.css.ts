@@ -48,7 +48,7 @@ export const refract = style({
   height: 450,
   transition: 'all 0.3s ease',
   mixBlendMode: 'color-burn',
-  filter: 'saturate(150%)',
+  filter: 'saturate(150%) brightness(110%)',
   top: 0,
   selectors: {
     '&.refract&.topSkew': {

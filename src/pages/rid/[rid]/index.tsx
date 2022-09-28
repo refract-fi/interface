@@ -7,13 +7,24 @@ import { ReactNode } from 'react';
 import { useRecoilValue } from 'recoil';
 import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
 import { basicFadeIn } from 'theme/animations.css';
-import { Box, FlexCol, FlexRow } from 'theme/components';
+import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 
 const Refraction: NextPageWithLayout = () => {
   const { isTopSkew } = useRecoilValue(refractPhaseState);
   const { setIsTopSkew } = useRefractPhaseActions();
   return (
     <Box className={basicFadeIn}>
+      {isTopSkew && (
+        <Flex position={'absolute'} top='0' left='0' width='full'>
+          <Button
+            label='Reset View'
+            variant='none'
+            color='action'
+            width={'full'}
+            onClick={() => setIsTopSkew(false)}
+          />
+        </Flex>
+      )}
       <FlexCol width='full' marginTop={'12x'} gap='4x'>
         <FlexRow gap='2x' width={'full'} justifyContent='space-between'>
           <FlexRow alignItems={'center'} gap='0x'>
@@ -48,12 +59,6 @@ const Refraction: NextPageWithLayout = () => {
         </FlexRow>
       </FlexCol>
       <StackedBarChart />
-      <Button
-        label='test'
-        variant='default'
-        color='action'
-        onClick={() => setIsTopSkew(!isTopSkew)}
-      />
     </Box>
   );
 };

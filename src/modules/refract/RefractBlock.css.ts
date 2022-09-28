@@ -5,15 +5,15 @@ export const refractBlock = style({
   cursor: 'pointer',
   selectors: {
     '* &:hover': {
-      color: vars.color.blue,
+      color: vars.color.primary,
     },
   },
 });
 
 export const assetBlock = style({
-  backgroundColor: vars.color.secondary,
+  backgroundColor: vars.color.primary,
 });
 
 globalStyle(`${refractBlock}:hover ${assetBlock}`, {
-  backgroundColor: vars.color.blue,
+  backgroundColor: vars.color.primary,
 });
