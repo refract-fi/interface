@@ -18,6 +18,11 @@ const defaultHover = style({
   ':hover': {
     opacity: 0.7,
   },
+  selectors: {
+    '&:hover&.disabled': {
+      opacity: 0.3,
+    },
+  },
 });
 
 export const active = style({});
@@ -135,6 +140,9 @@ export const buttonVariants = styleVariants({
       selectors: {
         '&.disabled': {
           opacity: 0.4,
+        },
+        '&:hover&.disabled': {
+          backgroundColor: vars.color['gray-5'],
         },
       },
       ':hover': {

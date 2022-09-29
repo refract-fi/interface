@@ -11,6 +11,7 @@ import { IAccountInfo } from 'utils/types/form';
 import { useModalActions } from 'states/modalState';
 import BorderInput from 'components/BorderInput/BorderInput';
 import * as styles from './AddressInput.css';
+import { formatAccount, titleCase } from 'utils/func';
 
 const AddressInput = () => {
   const { accounts } = useRecoilValue<IForm>(formState);
@@ -23,24 +24,31 @@ const AddressInput = () => {
   const checkInput = async (targetVal: string) => {
     //Check for duplicates
     const indexOfDuplicate = [...accounts].findIndex(
-      (account: IAccountInfo) => account.address === value
+      (account: IAccountInfo) =>
+        account.address === value.replaceAll(',', '').replaceAll(' ', '') ||
+        account.ens === value.replaceAll(',', '').replaceAll(' ', '')
     );
-    if (indexOfDuplicate !== -1 && accounts[indexOfDuplicate].address?.length === value.length) {
+
+    if (
+      indexOfDuplicate !== -1
+      // Is below necessary?
+      // && accounts[indexOfDuplicate].address?.length === value.length
+    ) {
       setError('DUPLICATE_ADDRESS');
-      return;
+      return false;
     }
     //Check if valid ethereum address
     if (ethers.utils.isAddress(targetVal)) {
       setError('');
       setValue('');
       setAccount([...accounts, { address: targetVal, type: 'ethereum' }]);
-      return;
+      return true;
     }
     if (validate(targetVal)) {
       setError('');
       setValue('');
       setAccount([...accounts, { address: targetVal, type: 'bitcoin' }]);
-      return;
+      return true;
     }
     //or check if valid ENS
     if (`${targetVal.slice(-4)}` === '.eth') {
@@ -54,17 +62,17 @@ const AddressInput = () => {
           setError('');
           setValue('');
           setAccount([...accounts, { address: targetAddress, ens: targetVal, type: 'ethereum' }]);
-          return;
+          return true;
         }
       } catch (e) {
         setError('ERROR_ENS_FETCH');
         console.log('error retrieving ens address');
-        return;
+        return false;
       }
     }
     //or check if valid btc address
     setError('INVALID_ADDRESS');
-    return;
+    return false;
   };
 
   const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -74,9 +82,15 @@ const AddressInput = () => {
       e.target.value.length > 3
     ) {
       const targetVal = e.target.value.replaceAll(',', '').replaceAll(' ', '');
-      checkInput(targetVal);
+      const isValid = await checkInput(targetVal);
+      if (isValid) {
+        setValue('');
+      } else {
+        setValue(e.target.value);
+      }
+    } else {
+      setValue(e.target.value);
     }
-    setValue(e.target.value);
   };
 
   const onClear = (index: number) => {
@@ -127,7 +141,13 @@ const AddressInput = () => {
             accounts.map(({ address, ens, type, exchange }, index) => (
               <Chips
                 label={
-                  type === 'exchange' && exchange ? exchange : ens ? ens : address ? address : ''
+                  type === 'exchange' && exchange
+                    ? titleCase(exchange)
+                    : ens
+                    ? ens
+                    : address
+                    ? formatAccount(address)
+                    : ''
                 }
                 key={address}
                 background={getBorderColor(index)}

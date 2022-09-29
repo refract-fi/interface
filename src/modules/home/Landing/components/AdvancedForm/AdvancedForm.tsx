@@ -187,6 +187,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
           optionDetails='Your addresses are unverified.'
           modal='VERIFY_ACCOUNTS'
           activeOption='VERIFY ACCOUNTS'
+          disabled={form.accounts.length < 1}
         />
       </FlexCol>
       <NetworkSelectModal />

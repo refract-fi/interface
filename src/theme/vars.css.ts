@@ -160,6 +160,7 @@ export const vars = createGlobalTheme(':root', {
   color: {
     white: '#fff',
     black: '#000',
+    none: '#FFFFFF00',
 
     primary: '#fff',
     secondary: '#868686',

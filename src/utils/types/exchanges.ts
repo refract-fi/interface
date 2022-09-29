@@ -1,6 +1,6 @@
 export enum SupportedExchanges {
   BINANCE = 'binance',
   KRAKEN = 'kraken',
-  COINBASE = 'coinbase',
+  // COINBASE = 'coinbase',
   GEMINI = 'gemini',
 }

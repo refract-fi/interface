@@ -58,9 +58,12 @@ const AddCEXModal = () => {
                     isDisabled ? null : setCEXInfo({ ...CEXInfo, exchange: exchange })
                   }
                 >
-                  <FlexRow alignItems={'center'} gap='2x' paddingY='1x'>
-                    <Icon name={exchange} />
-                    <Text level='b2'>{exchange.charAt(0).toUpperCase() + exchange.slice(1)}</Text>
+                  <FlexRow justifyContent={'space-between'} alignItems='center'>
+                    <FlexRow alignItems={'center'} gap='2x' paddingY='1x'>
+                      <Icon name={exchange} />
+                      <Text level='b2'>{exchange.charAt(0).toUpperCase() + exchange.slice(1)}</Text>
+                    </FlexRow>
+                    {isDisabled && <Icon name='check' fill='white' />}
                   </FlexRow>
                 </Button>
               );

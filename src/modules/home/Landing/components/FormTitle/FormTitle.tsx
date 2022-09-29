@@ -16,6 +16,7 @@ interface FormTitleProps extends IFormOption {
   percent?: number;
   setPercent?: (percent: number) => void;
   modal?: ModalStateType['visibleModal'];
+  disabled?: boolean;
 }
 
 const FormTitle = ({
@@ -31,6 +32,7 @@ const FormTitle = ({
   percent,
   setPercent,
   modal,
+  disabled,
 }: FormTitleProps) => {
   const { isModal, isGroup, isSwitch, isOther } = useMemo(() => {
     return {
@@ -88,7 +90,8 @@ const FormTitle = ({
             gap='1x'
             alignItems={'center'}
             flexDirection={'row'}
-            onClick={() => isModal && modal && setVisibleModal(modal)}
+            onClick={() => isModal && modal && !disabled && setVisibleModal(modal)}
+            disabled={disabled}
           >
             {activeOption}
             {isOther && (

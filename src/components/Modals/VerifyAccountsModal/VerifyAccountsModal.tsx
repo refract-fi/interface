@@ -3,13 +3,16 @@ import Modal from 'components/Modal/Modal';
 import Text from 'components/Typography/Text';
 import { useModalActions } from 'states/modalState';
 import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
-import Verified from '/public/icons/verified.svg';
-import VerifiedChromatic from '/public/icons/verified-chromatic.svg';
 import * as styles from './VerifyAccountsModal.css';
 import Icon from 'components/Icon/Icon';
+import { useRecoilValue } from 'recoil';
+import { formState } from 'states/formState';
+import { formatAccount, titleCase } from 'utils/func';
 
 const VerifyAccountsModal = () => {
   const { isModalVisible, resetModalStatus } = useModalActions();
+  const { accounts } = useRecoilValue(formState);
+
   return (
     <Modal
       title={'VERIFICATION'}
@@ -20,7 +23,7 @@ const VerifyAccountsModal = () => {
     >
       <FlexCol gap='2x' marginTop={'2x'}>
         <FlexCol padding={'2x'} gap='0x'>
-          <Text>1/3 Wallets verified</Text>
+          <Text>/{accounts.length} Wallets verified</Text>
           <Text component={'p'} level='b2' color='secondary'>
             Remember that you need to verify all the wallets to display the verified badge on your
             Refract.{' '}
@@ -31,28 +34,39 @@ const VerifyAccountsModal = () => {
         </FlexCol>
         <Box height={1} width='full' backgroundColor='separator-non-opaque' />
         <FlexCol gap='0x'>
-          <FlexRow
-            justifyContent={'space-between'}
-            paddingX='2x'
-            paddingY='1x'
-            backgroundColor={'gray-5'}
-          >
-            <Text level='b2'>0x2453...b324</Text>
-            <Flex alignItems={'center'} gap='0x'>
-              <Text className={styles.textGradient} level='b2'>
-                Verified
-              </Text>
-              <Icon name='verified-chromatic' />
-            </Flex>
-          </FlexRow>
-          <FlexRow justifyContent={'space-between'} paddingX='2x' paddingY='1x'>
-            <Text level='b2'>0x2453...b324</Text>
-            <Button size='none' label='Verify' level='b2' color='action' />
-          </FlexRow>
-          <FlexRow justifyContent={'space-between'} paddingX='2x' paddingY='1x'>
-            <Text level='b2'>Refract.eth</Text>
-            <Button size='none' label='Verify' level='b2' color='action' />
-          </FlexRow>
+          {accounts.map(account => {
+            const formattedAccount = account.address && formatAccount(account.address);
+            const isVerified = account.secretApiKey || account.signature;
+            return (
+              <FlexRow
+                justifyContent={'space-between'}
+                paddingX='2x'
+                paddingY='1x'
+                backgroundColor={isVerified ? 'gray-5' : 'none'}
+                key={account.address ? account.address : account.apiKey}
+              >
+                <Text level='b2'>
+                  {account.ens
+                    ? account.ens
+                    : account.exchange
+                    ? titleCase(account.exchange)
+                    : formattedAccount}
+                </Text>
+                <Flex alignItems={'center'} gap='0x'>
+                  {isVerified ? (
+                    <>
+                      <Text className={styles.textGradient} level='b2'>
+                        Verified
+                      </Text>
+                      <Icon name='verified-chromatic' />
+                    </>
+                  ) : (
+                    <Button size='none' label='Verify' level='b2' color='action' />
+                  )}
+                </Flex>
+              </FlexRow>
+            );
+          })}
         </FlexCol>
       </FlexCol>
     </Modal>
