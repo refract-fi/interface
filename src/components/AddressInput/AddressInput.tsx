@@ -15,7 +15,7 @@ import { formatAccount, titleCase } from 'utils/func';
 
 const AddressInput = () => {
   const { accounts } = useRecoilValue<IForm>(formState);
-  const { setAccount } = useFormActions();
+  const { setAccounts } = useFormActions();
   const { setVisibleModal } = useModalActions();
 
   const [value, setValue] = useState('');
@@ -41,13 +41,13 @@ const AddressInput = () => {
     if (ethers.utils.isAddress(targetVal)) {
       setError('');
       setValue('');
-      setAccount([...accounts, { address: targetVal, type: 'ethereum' }]);
+      setAccounts([...accounts, { address: targetVal, type: 'ethereum' }]);
       return true;
     }
     if (validate(targetVal)) {
       setError('');
       setValue('');
-      setAccount([...accounts, { address: targetVal, type: 'bitcoin' }]);
+      setAccounts([...accounts, { address: targetVal, type: 'bitcoin' }]);
       return true;
     }
     //or check if valid ENS
@@ -61,7 +61,7 @@ const AddressInput = () => {
         if (targetAddress) {
           setError('');
           setValue('');
-          setAccount([...accounts, { address: targetAddress, ens: targetVal, type: 'ethereum' }]);
+          setAccounts([...accounts, { address: targetAddress, ens: targetVal, type: 'ethereum' }]);
           return true;
         }
       } catch (e) {
@@ -96,7 +96,7 @@ const AddressInput = () => {
   const onClear = (index: number) => {
     const list = [...accounts];
     list.splice(index, 1);
-    setAccount(list);
+    setAccounts(list);
   };
 
   const onKeydown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -112,7 +112,7 @@ const AddressInput = () => {
   const onBlur = () => {
     if (value.length > 3) {
       setValue('');
-      setAccount([...accounts, { address: value.replaceAll(',', '').replaceAll(' ', '') }]);
+      setAccounts([...accounts, { address: value.replaceAll(',', '').replaceAll(' ', '') }]);
     }
   };
 

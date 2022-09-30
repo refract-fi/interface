@@ -1,6 +1,8 @@
 import { AddressInput, Button, Icon, Text, Title } from 'components';
+import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { formPhaseState, useFormPhaseActions } from 'states/formPhasesState';
+import { formState } from 'states/formState';
 import { FlexCol, FlexRow } from 'theme/components';
 import { FormPhases } from 'utils/types/formPhase';
 import AdvancedForm from './components/AdvancedForm/AdvancedForm';
@@ -14,10 +16,15 @@ interface LandingProps {
 const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
   const { showParams } = useRecoilValue(formPhaseState);
   const { setPhase, setShowParams } = useFormPhaseActions();
+  const { accounts } = useRecoilValue(formState);
   const onGenerateClick = () => {
     setTimeout(() => setPhase(FormPhases.REVIEW), 150);
     fadeOut(() => setTimeout(() => fadeIn(), 150));
   };
+
+  const isDisabled = useMemo(() => {
+    return accounts.length < 1;
+  }, [accounts]);
   return (
     <FlexCol alignItems={'center'} marginTop='60x'>
       <Title special level='0' weight={'bold'} className={styles.title}>
@@ -32,7 +39,8 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
         variant='hero'
         marginTop='8x'
         size='large'
-        onClick={() => onGenerateClick()}
+        onClick={() => !isDisabled && onGenerateClick()}
+        disabled={isDisabled}
       />
       <Button marginTop={'7x'} color='secondary'>
         <FlexRow alignItems={'center'} gap='1x' onClick={() => setShowParams(!showParams)}>

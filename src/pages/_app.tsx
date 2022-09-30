@@ -1,3 +1,4 @@
+import ConnectionProvider from 'connection/connectionProvider';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
@@ -14,7 +15,11 @@ type AppPropsWithLayout = AppProps & {
 
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout || ((page: ReactNode) => page);
-  return <RecoilRoot>{getLayout(<Component {...pageProps} />)}</RecoilRoot>;
+  return (
+    <RecoilRoot>
+      <ConnectionProvider>{getLayout(<Component {...pageProps} />)}</ConnectionProvider>
+    </RecoilRoot>
+  );
 }
 
 export default MyApp;

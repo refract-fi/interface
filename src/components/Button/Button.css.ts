@@ -107,6 +107,9 @@ export const buttonVariants = styleVariants({
         '&:hover::before': {
           opacity: 1,
         },
+        '&:hover&.disabled::before': {
+          opacity: 0,
+        },
       },
     },
   ],

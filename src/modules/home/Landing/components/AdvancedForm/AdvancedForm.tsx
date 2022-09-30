@@ -184,7 +184,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         <FormTitle
           title='VERIFICATION'
           icon='verified'
-          optionDetails='Your addresses are unverified.'
+          optionDetails='Your addresses are not verified.'
           modal='VERIFY_ACCOUNTS'
           activeOption='VERIFY ACCOUNTS'
           disabled={form.accounts.length < 1}

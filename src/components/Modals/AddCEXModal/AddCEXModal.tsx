@@ -18,14 +18,14 @@ const initialAddressInfo = {
 const AddCEXModal = () => {
   const { isModalVisible, resetModalStatus } = useModalActions();
   const { accounts } = useRecoilValue(formState);
-  const { setAccount } = useFormActions();
+  const { setAccounts } = useFormActions();
   const [error, setError] = useState('');
   const [CEXInfo, setCEXInfo] = useState<IAccountInfo>(initialAddressInfo);
 
   const onAdd = () => {
     setError('');
     if (CEXInfo.apiKey && CEXInfo.secretApiKey && CEXInfo?.exchange) {
-      setAccount([...accounts, { ...CEXInfo, type: 'exchange' }]);
+      setAccounts([...accounts, { ...CEXInfo, type: 'exchange' }]);
       setCEXInfo(initialAddressInfo);
       resetModalStatus();
     } else {

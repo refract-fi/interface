@@ -22,7 +22,7 @@ export function useFormActions() {
   const setForm = useSetRecoilState(formState);
   const resetForm = () => setForm(initialFormState);
 
-  const setAccount = (accounts: IForm['accounts']) =>
+  const setAccounts = (accounts: IForm['accounts']) =>
     setForm(prevState => ({ ...prevState, accounts }));
   const setName = (name: IForm['name']) => setForm(prevState => ({ ...prevState, name }));
   const setDuration = (duration: IForm['duration']) =>
@@ -40,7 +40,7 @@ export function useFormActions() {
 
   return {
     resetForm,
-    setAccount,
+    setAccounts,
     setName,
     setDuration,
     setNetworks,
