@@ -15,7 +15,14 @@ const AllocationsPage = () => {
       alignItems={'center'}
       className={clsx(styles.allocationsPageWrapper, basicFadeIn)}
     >
-      <FlexCol width='full'>
+      <FlexCol
+        width='full'
+        position='sticky'
+        top={'18x'}
+        backgroundColor='black'
+        zIndex={2}
+        paddingTop='12x'
+      >
         <FlexRow width='full' paddingY={'4x'}>
           <Title special>Allocations</Title>
         </FlexRow>

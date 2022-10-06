@@ -4,7 +4,7 @@ import * as styles from './AllocationBlocks.css';
 
 const AllocationBlocks = () => {
   return (
-    <FlexCol width={'full'}>
+    <FlexCol width={'full'} marginTop='4x'>
       <AllocationBlock
         title='WALLET'
         allocationShare={0.2212}

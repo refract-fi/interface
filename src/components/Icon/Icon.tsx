@@ -22,8 +22,8 @@ import Copy from './icons/Copy';
 import Claimable from './icons/Claimable';
 import Debt from './icons/Debt';
 import Deposit from './icons/Deposit';
-import Locked from './icons/locked';
-import Vesting from './icons/vesting';
+import Locked from './icons/Locked';
+import Vesting from './icons/Vesting';
 import Wallet from './icons/Wallet';
 
 const standardIcons = {

@@ -32,7 +32,15 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
 
   return (
     <Box>
-      <FlexRow gap='2x' justifyContent={'center'} marginY='6x'>
+      <FlexRow
+        gap='2x'
+        justifyContent={'center'}
+        paddingY='6x'
+        position={'sticky'}
+        top={'0'}
+        backgroundColor='black'
+        zIndex={2}
+      >
         <Button size='none' position={'absolute'} left='7x' gap='2x' onClick={() => push('/')}>
           <Icon name='refract-logo' />
         </Button>
