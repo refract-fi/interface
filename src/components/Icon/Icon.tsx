@@ -19,6 +19,12 @@ import { rotation } from './Icon.css';
 import RefractLogo from './icons/RefractLogo';
 import * as styles from './Icon.css';
 import Copy from './icons/Copy';
+import Claimable from './icons/Claimable';
+import Debt from './icons/Debt';
+import Deposit from './icons/Deposit';
+import Locked from './icons/locked';
+import Vesting from './icons/vesting';
+import Wallet from './icons/Wallet';
 
 const standardIcons = {
   hourglass: <Hourglass />,
@@ -32,6 +38,12 @@ const standardIcons = {
   'verified-chromatic': <VerifiedChromatic />,
   chevron: <Chevron />,
   copy: <Copy />,
+  claimable: <Claimable />,
+  debt: <Debt />,
+  deposit: <Deposit />,
+  locked: <Locked />,
+  vesting: <Vesting />,
+  wallet: <Wallet />,
 };
 
 const brandIcons = {
@@ -51,17 +63,16 @@ export type iconNames = keyof typeof icons;
 
 interface IconProps {
   name: iconNames;
-  fill?: Sprinkles['color'];
-  stroke?: Sprinkles['color'];
+  color?: Sprinkles['color'];
   rotate?: '0deg' | '90deg' | '180deg' | '270deg';
   size?: number;
 }
 
-const Icon = ({ name, fill, stroke, size, rotate = '0deg' }: IconProps) => {
+const Icon = ({ name, color, size, rotate = '0deg' }: IconProps) => {
   return (
     <Flex
-      fill={fill}
-      stroke={stroke}
+      fill={color}
+      stroke={color}
       alignItems='center'
       justifyContent={'center'}
       className={styles.rotate}

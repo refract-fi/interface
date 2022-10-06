@@ -34,7 +34,7 @@ const Option = ({ isSelected, label, details, variant, ...restProps }: OptionPro
             {details}
           </Text>
         )}
-        {isSelected && !isDetailed && <Icon name='check' fill='white' rotate='0deg' />}
+        {isSelected && !isDetailed && <Icon name='check' color='white' rotate='0deg' />}
       </Flex>
     </BorderButton>
   );

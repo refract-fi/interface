@@ -188,6 +188,7 @@ export const vars = createGlobalTheme(':root', {
     'bg-fill-quarter': '#151517',
 
     separator: '#545458B3',
+    'separator-opaque': '#252627',
     'separator-non-opaque': '#545458B3',
 
     red: 'E9164E',

@@ -8,11 +8,11 @@ export const refractWrapper = style({
   selectors: {
     '&.allocations': {
       left: -950,
-      position: 'absolute',
+      position: 'fixed',
     },
     '&.stats': {
       left: 950,
-      position: 'absolute',
+      position: 'fixed',
     },
   },
 });

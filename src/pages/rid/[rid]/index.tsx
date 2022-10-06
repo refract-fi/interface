@@ -34,19 +34,19 @@ const Refraction: NextPageWithLayout = () => {
             </Text>
           </FlexRow>
           <FlexRow alignItems={'center'} gap='0x'>
-            <Icon name='copy' stroke={'secondary'} />
+            <Icon name='copy' color={'secondary'} />
             <Text level='f5' textTransform={'uppercase'} color='secondary'>
               refract.fi/rid/asdiua8sy98
             </Text>
           </FlexRow>
           <FlexRow alignItems={'center'} gap='0x'>
-            <Icon name='hourglass' stroke='secondary' />
+            <Icon name='hourglass' color='secondary' />
             <Text level='f5' textTransform={'uppercase'} color='secondary'>
               expires Nov 28th 2021 10:45:34pm
             </Text>
           </FlexRow>
           <FlexRow alignItems={'center'} gap='0x'>
-            <Icon name='snapshot' stroke='secondary' />
+            <Icon name='snapshot' color='secondary' />
             <Text level='f5' textTransform={'uppercase'} color='secondary'>
               SNAPSHOT TAKEN oct 28th 2021 10:45:34pm
             </Text>

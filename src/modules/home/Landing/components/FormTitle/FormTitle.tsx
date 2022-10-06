@@ -48,7 +48,7 @@ const FormTitle = ({
   return (
     <FlexRow justifyContent={'space-between'}>
       <FlexRow gap='2x'>
-        <Icon stroke={'white'} name={icon} />
+        <Icon color={'white'} name={icon} />
         <Title level='6' textTransform={'uppercase'}>
           {title}
         </Title>
@@ -97,7 +97,7 @@ const FormTitle = ({
             {isOther && (
               <Icon
                 name='chevron'
-                stroke={'primary'}
+                color={'primary'}
                 size={20}
                 rotate={extend ? '0deg' : '180deg'}
               />

@@ -63,7 +63,7 @@ const AddCEXModal = () => {
                       <Icon name={exchange} />
                       <Text level='b2'>{exchange.charAt(0).toUpperCase() + exchange.slice(1)}</Text>
                     </FlexRow>
-                    {isDisabled && <Icon name='check' fill='white' />}
+                    {isDisabled && <Icon name='check' color='white' />}
                   </FlexRow>
                 </Button>
               );

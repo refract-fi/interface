@@ -80,7 +80,6 @@ const Refract = ({ page }: RefractProps) => {
 
   return (
     <Flex
-      position='relative'
       alignItems={'center'}
       justifyContent='center'
       className={clsx(styles.refractWrapper, page)}

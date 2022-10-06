@@ -44,7 +44,7 @@ const Chips = ({
             fixedHeight={'icon'}
             onClick={() => onClear && onClear()}
           >
-            <Icon name='close' stroke={'primary'} />
+            <Icon name='close' color={'primary'} />
           </Button>
         )}
       </FlexRow>

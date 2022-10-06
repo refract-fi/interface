@@ -53,10 +53,10 @@ const Modal = ({
       >
         <FlexRow width={'full'} justifyContent='space-between' alignItems={'center'}>
           <FlexRow gap='0x' alignItems={'center'}>
-            {icon && <Icon name={icon} stroke='white' />}
+            {icon && <Icon name={icon} color='white' />}
             {onReturn && (
               <Button onClick={() => onReturn()} size='none'>
-                <Icon name='chevron' stroke='white' rotate='90deg' />
+                <Icon name='chevron' color='white' rotate='90deg' />
               </Button>
             )}
             <Title level='6' textTransform={'uppercase'}>
@@ -87,7 +87,7 @@ const Modal = ({
                     alignItems={'center'}
                     display='flex'
                   >
-                    <Icon name='close' stroke='white' />
+                    <Icon name='close' color='white' />
                   </Button>
                 )}
               </>

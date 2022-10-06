@@ -7,5 +7,5 @@ export const segmentWrapper = style({
 });
 
 export const line = style({
-  height: 5,
+  height: 10,
 });

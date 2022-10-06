@@ -47,7 +47,7 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
           ADVANCED PARAMETERS
           <Icon
             name='chevron'
-            stroke={'secondary'}
+            color={'secondary'}
             size={20}
             rotate={showParams ? '0deg' : '180deg'}
           />

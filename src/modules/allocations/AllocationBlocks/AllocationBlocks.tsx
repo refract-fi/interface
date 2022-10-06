@@ -1,13 +1,14 @@
-import { Flex } from 'theme/components';
+import { Flex, FlexCol } from 'theme/components';
 import AllocationBlock from '../AllocationBlock/AllocationBlock';
 import * as styles from './AllocationBlocks.css';
 
 const AllocationBlocks = () => {
   return (
-    <Flex width={'full'} marginX={'3x'} className={styles.allocationBlocksWrapper}>
+    <FlexCol width={'full'}>
       <AllocationBlock
         title='WALLET'
-        allocationShare={0.22}
+        allocationShare={0.2212}
+        iconName='wallet'
         allocations={[
           {
             symbol: 'eth',
@@ -29,6 +30,7 @@ const AllocationBlocks = () => {
       <AllocationBlock
         title='DEPOSITS'
         allocationShare={0.22}
+        iconName='deposit'
         allocations={[
           {
             symbol: 'eth',
@@ -40,6 +42,7 @@ const AllocationBlocks = () => {
       <AllocationBlock
         title='CLAIMABLE'
         allocationShare={0.22}
+        iconName='claimable'
         allocations={[
           {
             symbol: 'eth',
@@ -51,6 +54,7 @@ const AllocationBlocks = () => {
       <AllocationBlock
         title='LOCKED'
         allocationShare={0.22}
+        iconName='locked'
         allocations={[
           {
             symbol: 'eth',
@@ -62,6 +66,7 @@ const AllocationBlocks = () => {
       <AllocationBlock
         title='VESTING'
         allocationShare={0.22}
+        iconName='vesting'
         allocations={[
           {
             symbol: 'eth',
@@ -73,6 +78,7 @@ const AllocationBlocks = () => {
       <AllocationBlock
         title='NFTS'
         allocationShare={0.22}
+        iconName='nft'
         allocations={[
           {
             symbol: 'eth',
@@ -84,6 +90,7 @@ const AllocationBlocks = () => {
       <AllocationBlock
         title='DEBT'
         allocationShare={0.22}
+        iconName='debt'
         allocations={[
           {
             symbol: 'eth',
@@ -92,7 +99,7 @@ const AllocationBlocks = () => {
           },
         ]}
       />
-    </Flex>
+    </FlexCol>
   );
 };
 
