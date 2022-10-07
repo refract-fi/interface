@@ -13,6 +13,9 @@ export const refractWrapper = style({
     '&.stats': {
       left: 950,
     },
+    '&.generate': {
+      position: 'absolute',
+    },
   },
 });
 

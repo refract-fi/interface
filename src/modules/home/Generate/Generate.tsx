@@ -1,6 +1,7 @@
-import { Button, Chips, Text, Title } from 'components';
+import clsx from 'clsx';
+import { Button, Chips, Refract, Text, Title } from 'components';
 import moment from 'moment';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { formPhaseState, useFormPhaseActions } from 'states/formPhasesState';
 import { formState } from 'states/formState';
@@ -16,6 +17,7 @@ const ReviewForm = () => {
   const form = useRecoilValue<IForm>(formState);
   const { phase } = useRecoilValue(formPhaseState);
   const { setPhase, setShowParams } = useFormPhaseActions();
+  const [loadingText, setLoadingText] = useState('Retrieving Balances...');
 
   const { isReview, isGenerating } = useMemo(() => {
     return {
@@ -31,11 +33,27 @@ const ReviewForm = () => {
     return () => clearTimeout(generatingTimeout);
   }, []);
 
+  async function test() {
+    for (const string of [
+      'Retrieving Balances',
+      'Aggregating Results',
+      'Anonymizing your finances',
+    ]) {
+      setLoadingText(string);
+      await new Promise(r => setTimeout(r, 2666));
+    }
+  }
+  useEffect(() => {
+    if (phase === FormPhases.GENERATING) {
+      test();
+    }
+  }, [phase]);
+
   useEffect(() => {
     if (isGenerating) {
       const completeTimeout = setTimeout(() => {
         setPhase(FormPhases.COMPLETED);
-      }, 6000);
+      }, 8000);
       return () => clearTimeout(completeTimeout);
     }
   }, [isGenerating]);
@@ -68,11 +86,20 @@ const ReviewForm = () => {
       )}
       <FlexCol maxWidth={'124x'} width='full' marginTop={'0x'}>
         {isGenerating && (
-          <Flex className={styles.generatingAnim}>
-            <video width='500' height='438' autoPlay muted loop>
-              <source src='/animation.mp4' type='video/mp4' />
-            </video>
-          </Flex>
+          <FlexRow gap='12x'>
+            <Box className={styles.refractWrapper}>
+              <Refract page='generate' />
+            </Box>
+            <Box className={styles.refractWrapper}>
+              <Refract page='generate' />
+            </Box>
+            <Box className={styles.refractWrapper}>
+              <Refract page='generate' />
+            </Box>
+            <Box className={styles.refractWrapper}>
+              <Refract page='generate' />
+            </Box>
+          </FlexRow>
         )}
         {isReview && (
           <FlexCol className={styles.reviewFormAnim} width='full'>
@@ -126,31 +153,23 @@ const ReviewForm = () => {
             />
           </FlexCol>
         )}
-        <Box
-          height='0x'
-          backgroundColor='separator-non-opaque'
-          marginTop={'8x'}
-          position='relative'
-        >
-          {isGenerating && (
-            <Box
-              className={styles.generatingAnim}
-              height='full'
-              position={'absolute'}
-              zIndex={2}
-              width='full'
-            >
-              <Box height='full' background={'spectrum'} className={styles.gradientAnim} />
-            </Box>
-          )}
+        {isReview && (
           <Box
-            height='full'
-            background={'spectrum'}
-            className={styles.progressAnim}
-            position='absolute'
-            zIndex={1}
-          />
-        </Box>
+            height='0x'
+            backgroundColor='separator-non-opaque'
+            marginTop={'8x'}
+            position='relative'
+            className={styles.reviewFormAnim}
+          >
+            <Box
+              height='full'
+              background={'spectrum'}
+              className={styles.progressAnim}
+              position='absolute'
+              zIndex={1}
+            />
+          </Box>
+        )}
         <FlexCol marginTop={'4x'} alignItems={'center'}>
           {isReview && (
             <FlexCol width='full' alignItems={'center'} gap='2x' className={styles.reviewFormAnim}>
@@ -183,9 +202,10 @@ const ReviewForm = () => {
               color='secondary'
               level='f4'
               textTransform={'uppercase'}
-              className={styles.generatingAnim}
+              className={clsx(styles.generatingAnim, styles.loadingDots)}
+              marginTop='4x'
             >
-              Anonymizing your accounts
+              {loadingText}
             </Text>
           )}
         </FlexCol>

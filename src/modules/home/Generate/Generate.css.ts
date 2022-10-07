@@ -1,4 +1,5 @@
 import { keyframes, style } from '@vanilla-extract/css';
+import { vars } from 'theme/vars.css';
 
 export const fadeOut = keyframes({
   '0%': {
@@ -18,6 +19,45 @@ export const fadeIn = keyframes({
   },
 });
 
+export const progressAnimFrames = keyframes({
+  '0%': {
+    width: 0,
+  },
+  '100%': {
+    width: '100%',
+  },
+});
+
+export const dots = keyframes({
+  '0%': {
+    color: 'rgba(0, 0, 0, 0)',
+    textShadow: `0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0)`,
+  },
+  '20%': {
+    color: 'rgba(0, 0, 0, 0)',
+    textShadow: `0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0)`,
+  },
+  '40%': {
+    color: vars.color.secondary,
+    textShadow: `0.25em 0 0 rgba(0, 0, 0, 0), 0.5em 0 0 rgba(0, 0, 0, 0)`,
+  },
+  '60%': {
+    textShadow: `0.25em 0 0 ${vars.color.secondary}, 0.5em 0 0 rgba(0, 0, 0, 0)`,
+  },
+  '80%': { textShadow: `0.25em 0 0 ${vars.color.secondary}, 0.5em 0 0 ${vars.color.secondary}` },
+  '100%': { textShadow: `0.25em 0 0 ${vars.color.secondary}, 0.5em 0 0 ${vars.color.secondary}` },
+});
+
+export const refractWrapper = style({
+  width: 900,
+  height: 450,
+  animationName: fadeIn,
+  animationDuration: '1s',
+  animationFillMode: 'both',
+  marginTop: '50px',
+  overflow: 'hidden',
+});
+
 export const reviewFormAnim = style({
   animationDelay: '6.3s',
   animationName: fadeOut,
@@ -25,12 +65,10 @@ export const reviewFormAnim = style({
   animationDuration: '0.5s',
 });
 
-export const progressAnimFrames = keyframes({
-  '0%': {
-    width: 0,
-  },
-  '100%': {
-    width: '100%',
+export const loadingDots = style({
+  ':after': {
+    content: '.',
+    animation: `${dots} 2s steps(5, end) infinite`,
   },
 });
 
