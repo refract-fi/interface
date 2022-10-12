@@ -14,6 +14,15 @@ const nextConfig = {
 
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/discord',
+        destination: 'https://discord.com/invite/fTTC5nvdqV',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = withVanillaExtract(nextConfig);
