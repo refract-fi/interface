@@ -45,7 +45,7 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
           <Icon name='refract-logo' />
         </Button>
         <Button
-          label='STATS'
+          label='stats'
           variant='nav'
           active={isActive('stats')}
           onClick={() => changeRoute('stats')}

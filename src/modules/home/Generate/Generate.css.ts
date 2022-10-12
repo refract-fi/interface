@@ -1,32 +1,6 @@
 import { keyframes, style } from '@vanilla-extract/css';
+import { fadeIn } from 'theme/animations.css';
 import { vars } from 'theme/vars.css';
-
-export const fadeOut = keyframes({
-  '0%': {
-    opacity: 1,
-  },
-  '100%': {
-    opacity: 0,
-  },
-});
-
-export const fadeIn = keyframes({
-  '0%': {
-    opacity: 0,
-  },
-  '100%': {
-    opacity: 1,
-  },
-});
-
-export const progressAnimFrames = keyframes({
-  '0%': {
-    width: 0,
-  },
-  '100%': {
-    width: '100%',
-  },
-});
 
 export const dots = keyframes({
   '0%': {
@@ -54,15 +28,8 @@ export const refractWrapper = style({
   animationName: fadeIn,
   animationDuration: '1s',
   animationFillMode: 'both',
-  marginTop: '50px',
   overflow: 'hidden',
-});
-
-export const reviewFormAnim = style({
-  animationDelay: '6.3s',
-  animationName: fadeOut,
-  animationFillMode: 'both',
-  animationDuration: '0.5s',
+  marginTop: '-10px',
 });
 
 export const loadingDots = style({
@@ -70,14 +37,6 @@ export const loadingDots = style({
     content: '.',
     animation: `${dots} 2s steps(5, end) infinite`,
   },
-});
-
-export const progressAnim = style({
-  animationName: progressAnimFrames,
-  animationDuration: '2.5s',
-  animationDelay: '3.8s',
-  animationTimingFunction: 'linear',
-  animationFillMode: 'both',
 });
 
 export const generatingAnim = style({

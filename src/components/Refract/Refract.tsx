@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
 import { Box, Flex } from 'theme/components';
@@ -8,7 +8,7 @@ import { animated, config, easings, useSpring } from 'react-spring';
 import Button from 'components/Button/Button';
 
 interface RefractProps {
-  page: string;
+  page?: string;
 }
 
 const initialRefractValues = {
@@ -58,85 +58,7 @@ const Refract = ({ page }: RefractProps) => {
       bottomRightOpacity,
     },
     setSVGParams,
-  ] = useSpring(
-    () => ({
-      from: {
-        topLeftOffset: 0,
-        topLeftOpacity: 0,
-        topMiddleOffset: 0,
-        topMiddleOpacity: 0,
-        topRightOffset: 0,
-        topRightOpacity: 0,
-        bottomLeftOffset: 0,
-        bottomLeftOpacity: 0,
-        bottomMiddleOffset: 0,
-        bottomMiddleOpacity: 0,
-        bottomRightOffset: 0,
-        bottomRightOpacity: 0,
-      },
-      to: async (next, cancel) => {
-        await next({
-          topLeftOffset: 1,
-          topLeftOpacity: 1,
-          bottomLeftOffset: 0,
-          bottomLeftOpacity: 0,
-        });
-        await next({
-          topLeftOffset: 0,
-          topLeftOpacity: 0,
-          topMiddleOffset: 1,
-          topMiddleOpacity: 1,
-        });
-        await next({
-          topMiddleOffset: 0,
-          topMiddleOpacity: 0,
-          topRightOffset: 1,
-          topRightOpacity: 1,
-        });
-        await next({
-          topRightOffset: 0,
-          topRightOpacity: 0,
-          bottomRightOffset: 1,
-          bottomRightOpacity: 1,
-        });
-        await next({
-          bottomRightOffset: 0,
-          bottomRightOpacity: 0,
-          bottomMiddleOffset: 1,
-          bottomMiddleOpacity: 1,
-        });
-        await next({
-          bottomMiddleOffset: 0,
-          bottomMiddleOpacity: 0,
-          bottomLeftOffset: 1,
-          bottomLeftOpacity: 1,
-        });
-        // await next({
-        //   topLeftOffset: 0.5,
-        //   topLeftOpacity: 1,
-        //   topMiddleOffset: 0.5,
-        //   topMiddleOpacity: 1,
-        //   topRightOffset: 0.5,
-        //   topRightOpacity: 1,
-        //   bottomLeftOffset: 0.5,
-        //   bottomLeftOpacity: 1,
-        //   bottomMiddleOffset: 0.5,
-        //   bottomMiddleOpacity: 1,
-        //   bottomRightOffset: 0.5,
-        //   bottomRightOpacity: 1,
-        // });
-      },
-      config: {
-        friction: 50,
-        duration: 1700,
-        easing: easings.easeInOutSine,
-      },
-      loop: {
-        reverse: true,
-      },
-    }),
-    []
-  );
+  ] = useSpring(() => initialRefractValues);
 
   const topLeftPosX = 0;
   const topLeftPosY = 0;
@@ -155,6 +77,87 @@ const Refract = ({ page }: RefractProps) => {
 
   const bottomRightPosX = 900;
   const bottomRightPosY = 450;
+  useEffect(() => {
+    if (page === 'loading') {
+      setSVGParams(() => ({
+        from: {
+          topLeftOffset: 0.5,
+          topLeftOpacity: 0.5,
+          topMiddleOffset: 0,
+          topMiddleOpacity: 0,
+          topRightOffset: 0,
+          topRightOpacity: 0,
+          bottomLeftOffset: 0,
+          bottomLeftOpacity: 0,
+          bottomMiddleOffset: 0,
+          bottomMiddleOpacity: 0,
+          bottomRightOffset: 0,
+          bottomRightOpacity: 0,
+        },
+        to: async (next, cancel) => {
+          await next({
+            topLeftOffset: 1,
+            topLeftOpacity: 1,
+            bottomLeftOffset: 0,
+            bottomLeftOpacity: 0,
+          });
+          await next({
+            topLeftOffset: 0,
+            topLeftOpacity: 0,
+            topMiddleOffset: 1,
+            topMiddleOpacity: 1,
+          });
+          await next({
+            topMiddleOffset: 0,
+            topMiddleOpacity: 0,
+            topRightOffset: 1,
+            topRightOpacity: 1,
+          });
+          await next({
+            topRightOffset: 0,
+            topRightOpacity: 0,
+            bottomRightOffset: 1,
+            bottomRightOpacity: 1,
+          });
+          await next({
+            bottomRightOffset: 0,
+            bottomRightOpacity: 0,
+            bottomMiddleOffset: 1,
+            bottomMiddleOpacity: 1,
+          });
+          await next({
+            bottomMiddleOffset: 0,
+            bottomMiddleOpacity: 0,
+            bottomLeftOffset: 1,
+            bottomLeftOpacity: 1,
+          });
+        },
+        config: {
+          friction: 50,
+          duration: 1700,
+          easing: easings.easeInOutSine,
+        },
+        loop: {
+          reverse: false,
+        },
+      }));
+    }
+    if (page === 'completed') {
+      setSVGParams(() => ({
+        to: async (next, cancel) => {
+          await next(initialRefractValues);
+        },
+        config: {
+          friction: 100,
+          duration: 1000,
+          easing: easings.easeOutCirc,
+        },
+        loop: {
+          reverse: false,
+        },
+      }));
+    }
+  }, [page, setSVGParams]);
 
   return (
     <>
@@ -339,124 +342,24 @@ const Refract = ({ page }: RefractProps) => {
           </svg>
         </Box>
         {/* Pls cleanup mess below */}
-        {/* <Button
-          position={'absolute'}
-          left='60x'
-          top='0'
-          height='60x'
-          width='72x'
-          color='action'
-          onMouseEnter={() =>
-            !isTopSkew &&
-            setSVGParams({
-              topMiddleOpacity: 0.2,
-              topRightOpacity: 0.2,
-              bottomLeftOpacity: 0.2,
-              bottomMiddleOpacity: 0.2,
-              bottomRightOpacity: 0.2,
-            })
-          }
-          onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
-          onClick={() => {
-            if (isTopSkew) {
-              setSVGParams(initialRefractValues);
-              setIsTopSkew(false);
-            } else {
-              setSVGParams({
-                topMiddleOpacity: 0.2,
-                topRightOpacity: 0.2,
-                bottomLeftOpacity: 0.2,
-                bottomMiddleOpacity: 0.2,
-                bottomRightOpacity: 0.2,
-              });
-              setIsTopSkew(true);
-            }
-          }}
-        />
-        <Button
-          position={'absolute'}
-          left='60x'
-          height='60x'
-          top='0'
-          marginLeft='72x'
-          width='72x'
-          color='action'
-          onMouseEnter={() =>
-            !isTopSkew &&
-            setSVGParams({
-              topLeftOpacity: 0.2,
-              topRightOpacity: 0.2,
-              bottomLeftOpacity: 0.2,
-              bottomMiddleOpacity: 0.2,
-              bottomRightOpacity: 0.2,
-            })
-          }
-          onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
-          onClick={() => {
-            if (isTopSkew) {
-              setSVGParams(initialRefractValues);
-              setIsTopSkew(false);
-            } else {
-              setSVGParams({
-                topLeftOpacity: 0.2,
-                topRightOpacity: 0.2,
-                bottomLeftOpacity: 0.2,
-                bottomMiddleOpacity: 0.2,
-                bottomRightOpacity: 0.2,
-              });
-              setIsTopSkew(true);
-            }
-          }}
-        />
-        <Button
-          position={'absolute'}
-          right='60x'
-          top='0'
-          height='60x'
-          width='72x'
-          color='action'
-          onMouseEnter={() =>
-            !isTopSkew &&
-            setSVGParams({
-              topLeftOpacity: 0.2,
-              topMiddleOpacity: 0.2,
-              bottomLeftOpacity: 0.2,
-              bottomMiddleOpacity: 0.2,
-              bottomRightOpacity: 0.2,
-            })
-          }
-          onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
-          onClick={() => {
-            if (isTopSkew) {
-              setSVGParams(initialRefractValues);
-              setIsTopSkew(false);
-            } else {
-              setSVGParams({
-                topLeftOpacity: 0.2,
-                topMiddleOpacity: 0.2,
-                bottomLeftOpacity: 0.2,
-                bottomMiddleOpacity: 0.2,
-                bottomRightOpacity: 0.2,
-              });
-              setIsTopSkew(true);
-            }
-          }}
-        />
-        {!isTopSkew && (
+        {(page === 'allocations' ||
+          page === 'stats' ||
+          page === 'refract' ||
+          page === 'insights') && (
           <>
             <Button
               position={'absolute'}
               left='60x'
-              bottom='0'
+              top='0'
               height='60x'
               width='72x'
               color='action'
               onMouseEnter={() =>
                 !isTopSkew &&
                 setSVGParams({
-                  topLeftOpacity: 0.2,
                   topMiddleOpacity: 0.2,
                   topRightOpacity: 0.2,
+                  bottomLeftOpacity: 0.2,
                   bottomMiddleOpacity: 0.2,
                   bottomRightOpacity: 0.2,
                 })
@@ -468,9 +371,9 @@ const Refract = ({ page }: RefractProps) => {
                   setIsTopSkew(false);
                 } else {
                   setSVGParams({
-                    topLeftOpacity: 0.2,
                     topMiddleOpacity: 0.2,
                     topRightOpacity: 0.2,
+                    bottomLeftOpacity: 0.2,
                     bottomMiddleOpacity: 0.2,
                     bottomRightOpacity: 0.2,
                   });
@@ -482,7 +385,7 @@ const Refract = ({ page }: RefractProps) => {
               position={'absolute'}
               left='60x'
               height='60x'
-              bottom='0'
+              top='0'
               marginLeft='72x'
               width='72x'
               color='action'
@@ -492,7 +395,7 @@ const Refract = ({ page }: RefractProps) => {
                   topLeftOpacity: 0.2,
                   topRightOpacity: 0.2,
                   bottomLeftOpacity: 0.2,
-                  topMiddleOpacity: 0.2,
+                  bottomMiddleOpacity: 0.2,
                   bottomRightOpacity: 0.2,
                 })
               }
@@ -506,7 +409,7 @@ const Refract = ({ page }: RefractProps) => {
                     topLeftOpacity: 0.2,
                     topRightOpacity: 0.2,
                     bottomLeftOpacity: 0.2,
-                    topMiddleOpacity: 0.2,
+                    bottomMiddleOpacity: 0.2,
                     bottomRightOpacity: 0.2,
                   });
                   setIsTopSkew(true);
@@ -516,18 +419,18 @@ const Refract = ({ page }: RefractProps) => {
             <Button
               position={'absolute'}
               right='60x'
-              bottom='0'
+              top='0'
               height='60x'
-              width='84x'
+              width='72x'
               color='action'
               onMouseEnter={() =>
                 !isTopSkew &&
                 setSVGParams({
                   topLeftOpacity: 0.2,
                   topMiddleOpacity: 0.2,
-                  topRightOpacity: 0.2,
                   bottomLeftOpacity: 0.2,
                   bottomMiddleOpacity: 0.2,
+                  bottomRightOpacity: 0.2,
                 })
               }
               onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
@@ -539,16 +442,123 @@ const Refract = ({ page }: RefractProps) => {
                   setSVGParams({
                     topLeftOpacity: 0.2,
                     topMiddleOpacity: 0.2,
-                    topRightOpacity: 0.2,
                     bottomLeftOpacity: 0.2,
                     bottomMiddleOpacity: 0.2,
+                    bottomRightOpacity: 0.2,
                   });
                   setIsTopSkew(true);
                 }
               }}
-            /> */}
-        {/* </>
-        )} */}
+            />
+            {!isTopSkew && (
+              <>
+                <Button
+                  position={'absolute'}
+                  left='60x'
+                  bottom='0'
+                  height='60x'
+                  width='72x'
+                  color='action'
+                  onMouseEnter={() =>
+                    !isTopSkew &&
+                    setSVGParams({
+                      topLeftOpacity: 0.2,
+                      topMiddleOpacity: 0.2,
+                      topRightOpacity: 0.2,
+                      bottomMiddleOpacity: 0.2,
+                      bottomRightOpacity: 0.2,
+                    })
+                  }
+                  onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+                  onClick={() => {
+                    if (isTopSkew) {
+                      setSVGParams(initialRefractValues);
+                      setIsTopSkew(false);
+                    } else {
+                      setSVGParams({
+                        topLeftOpacity: 0.2,
+                        topMiddleOpacity: 0.2,
+                        topRightOpacity: 0.2,
+                        bottomMiddleOpacity: 0.2,
+                        bottomRightOpacity: 0.2,
+                      });
+                      setIsTopSkew(true);
+                    }
+                  }}
+                />
+                <Button
+                  position={'absolute'}
+                  left='60x'
+                  height='60x'
+                  bottom='0'
+                  marginLeft='72x'
+                  width='72x'
+                  color='action'
+                  onMouseEnter={() =>
+                    !isTopSkew &&
+                    setSVGParams({
+                      topLeftOpacity: 0.2,
+                      topRightOpacity: 0.2,
+                      bottomLeftOpacity: 0.2,
+                      topMiddleOpacity: 0.2,
+                      bottomRightOpacity: 0.2,
+                    })
+                  }
+                  onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+                  onClick={() => {
+                    if (isTopSkew) {
+                      setSVGParams(initialRefractValues);
+                      setIsTopSkew(false);
+                    } else {
+                      setSVGParams({
+                        topLeftOpacity: 0.2,
+                        topRightOpacity: 0.2,
+                        bottomLeftOpacity: 0.2,
+                        topMiddleOpacity: 0.2,
+                        bottomRightOpacity: 0.2,
+                      });
+                      setIsTopSkew(true);
+                    }
+                  }}
+                />
+                <Button
+                  position={'absolute'}
+                  right='60x'
+                  bottom='0'
+                  height='60x'
+                  width='84x'
+                  color='action'
+                  onMouseEnter={() =>
+                    !isTopSkew &&
+                    setSVGParams({
+                      topLeftOpacity: 0.2,
+                      topMiddleOpacity: 0.2,
+                      topRightOpacity: 0.2,
+                      bottomLeftOpacity: 0.2,
+                      bottomMiddleOpacity: 0.2,
+                    })
+                  }
+                  onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+                  onClick={() => {
+                    if (isTopSkew) {
+                      setSVGParams(initialRefractValues);
+                      setIsTopSkew(false);
+                    } else {
+                      setSVGParams({
+                        topLeftOpacity: 0.2,
+                        topMiddleOpacity: 0.2,
+                        topRightOpacity: 0.2,
+                        bottomLeftOpacity: 0.2,
+                        bottomMiddleOpacity: 0.2,
+                      });
+                      setIsTopSkew(true);
+                    }
+                  }}
+                />
+              </>
+            )}
+          </>
+        )}
       </Flex>
     </>
   );
