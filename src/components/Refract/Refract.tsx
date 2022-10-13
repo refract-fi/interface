@@ -149,7 +149,7 @@ const Refract = ({ page }: RefractProps) => {
         },
         config: {
           friction: 100,
-          duration: 1000,
+          duration: 300,
           easing: easings.easeOutCirc,
         },
         loop: {

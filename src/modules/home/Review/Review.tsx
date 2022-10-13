@@ -15,12 +15,12 @@ const Review = () => {
   const form = useRecoilValue<IForm>(formState);
   const { setPhase, setShowParams } = useFormPhaseActions();
 
-  // useEffect(() => {
-  //   const generatingTimeout = setTimeout(() => {
-  //     setPhase(FormPhases.GENERATING);
-  //   }, 6800);
-  //   return () => clearTimeout(generatingTimeout);
-  // }, []);
+  useEffect(() => {
+    const generatingTimeout = setTimeout(() => {
+      setPhase(FormPhases.GENERATING);
+    }, 6800);
+    return () => clearTimeout(generatingTimeout);
+  }, []);
 
   return (
     <FlexCol alignItems={'center'}>
