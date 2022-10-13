@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { BorderButton, Button, Icon, Refract } from 'components';
+import { BorderButton, Button, Icon, Refract, RefractLogoButton } from 'components';
 import { useRouter } from 'next/router';
 import { ReactNode, useCallback, useMemo, useState } from 'react';
 import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
@@ -41,9 +41,7 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
         backgroundColor='black'
         zIndex={2}
       >
-        <Button size='none' position={'absolute'} left='7x' gap='2x' onClick={() => push('/')}>
-          <Icon name='refract-logo' />
-        </Button>
+        <RefractLogoButton position={'absolute'} left='7x' onClick={() => push('/')} size={28} />
         <Button
           label='stats'
           variant='nav'

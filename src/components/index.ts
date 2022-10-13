@@ -11,6 +11,7 @@ import Checkbox from './Checkbox/Checkbox';
 import Icon from './Icon/Icon';
 import BorderButton from './BorderButton/BorderButton';
 import Refract from './Refract/Refract';
+import RefractLogoButton from './RefractLogoButton/RefractLogoButton';
 
 export {
   Button,
@@ -26,4 +27,5 @@ export {
   Icon,
   BorderButton,
   Refract,
+  RefractLogoButton,
 };
