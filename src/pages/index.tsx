@@ -10,6 +10,7 @@ import { useRecoilValue } from 'recoil';
 import { formPhaseState } from 'states/formPhasesState';
 import Completed from 'modules/home/Completed/Completed';
 import { Title } from 'components';
+import { title } from 'modules/home/Landing/Landing.css';
 
 const Home: NextPageWithLayout = () => {
   const { phase } = useRecoilValue(formPhaseState);
@@ -26,10 +27,14 @@ const Home: NextPageWithLayout = () => {
   return (
     <>
       <FlexCol height='100vh' width='100vw' alignItems={'center'} justifyContent='center'>
-        <Title special level='0' weight={'bold'}>
+        <Title special level={{ sm: '2', md: '0' }} weight={'bold'} className={title}>
           REFRACT
         </Title>
-        <Title level='4' marginTop={'6x'} textTransform='uppercase' marginBottom={'12x'}>
+        <Title
+          level={{ sm: '6', md: '4' }}
+          marginTop={{ sm: '4x', md: '6x' }}
+          textTransform='uppercase'
+        >
           Coming Soon
         </Title>
       </FlexCol>
