@@ -1,8 +1,8 @@
-import { Button, Option, Title } from 'components';
+import { Button, Option, Text, Title } from 'components';
 import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './AdvancedForm.css';
 import FormTitle from '../FormTitle/FormTitle';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { IForm, SupportedNetworks } from 'utils/types';
 import { formState, useFormActions } from 'states/formState';
 import { useRecoilValue } from 'recoil';
@@ -10,6 +10,7 @@ import moment from 'moment';
 import { AddCEXModal, NetworkSelectModal } from 'components/Modals';
 import VerifyAccountsModal from 'components/Modals/VerifyAccountsModal/VerifyAccountsModal';
 import { formatMoment } from 'utils/func';
+import { modalState, useModalActions } from 'states/modalState';
 
 interface AdvancedFormProps {
   isVisible: boolean;
@@ -18,6 +19,9 @@ interface AdvancedFormProps {
 const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
   const [showExpirationOptions, setShowExpirationOptions] = useState(false);
   const [showDataOptions, setShowDataOptions] = useState(false);
+  const { visibleModal } = useRecoilValue(modalState);
+
+  const isModalActive = useMemo(() => visibleModal === 'NONE', [visibleModal]);
 
   const form = useRecoilValue<IForm>(formState);
 
@@ -35,7 +39,10 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         className={styles.formWrapper}
         gap='5x'
         marginBottom={{ sm: 'none', md: 'none', lg: '24x' }}
-        display={isVisible ? 'flex' : 'none'}
+        display={{
+          sm: isVisible ? (isModalActive ? 'flex' : 'none') : 'none',
+          md: isVisible ? 'flex' : 'none',
+        }}
         paddingX={{ sm: '2x', md: '6x', lg: 'none' }}
       >
         <FlexCol marginTop={'4x'}>
@@ -43,7 +50,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
             <Title level='6' textTransform={'uppercase'} weight='regular'>
               advanced parameters
             </Title>
-            <FlexRow gap='3x'>
+            <FlexRow gap={{ sm: '1x', md: '3x' }}>
               <Button label='Help' color='secondary' size='none' />
               <Button label='Reset' color='action' size='none' onClick={resetForm} />
             </FlexRow>
@@ -68,10 +75,10 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
             gap='3x'
             paddingX={'3x'}
             marginTop='7x'
-            display={showExpirationOptions ? 'flex' : 'none'}
+            display={{ sm: 'none', md: showExpirationOptions ? 'flex' : 'none' }}
           >
             {/* Cleanup below 🧹🧹🧹🧹🧹*/}
-            {/* <Option
+            <Option
               label={formatMoment(moment.duration(1, 'h').humanize())}
               flex={1}
               isSelected={form.duration === moment.duration(1, 'h').asSeconds()}
@@ -106,9 +113,10 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
               flex={1}
               onClick={() => setDuration(null)}
               isSelected={!form.duration}
-            /> */}
+            />
             {/* <Option label='CUSTOM' flex={1} /> */}
           </FlexRow>
+          <Flex display={{ sm: 'flex', md: 'none' }}>SLIDER HERE</Flex>
         </Box>
         <Box width='full' backgroundColor={'separator'} height={1} />
         <Box>

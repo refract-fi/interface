@@ -37,13 +37,17 @@ const AddCEXModal = () => {
     <Modal
       title={CEXInfo?.exchange ? 'ADD EXCHANGE' : 'CENTRALIZED EXCHANGES'}
       isVisible={isModalVisible('ADD_CEX')}
-      onCancel={CEXInfo?.exchange ? null : () => resetModalStatus()}
+      onCancel={CEXInfo?.exchange ? () => null : () => resetModalStatus()}
       onReturn={CEXInfo?.exchange ? () => setCEXInfo(initialAddressInfo) : null}
       maxWidth='116x'
+      isMobileFullscreen
+      onSave={CEXInfo?.exchange ? onAdd : undefined}
+      saveLabel={`add ${CEXInfo?.exchange}`}
+      hideButtonsMD
     >
       <Box height={1} backgroundColor='separator-non-opaque' marginY={'2x'} />
       {!CEXInfo?.exchange ? (
-        <>
+        <FlexCol justifyContent={{ sm: 'space-between', md: 'flex-start' }} height='full'>
           <FlexCol gap='2x'>
             {Object.values(SupportedExchanges).map((exchange: SupportedExchanges) => {
               const isDisabled = !(accounts.findIndex(CEX => CEX.exchange === exchange) === -1);
@@ -69,17 +73,19 @@ const AddCEXModal = () => {
               );
             })}
           </FlexCol>
-          <Flex justifyContent={'center'} marginY='2x'>
-            <Text level='b2' color='secondary'>
-              Don&apos;t see your Centralized Exchange?
-              <Button component={'span'} color='action' cursor='pointer' size='none'>
-                {' '}
-                Request
-              </Button>
-            </Text>
-          </Flex>
-          <Box height={1} backgroundColor='separator-non-opaque' />
-        </>
+          <FlexCol>
+            <Flex justifyContent={'center'} marginY='2x'>
+              <Text level='b2' color='secondary'>
+                Don&apos;t see your Centralized Exchange?
+                <Button component={'span'} color='action' cursor='pointer' size='none'>
+                  {' '}
+                  Request
+                </Button>
+              </Text>
+            </Flex>
+            <Box height={1} backgroundColor='separator-non-opaque' />
+          </FlexCol>
+        </FlexCol>
       ) : (
         <FlexCol>
           <FlexRow alignItems={'center'} gap='2x' paddingY='1x'>
@@ -127,6 +133,7 @@ const AddCEXModal = () => {
             variant='secondary'
             size='large'
             marginTop={'3x'}
+            display={{ sm: 'none', md: 'block' }}
             onClick={() => onAdd()}
           />
         </FlexCol>

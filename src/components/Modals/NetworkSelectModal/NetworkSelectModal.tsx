@@ -53,8 +53,9 @@ const NetworkSelectModal = () => {
         resetModalStatus();
       }}
       saveDisabled={selectedNetworks.length === 0}
+      isMobileFullscreen
     >
-      <FlexCol gap='0x'>
+      <FlexCol gap='0x' height={'full'}>
         <FlexRow justifyContent={'space-between'} marginTop='2x'>
           <Checkbox
             label={'14 networks selected'}
@@ -73,16 +74,21 @@ const NetworkSelectModal = () => {
           borderWidth='1px'
           borderStyle='solid'
           marginBottom={'1x'}
+          flex={1}
+          overflow={'scroll'}
+          height={'fit'}
         />
-        {Object.values(SupportedNetworks).map((network: SupportedNetworks) => (
-          <Checkbox
-            label={network}
-            variant='button'
-            key={network}
-            checked={isChecked(network)}
-            setChecked={() => setChecked(network)}
-          />
-        ))}
+        <FlexCol gap='0x' overflow={'scroll'}>
+          {Object.values(SupportedNetworks).map((network: SupportedNetworks) => (
+            <Checkbox
+              label={network}
+              variant='button'
+              key={network}
+              checked={isChecked(network)}
+              setChecked={() => setChecked(network)}
+            />
+          ))}
+        </FlexCol>
       </FlexCol>
     </Modal>
   );

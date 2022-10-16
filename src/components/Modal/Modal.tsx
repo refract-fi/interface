@@ -3,7 +3,7 @@ import Icon, { iconNames } from 'components/Icon/Icon';
 import { Title } from 'components/Typography/Title';
 import { ReactNode } from 'react';
 import { useModalActions } from 'states/modalState';
-import { Box, Flex, FlexRow } from 'theme/components';
+import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import { Sprinkles } from 'theme/sprinkles.css';
 import Close from '/public/icons/close.svg';
 
@@ -16,7 +16,10 @@ interface ModalProps {
   onReturn?: Function | null;
   onSave?: () => void;
   saveDisabled?: boolean;
+  isMobileFullscreen?: boolean;
   maxWidth?: Sprinkles['maxWidth'];
+  saveLabel?: string;
+  hideButtonsMD?: boolean;
 }
 
 const Modal = ({
@@ -28,7 +31,10 @@ const Modal = ({
   onReturn,
   onCancel,
   saveDisabled,
+  isMobileFullscreen,
   maxWidth = '104x',
+  saveLabel,
+  hideButtonsMD,
 }: ModalProps) => {
   const { resetModalStatus } = useModalActions();
   return (
@@ -43,29 +49,30 @@ const Modal = ({
       display={isVisible ? 'flex' : 'none'}
       zIndex={4}
     >
-      <Box
+      <FlexCol
         backgroundColor={'bg-primary'}
         maxWidth={maxWidth}
-        width='full'
-        height='fit'
+        width={{ sm: isMobileFullscreen ? '100vw' : 'full', md: 'full' }}
+        height={{ sm: isMobileFullscreen ? '100vh' : 'fit', md: 'fit' }}
         paddingY={'8x'}
         paddingX='5x'
+        justifyContent={'space-between'}
       >
-        <FlexRow width={'full'} justifyContent='space-between' alignItems={'center'}>
-          <FlexRow gap='0x' alignItems={'center'}>
-            {icon && <Icon name={icon} color='white' />}
-            {onReturn && (
-              <Button onClick={() => onReturn()} size='none'>
-                <Icon name='chevron' color='white' rotate='90deg' />
-              </Button>
-            )}
-            <Title level='6' textTransform={'uppercase'}>
-              {title}
-            </Title>
-          </FlexRow>
-          {!onReturn &&
-            (onSave ? (
-              <FlexRow gap='1x'>
+        <FlexCol height={{ sm: 'full', md: 'auto' }}>
+          <FlexRow width={'full'} justifyContent='space-between' alignItems={'center'}>
+            <FlexRow gap='0x' alignItems={'center'}>
+              {icon && <Icon name={icon} color='white' />}
+              {onReturn && (
+                <Button onClick={() => onReturn()} size='none'>
+                  <Icon name='chevron' color='white' rotate='90deg' />
+                </Button>
+              )}
+              <Title level='6' textTransform={'uppercase'}>
+                {title}
+              </Title>
+            </FlexRow>
+            {onSave ? (
+              <FlexRow gap='1x' display={{ sm: 'none', md: hideButtonsMD ? 'none' : 'flex' }}>
                 {onCancel && (
                   <Button label='CANCEL' onClick={() => onCancel && onCancel()} color='primary' />
                 )}
@@ -79,22 +86,56 @@ const Modal = ({
             ) : (
               <>
                 {onCancel ? (
-                  <Button label='CANCEL' onClick={() => onCancel && onCancel()} color='primary' />
+                  <Button
+                    label='CANCEL'
+                    onClick={() => onCancel && onCancel()}
+                    color='primary'
+                    display={{ sm: 'none', md: 'flex' }}
+                  />
                 ) : (
                   <Button
                     onClick={() => resetModalStatus()}
                     size='none'
                     alignItems={'center'}
-                    display='flex'
+                    display={{ sm: 'none', md: 'flex' }}
                   >
                     <Icon name='close' color='white' />
                   </Button>
                 )}
               </>
-            ))}
-        </FlexRow>
-        {children}
-      </Box>
+            )}
+          </FlexRow>
+          {children}
+        </FlexCol>
+        <FlexCol display={{ sm: 'flex', md: 'none' }} marginTop='2x' marginBottom={'12x'} gap='2x'>
+          {onCancel && (
+            <Button
+              label='CANCEL'
+              onClick={() => onCancel && onCancel()}
+              variant='tertiary'
+              size='large'
+            />
+          )}
+          {onSave && (
+            <Button
+              label={saveLabel ? saveLabel : 'SAVE'}
+              variant='secondary'
+              onClick={() => onSave()}
+              size='large'
+              disabled={saveDisabled}
+            />
+          )}
+          {!onCancel && (
+            <Button
+              label={saveLabel ? saveLabel : 'OK'}
+              variant='secondary'
+              onClick={() => resetModalStatus()}
+              size='large'
+              disabled={saveDisabled}
+            />
+          )}
+        </FlexCol>
+      </FlexCol>
     </Flex>
   );
 };

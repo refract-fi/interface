@@ -26,7 +26,7 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
     return accounts.length < 1;
   }, [accounts]);
   return (
-    <FlexCol alignItems={'center'} marginTop={{ sm: '36x', md: '60x' }}>
+    <FlexCol alignItems={'center'} paddingTop={{ sm: '30x', md: '60x' }}>
       <Title special level={{ sm: '2', md: '0' }} weight={'bold'} className={styles.title}>
         REFRACT
       </Title>

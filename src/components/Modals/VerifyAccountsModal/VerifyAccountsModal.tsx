@@ -38,6 +38,7 @@ const VerifyAccountsModal = () => {
       isVisible={isModalVisible('VERIFY_ACCOUNTS')}
       icon={verifPhase === 'default' ? 'verified' : undefined}
       onReturn={verifPhase !== 'default' ? () => setVerifPhase('default') : null}
+      isMobileFullscreen
     >
       {verifPhase === 'default' && (
         <FlexCol gap='2x' marginTop={'2x'}>

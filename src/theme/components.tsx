@@ -65,6 +65,7 @@ export const Box = ({
   borderStyle,
   stroke,
   visibility,
+  overflow,
   ...restProps
 }: BoxProps) => {
   const atomClasses = clsx(
@@ -120,6 +121,7 @@ export const Box = ({
       borderStyle,
       stroke,
       visibility,
+      overflow,
     }),
     className
   );

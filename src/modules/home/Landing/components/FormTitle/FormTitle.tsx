@@ -53,12 +53,14 @@ const FormTitle = ({
           {title}
         </Title>
       </FlexRow>
+      {/* MD AND LARGER */}
       <FlexRow
         alignItems={'center'}
-        cursor={isSwitch || isGroup || isModal ? 'auto' : 'pointer'}
+        cursor={{ md: isSwitch || isGroup || isModal ? 'auto' : 'pointer' }}
         onClick={() => setExtend && setExtend(!extend)}
         gap='1x'
         paddingTop={{ sm: '2x', md: 'none' }}
+        display={{ sm: 'none', md: 'flex' }}
       >
         <Text color='secondary' level='b3'>
           {optionDetails}
@@ -121,6 +123,81 @@ const FormTitle = ({
             {activeOption}
             <Switch toggled={toggled} onClick={() => setToggle && setToggle(!toggled)} />
           </Text>
+        )}
+      </FlexRow>
+      {/* SMALLER THAN MD */}
+      <FlexRow
+        alignItems={'center'}
+        cursor={{ md: isSwitch || isGroup || isModal ? 'auto' : 'pointer' }}
+        gap='1x'
+        paddingTop={{ sm: '2x', md: 'none' }}
+        display={{ sm: 'flex', md: 'none' }}
+        justifyContent='space-between'
+      >
+        <FlexRow alignItems={'center'} gap='1x'>
+          <Text color='secondary' level='b3'>
+            {optionDetails}
+            {setPercent && (
+              <>
+                <Box
+                  component={'input'}
+                  value={percent}
+                  type='number'
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setPercent(e.target.valueAsNumber)
+                  }
+                  className={styles.input}
+                />
+                <Text level='b3' color='primary' weight='bold' marginRight={'0x'}>
+                  %
+                </Text>
+                <Text level='b3'>will</Text>
+              </>
+            )}
+          </Text>
+          {(isOther || isModal) && (
+            <Button
+              color={isModal ? 'action' : 'primary'}
+              weight='bold'
+              level='f4'
+              size='none'
+              display='flex'
+              gap='1x'
+              alignItems={'center'}
+              flexDirection={'row'}
+              onClick={() => isModal && modal && !disabled && setVisibleModal(modal)}
+              disabled={disabled}
+            >
+              {activeOption}
+              {isOther && (
+                <Icon
+                  name='chevron'
+                  color={'primary'}
+                  size={20}
+                  rotate={extend ? '0deg' : '180deg'}
+                  display={{ sm: 'none', md: 'block' }}
+                />
+              )}
+            </Button>
+          )}
+          {(isSwitch || isGroup) && (
+            <Text
+              color={'primary'}
+              cursor={isOther || isModal ? 'pointer' : 'auto'}
+              weight='bold'
+              level='f4'
+              display='flex'
+              gap='1x'
+              alignItems={'center'}
+              flexDirection={'row'}
+              onClick={() => isModal && modal && setVisibleModal(modal)}
+            >
+              {activeOption}
+            </Text>
+          )}
+        </FlexRow>
+        {(isSwitch || isGroup) && (
+          <Switch toggled={toggled} onClick={() => setToggle && setToggle(!toggled)} />
         )}
       </FlexRow>
     </Flex>
