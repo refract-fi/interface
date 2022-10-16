@@ -123,11 +123,15 @@ const AddressInput = () => {
   };
 
   return (
-    <Box position={'relative'}>
+    <Box
+      position={'relative'}
+      width={{ sm: 'full', lg: 'auto' }}
+      paddingX={{ sm: '2x', md: '6x', lg: 'none' }}
+    >
       <Box className={styles.addressInputWrapper}>
         <BorderInput
           variant='hero'
-          marginTop={'10x'}
+          marginTop={{ sm: '8x', md: '10x' }}
           size='large'
           value={value}
           placeholder='Enter accounts (0x, btc, .eth)'

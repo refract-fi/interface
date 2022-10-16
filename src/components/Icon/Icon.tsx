@@ -1,4 +1,4 @@
-import { Box, Flex } from 'theme/components';
+import { Box, BoxProps, Flex } from 'theme/components';
 import { Sprinkles } from 'theme/sprinkles.css';
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 import Hourglass from './icons/Hourglass';
@@ -61,14 +61,14 @@ const icons = { ...standardIcons, ...exchangeIcons, ...brandIcons };
 
 export type iconNames = keyof typeof icons;
 
-interface IconProps {
+interface IconProps extends BoxProps {
   name: iconNames;
   color?: Sprinkles['color'];
   rotate?: '0deg' | '90deg' | '180deg' | '270deg';
   size?: number;
 }
 
-const Icon = ({ name, color, size, rotate = '0deg' }: IconProps) => {
+const Icon = ({ name, color, size, rotate = '0deg', ...restProps }: IconProps) => {
   return (
     <Flex
       fill={color}
@@ -77,6 +77,7 @@ const Icon = ({ name, color, size, rotate = '0deg' }: IconProps) => {
       justifyContent={'center'}
       className={styles.rotate}
       style={assignInlineVars({ [rotation]: rotate })}
+      {...restProps}
     >
       <svg
         width={size ? size : '24'}

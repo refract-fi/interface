@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
 import { formPhaseState, useFormPhaseActions } from 'states/formPhasesState';
 import { formState } from 'states/formState';
-import { FlexCol, FlexRow } from 'theme/components';
+import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import { FormPhases } from 'utils/types/formPhase';
 import AdvancedForm from './components/AdvancedForm/AdvancedForm';
 import * as styles from './Landing.css';
@@ -26,22 +26,29 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
     return accounts.length < 1;
   }, [accounts]);
   return (
-    <FlexCol alignItems={'center'} marginTop='60x'>
-      <Title special level='0' weight={'bold'} className={styles.title}>
+    <FlexCol alignItems={'center'} marginTop={{ sm: '36x', md: '60x' }}>
+      <Title special level={{ sm: '2', md: '0' }} weight={'bold'} className={styles.title}>
         REFRACT
       </Title>
-      <Title level='4' marginTop={'6x'} textTransform='uppercase'>
+      <Title
+        level={{ sm: '6', md: '4' }}
+        marginTop={{ sm: '4x', md: '6x' }}
+        textTransform='uppercase'
+      >
         Anonymize & Share
       </Title>
       <AddressInput />
-      <Button
-        label='GENERATE YOUR REFRACT'
-        variant='hero'
-        marginTop='8x'
-        size='large'
-        onClick={() => !isDisabled && onGenerateClick()}
-        disabled={isDisabled}
-      />
+      <Flex justifyContent={'center'} width={'full'} paddingX={{ sm: '2x', md: 'none' }}>
+        <Button
+          label='GENERATE YOUR REFRACT'
+          variant='hero'
+          marginTop='8x'
+          size='large'
+          onClick={() => !isDisabled && onGenerateClick()}
+          disabled={isDisabled}
+          width={{ sm: 'full', md: 'auto' }}
+        />
+      </Flex>
       <Button marginTop={'7x'} color='secondary'>
         <FlexRow alignItems={'center'} gap='1x' onClick={() => setShowParams(!showParams)}>
           ADVANCED PARAMETERS

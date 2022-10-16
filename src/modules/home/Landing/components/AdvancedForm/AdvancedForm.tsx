@@ -1,5 +1,5 @@
 import { Button, Option, Title } from 'components';
-import { Box, FlexCol, FlexRow } from 'theme/components';
+import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './AdvancedForm.css';
 import FormTitle from '../FormTitle/FormTitle';
 import { useState } from 'react';
@@ -34,8 +34,9 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
       <FlexCol
         className={styles.formWrapper}
         gap='5x'
-        marginBottom={'24x'}
+        marginBottom={{ sm: 'none', md: 'none', lg: '24x' }}
         display={isVisible ? 'flex' : 'none'}
+        paddingX={{ sm: '2x', md: '6x', lg: 'none' }}
       >
         <FlexCol marginTop={'4x'}>
           <FlexRow justifyContent={'space-between'} width='full'>
@@ -70,7 +71,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
             display={showExpirationOptions ? 'flex' : 'none'}
           >
             {/* Cleanup below 🧹🧹🧹🧹🧹*/}
-            <Option
+            {/* <Option
               label={formatMoment(moment.duration(1, 'h').humanize())}
               flex={1}
               isSelected={form.duration === moment.duration(1, 'h').asSeconds()}
@@ -105,7 +106,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
               flex={1}
               onClick={() => setDuration(null)}
               isSelected={!form.duration}
-            />
+            /> */}
             {/* <Option label='CUSTOM' flex={1} /> */}
           </FlexRow>
         </Box>
@@ -119,12 +120,13 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
             extend={showDataOptions}
             setExtend={setShowDataOptions}
           />
-          <FlexRow
+          <Flex
             width='full'
             gap='3x'
-            paddingX={'3x'}
-            marginTop='7x'
-            display={showDataOptions ? 'flex' : 'none'}
+            paddingX={{ md: '3x' }}
+            marginTop={{ sm: '2x', md: '7x' }}
+            flexDirection={{ sm: 'column', md: 'row' }}
+            display={{ sm: 'flex', md: showDataOptions ? 'flex' : 'none' }}
           >
             <Option
               variant='detailed'
@@ -143,14 +145,14 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
               onClick={() => setIsSnapshot(false)}
               details='Portfolio data is updated every 5 minutes. Addresses are stored in an encrypted centralized database.'
             />
-          </FlexRow>
+          </Flex>
         </Box>
         <Box width='full' backgroundColor={'separator'} height={1} />
         <FormTitle
           title='nft allocations'
           icon='nft'
           optionDetails='Allocations will'
-          activeOption={`${form.includeNFTs ? 'INCLUDE' : 'EXCLUDE'} NFTS`}
+          activeOption={`${form.includeNFTs ? 'INCLUDE' : 'EXCLUDE'} NFT COLLECTIONS`}
           variant='switch'
           toggled={form.includeNFTs}
           setToggle={setIncludeNFTs}

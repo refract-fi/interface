@@ -1,4 +1,4 @@
-import { Box, FlexRow } from 'theme/components';
+import { Box, Flex, FlexRow } from 'theme/components';
 import Arrow from '/public/icons/arrow.svg';
 import { Button, Icon, Switch, Text, Title } from 'components';
 import { vars } from 'theme/vars.css';
@@ -46,7 +46,7 @@ const FormTitle = ({
   const { setVisibleModal } = useModalActions();
 
   return (
-    <FlexRow justifyContent={'space-between'}>
+    <Flex flexDirection={{ sm: 'column', md: 'row' }} justifyContent={'space-between'}>
       <FlexRow gap='2x'>
         <Icon color={'white'} name={icon} />
         <Title level='6' textTransform={'uppercase'}>
@@ -58,6 +58,7 @@ const FormTitle = ({
         cursor={isSwitch || isGroup || isModal ? 'auto' : 'pointer'}
         onClick={() => setExtend && setExtend(!extend)}
         gap='1x'
+        paddingTop={{ sm: '2x', md: 'none' }}
       >
         <Text color='secondary' level='b3'>
           {optionDetails}
@@ -100,6 +101,7 @@ const FormTitle = ({
                 color={'primary'}
                 size={20}
                 rotate={extend ? '0deg' : '180deg'}
+                display={{ sm: 'none', md: 'block' }}
               />
             )}
           </Button>
@@ -121,7 +123,7 @@ const FormTitle = ({
           </Text>
         )}
       </FlexRow>
-    </FlexRow>
+    </Flex>
   );
 };
 
