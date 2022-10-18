@@ -12,6 +12,7 @@ import Icon from './Icon/Icon';
 import BorderButton from './BorderButton/BorderButton';
 import Refract from './Refract/Refract';
 import RefractLogoButton from './RefractLogoButton/RefractLogoButton';
+import Slider from './Slider/Slider';
 
 export {
   Button,
@@ -28,4 +29,5 @@ export {
   BorderButton,
   Refract,
   RefractLogoButton,
+  Slider,
 };

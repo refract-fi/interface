@@ -1,4 +1,4 @@
-import { Button, Option, Text, Title } from 'components';
+import { Button, Option, Slider, Text, Title } from 'components';
 import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './AdvancedForm.css';
 import FormTitle from '../FormTitle/FormTitle';
@@ -11,6 +11,7 @@ import { AddCEXModal, NetworkSelectModal } from 'components/Modals';
 import VerifyAccountsModal from 'components/Modals/VerifyAccountsModal/VerifyAccountsModal';
 import { formatMoment } from 'utils/func';
 import { modalState, useModalActions } from 'states/modalState';
+import { refractDurations } from 'utils/constants/durations';
 
 interface AdvancedFormProps {
   isVisible: boolean;
@@ -24,6 +25,10 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
   const isModalActive = useMemo(() => visibleModal === 'NONE', [visibleModal]);
 
   const form = useRecoilValue<IForm>(formState);
+
+  const currentDurationIndex = useMemo(() => {
+    return refractDurations.findIndex(value => value.duration === form.duration);
+  }, [form.duration]);
 
   const {
     setDuration,
@@ -77,46 +82,27 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
             marginTop='7x'
             display={{ sm: 'none', md: showExpirationOptions ? 'flex' : 'none' }}
           >
-            {/* Cleanup below 🧹🧹🧹🧹🧹*/}
-            <Option
-              label={formatMoment(moment.duration(1, 'h').humanize())}
-              flex={1}
-              isSelected={form.duration === moment.duration(1, 'h').asSeconds()}
-              onClick={() => setDuration(moment.duration(1, 'h').asSeconds())}
-            />
-            <Option
-              label={formatMoment(moment.duration(1, 'd').humanize())}
-              flex={1}
-              isSelected={form.duration === moment.duration(1, 'd').asSeconds()}
-              onClick={() => setDuration(moment.duration(1, 'd').asSeconds())}
-            />
-            <Option
-              label={formatMoment(moment.duration(7, 'd').humanize())}
-              flex={1}
-              isSelected={form.duration === moment.duration(7, 'd').asSeconds()}
-              onClick={() => setDuration(moment.duration(7, 'd').asSeconds())}
-            />
-            <Option
-              label={formatMoment(moment.duration(1, 'M').humanize())}
-              flex={1}
-              isSelected={form.duration === moment.duration(1, 'M').asSeconds()}
-              onClick={() => setDuration(moment.duration(1, 'M').asSeconds())}
-            />
-            <Option
-              label={formatMoment(moment.duration(1, 'y').humanize())}
-              flex={1}
-              isSelected={form.duration === moment.duration(1, 'y').asSeconds()}
-              onClick={() => setDuration(moment.duration(1, 'y').asSeconds())}
-            />
-            <Option
-              label='NEVER'
-              flex={1}
-              onClick={() => setDuration(null)}
-              isSelected={!form.duration}
-            />
+            {refractDurations.map(refractDuration => (
+              <Option
+                key={refractDuration.label}
+                label={refractDuration.label}
+                flex={1}
+                isSelected={
+                  refractDuration.label === 'NEVER'
+                    ? !form.duration
+                    : form.duration === refractDuration.duration
+                }
+                onClick={() => setDuration(refractDuration.duration)}
+              />
+            ))}
             {/* <Option label='CUSTOM' flex={1} /> */}
           </FlexRow>
-          <Flex display={{ sm: 'flex', md: 'none' }}>SLIDER HERE</Flex>
+          <Flex display={{ sm: 'flex', md: 'none' }} width='full' marginTop={'1x'}>
+            <Slider
+              value={currentDurationIndex}
+              onChange={(value, index) => setDuration(refractDurations[value].duration)}
+            />
+          </Flex>
         </Box>
         <Box width='full' backgroundColor={'separator'} height={1} />
         <Box>
