@@ -45,7 +45,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
         gap='5x'
         marginBottom={{ sm: 'none', md: 'none', lg: '24x' }}
         display={{
-          sm: isVisible ? (isModalActive ? 'flex' : 'none') : 'none',
+          sm: isVisible ? 'flex' : 'none',
           md: isVisible ? 'flex' : 'none',
         }}
         paddingX={{ sm: '2x', md: '6x', lg: 'none' }}

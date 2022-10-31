@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import Button from 'components/Button/Button';
 import Icon, { iconNames } from 'components/Icon/Icon';
 import { Title } from 'components/Typography/Title';
@@ -5,7 +6,7 @@ import { ReactNode } from 'react';
 import { useModalActions } from 'states/modalState';
 import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import { Sprinkles } from 'theme/sprinkles.css';
-import Close from '/public/icons/close.svg';
+import * as styles from './Modal.css';
 
 interface ModalProps {
   title: string;
@@ -40,7 +41,7 @@ const Modal = ({
   return (
     <Flex
       width='100vw'
-      height={'100vh'}
+      height={'full'}
       position='fixed'
       backgroundColor={'overlay-ultrathin'}
       justifyContent='center'
@@ -52,13 +53,13 @@ const Modal = ({
       <FlexCol
         backgroundColor={'bg-primary'}
         maxWidth={maxWidth}
-        width={{ sm: isMobileFullscreen ? '100vw' : 'full', md: 'full' }}
-        height={{ sm: isMobileFullscreen ? '100vh' : 'fit', md: 'fit' }}
+        width={{ sm: isMobileFullscreen ? 'full' : 'full', md: 'full' }}
+        height={{ sm: isMobileFullscreen ? 'full' : 'fit', md: 'fit' }}
         paddingY={'8x'}
         paddingX='5x'
         justifyContent={'space-between'}
       >
-        <FlexCol height={{ sm: 'full', md: 'auto' }}>
+        <FlexCol className={clsx(title === 'NETWORK SELECT' && styles.networkWrapper)}>
           <FlexRow width={'full'} justifyContent='space-between' alignItems={'center'}>
             <FlexRow gap='0x' alignItems={'center'}>
               {icon && <Icon name={icon} color='white' />}
@@ -107,7 +108,7 @@ const Modal = ({
           </FlexRow>
           {children}
         </FlexCol>
-        <FlexCol display={{ sm: 'flex', md: 'none' }} marginTop='2x' marginBottom={'12x'} gap='2x'>
+        <FlexCol display={{ sm: 'flex', md: 'none' }} marginTop='2x' gap='2x'>
           {onCancel && (
             <Button
               label='CANCEL'

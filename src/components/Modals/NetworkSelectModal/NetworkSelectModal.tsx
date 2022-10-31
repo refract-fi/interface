@@ -7,7 +7,6 @@ import { formState, initialNetworksState, useFormActions } from 'states/formStat
 import { useModalActions } from 'states/modalState';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import { IForm, SupportedNetworks } from 'utils/types';
-import Multichain from '/public/icons/multichain.svg';
 
 const NetworkSelectModal = () => {
   const { networks } = useRecoilValue<IForm>(formState);
@@ -58,7 +57,9 @@ const NetworkSelectModal = () => {
       <FlexCol gap='0x' height={'full'}>
         <FlexRow justifyContent={'space-between'} marginTop='2x'>
           <Checkbox
-            label={'14 networks selected'}
+            label={`${selectedNetworks.length} network${
+              selectedNetworks.length > 1 ? 's' : ''
+            } selected`}
             checked={selectedNetworks.length >= 1}
             checkmarkType='line'
             setChecked={() =>
@@ -74,9 +75,6 @@ const NetworkSelectModal = () => {
           borderWidth='1px'
           borderStyle='solid'
           marginBottom={'1x'}
-          flex={1}
-          overflow={'scroll'}
-          height={'fit'}
         />
         <FlexCol gap='0x' overflow={'scroll'}>
           {Object.values(SupportedNetworks).map((network: SupportedNetworks) => (
