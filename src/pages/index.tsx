@@ -27,10 +27,14 @@ const Home: NextPageWithLayout = () => {
         paddingX={{ sm: '2x', md: 'none' }}
       >
         {phase === FormPhases.CREATE && <Landing fadeOut={fadeOut} fadeIn={fadeIn} />}
-        <FlexCol alignItems={'center'} marginTop='48x'>
-          {phase === FormPhases.REVIEW && <Review />}
-          {(phase === FormPhases.GENERATING || phase === FormPhases.COMPLETED) && <Generate />}
-        </FlexCol>
+        {(phase === FormPhases.REVIEW ||
+          phase === FormPhases.GENERATING ||
+          phase === FormPhases.COMPLETED) && (
+          <FlexCol alignItems={'center'} marginTop='48x'>
+            {phase === FormPhases.REVIEW && <Review />}
+            {(phase === FormPhases.GENERATING || phase === FormPhases.COMPLETED) && <Generate />}
+          </FlexCol>
+        )}
       </Box>
     </>
   );
