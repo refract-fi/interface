@@ -43,7 +43,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
       <FlexCol
         className={styles.formWrapper}
         gap='5x'
-        marginBottom={{ sm: 'none', md: 'none', lg: '24x' }}
+        marginBottom={{ sm: '24x', md: 'none', lg: '24x' }}
         display={{
           sm: isVisible ? 'flex' : 'none',
           md: isVisible ? 'flex' : 'none',
