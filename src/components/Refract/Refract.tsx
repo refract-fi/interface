@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
 import { Box, Flex } from 'theme/components';
 import * as styles from './Refract.css';
-import { animated, config, easings, useSpring } from 'react-spring';
+import { animated, easings, useSpring } from 'react-spring';
 import Button from 'components/Button/Button';
 
 interface RefractProps {
@@ -166,9 +166,8 @@ const Refract = ({ page }: RefractProps) => {
         justifyContent='center'
         className={clsx(styles.refractWrapper, page)}
       >
-        <Box className={clsx(styles.grain, page, isTopSkew && 'topSkew')} />
         <Box
-          position={'absolute'}
+          position={'relative'}
           top='0'
           className={clsx(styles.refract, page, isTopSkew && 'topSkew')}
         >
@@ -230,7 +229,29 @@ const Refract = ({ page }: RefractProps) => {
                 filter={bottomRightOpacity.to(v => `opacity(${v})`)}
               />
             </g>
+            <rect
+              x='0'
+              width='900'
+              height='450'
+              fill='url(#pattern0)'
+              fillOpacity='0.8'
+              style={{ mixBlendMode: 'color-burn' }}
+            />
+            <rect
+              x='0'
+              width='900'
+              height='450'
+              fill='url(#pattern0)'
+              fillOpacity='0.8'
+              style={{ mixBlendMode: 'color-burn' }}
+            />
             <defs>
+              <pattern id='pattern0' patternContentUnits='objectBoundingBox' width='1' height='1'>
+                <image
+                  href='/grain.png'
+                  transform='translate(0 -0.15648) scale(0.001111 0.00257)'
+                />
+              </pattern>
               <animated.radialGradient
                 id='top_left_gradient'
                 cx='0'
