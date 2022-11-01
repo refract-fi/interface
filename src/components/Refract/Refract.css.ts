@@ -49,7 +49,7 @@ export const refract = style({
   width: 900,
   height: 450,
   transition: 'all 0.3s ease',
-  mixBlendMode: 'color-burn',
+  // mixBlendMode: 'color-burn',
   filter: 'saturate(150%) brightness(110%)',
   top: 0,
   selectors: {
