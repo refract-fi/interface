@@ -4,9 +4,8 @@ import { useRecoilValue } from 'recoil';
 import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
 import { Box, Flex } from 'theme/components';
 import * as styles from './Refract.css';
-import { animated, config, easings, useSpring } from 'react-spring';
+import { animated, easings, useSpring } from 'react-spring';
 import Button from 'components/Button/Button';
-import Grain from './Grain';
 
 interface RefractProps {
   page?: string;
@@ -242,19 +241,14 @@ const Refract = ({ page }: RefractProps) => {
               x='0'
               width='900'
               height='450'
-              fill='url(#pattern1)'
+              fill='url(#pattern0)'
+              fillOpacity='0.8'
               style={{ mixBlendMode: 'color-burn' }}
             />
             <defs>
               <pattern id='pattern0' patternContentUnits='objectBoundingBox' width='1' height='1'>
                 <image
                   href='/grain.png'
-                  transform='translate(0 -0.15648) scale(0.001111 0.00257)'
-                />
-              </pattern>
-              <pattern id='pattern1' patternContentUnits='objectBoundingBox' width='1' height='1'>
-                <image
-                  href='/grain_1.png'
                   transform='translate(0 -0.15648) scale(0.001111 0.00257)'
                 />
               </pattern>
