@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
 import { Box, Flex } from 'theme/components';
 import * as styles from './Refract.css';
-import { animated, easings, useSpring } from 'react-spring';
+import { animated, easings, useSpring } from '@react-spring/web';
 import Button from 'components/Button/Button';
 
 interface RefractProps {
@@ -58,7 +58,9 @@ const Refract = ({ page }: RefractProps) => {
       bottomRightOpacity,
     },
     setSVGParams,
-  ] = useSpring(() => initialRefractValues);
+  ] = useSpring(() => ({
+    from: initialRefractValues,
+  }));
 
   const topLeftPosX = 0;
   const topLeftPosY = 0;
@@ -186,7 +188,7 @@ const Refract = ({ page }: RefractProps) => {
                 rx={topLeftScale * 100}
                 ry={topLeftScale * 100}
                 fill='url(#top_left_gradient)'
-                filter={topLeftOpacity.to(v => `opacity(${v})`)}
+                opacity={topLeftOpacity}
               />
               <animated.ellipse
                 cx={topMiddlePosX}
@@ -194,7 +196,7 @@ const Refract = ({ page }: RefractProps) => {
                 rx={topMiddleScale * 100}
                 ry={topMiddleScale * 100}
                 fill='url(#top_middle_gradient)'
-                filter={topMiddleOpacity.to(v => `opacity(${v})`)}
+                opacity={topMiddleOpacity}
               />
               <animated.ellipse
                 cx={topRightPosX}
@@ -202,7 +204,7 @@ const Refract = ({ page }: RefractProps) => {
                 rx={topRightScale * 100}
                 ry={topRightScale * 100}
                 fill='url(#top_right_gradient)'
-                filter={topRightOpacity.to(v => `opacity(${v})`)}
+                opacity={topRightOpacity}
               />
               <animated.ellipse
                 cx={bottomLeftPosX}
@@ -210,7 +212,7 @@ const Refract = ({ page }: RefractProps) => {
                 rx={bottomLeftScale * 100}
                 ry={bottomLeftScale * 100}
                 fill='url(#bottom_left_gradient)'
-                filter={bottomLeftOpacity.to(v => `opacity(${v})`)}
+                opacity={bottomLeftOpacity}
               />
               <animated.ellipse
                 cx={bottomMiddlePosX}
@@ -218,7 +220,7 @@ const Refract = ({ page }: RefractProps) => {
                 rx={bottomMiddleScale * 100}
                 ry={bottomMiddleScale * 100}
                 fill='url(#bottom_middle_gradient)'
-                filter={bottomMiddleOpacity.to(v => `opacity(${v})`)}
+                opacity={bottomMiddleOpacity}
               />
               <animated.ellipse
                 cx={bottomRightPosX}
@@ -226,7 +228,7 @@ const Refract = ({ page }: RefractProps) => {
                 rx={bottomRightScale * 100}
                 ry={bottomRightScale * 100}
                 fill='url(#bottom_right_gradient)'
-                filter={bottomRightOpacity.to(v => `opacity(${v})`)}
+                opacity={bottomRightOpacity}
               />
             </g>
             <rect
@@ -263,11 +265,7 @@ const Refract = ({ page }: RefractProps) => {
                 })`}
               >
                 <stop stopColor='#FF4343' />
-                <animated.stop
-                  offset={topLeftOffset.to(v => v)}
-                  stopColor='#FF4343'
-                  stopOpacity='0'
-                />
+                <animated.stop offset={topLeftOffset} stopColor='#FF4343' stopOpacity='0' />
               </animated.radialGradient>
               <animated.radialGradient
                 id='top_middle_gradient'
@@ -280,11 +278,7 @@ const Refract = ({ page }: RefractProps) => {
                 })`}
               >
                 <stop stopColor='#0024FF' />
-                <animated.stop
-                  offset={topMiddleOffset.to(v => v)}
-                  stopColor='#0024FF'
-                  stopOpacity='0'
-                />
+                <animated.stop offset={topMiddleOffset} stopColor='#0024FF' stopOpacity='0' />
               </animated.radialGradient>
               <animated.radialGradient
                 id='top_right_gradient'
@@ -297,11 +291,7 @@ const Refract = ({ page }: RefractProps) => {
                 })`}
               >
                 <stop stopColor='#FFAB0F' />
-                <animated.stop
-                  offset={topRightOffset.to(v => v)}
-                  stopColor='#FFAB0F'
-                  stopOpacity='0'
-                />
+                <animated.stop offset={topRightOffset} stopColor='#FFAB0F' stopOpacity='0' />
               </animated.radialGradient>
               <animated.radialGradient
                 id='bottom_left_gradient'
@@ -314,11 +304,7 @@ const Refract = ({ page }: RefractProps) => {
                 })`}
               >
                 <stop stopColor='#886FF4' />
-                <animated.stop
-                  offset={bottomLeftOffset.to(v => v)}
-                  stopColor='#886FF4'
-                  stopOpacity='0'
-                />
+                <animated.stop offset={bottomLeftOffset} stopColor='#886FF4' stopOpacity='0' />
               </animated.radialGradient>
 
               <animated.radialGradient
@@ -332,11 +318,7 @@ const Refract = ({ page }: RefractProps) => {
                 })`}
               >
                 <stop stopColor='#9AF46F' />
-                <animated.stop
-                  offset={bottomMiddleOffset.to(v => v)}
-                  stopColor='#9AF46F'
-                  stopOpacity='0'
-                />
+                <animated.stop offset={bottomMiddleOffset} stopColor='#9AF46F' stopOpacity='0' />
               </animated.radialGradient>
               <animated.radialGradient
                 id='bottom_right_gradient'
@@ -349,11 +331,7 @@ const Refract = ({ page }: RefractProps) => {
                 })`}
               >
                 <stop stopColor='#88E3F0' />
-                <animated.stop
-                  offset={bottomRightOffset.to(v => v)}
-                  stopColor='#88E3F0'
-                  stopOpacity='0'
-                />
+                <animated.stop offset={bottomRightOffset} stopColor='#88E3F0' stopOpacity='0' />
               </animated.radialGradient>
 
               <clipPath id='clip0_4667_3237'>
