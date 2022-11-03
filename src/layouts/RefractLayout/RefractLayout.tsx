@@ -35,7 +35,7 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
       <Flex
         gap='2x'
         justifyContent={{ sm: 'space-between', md: 'center' }}
-        paddingX={{ sm: '2x', md: 'none' }}
+        paddingX={{ sm: '3x', md: 'none' }}
         paddingY={{ sm: '3x', md: '6x' }}
         position={'sticky'}
         top={'0'}
@@ -56,6 +56,7 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
             weight='bold'
             textTransform={'uppercase'}
             className={styles.title}
+            display={{ sm: 'block', md: 'none' }}
           >
             Refract
           </Title>
