@@ -14,7 +14,7 @@ const responsiveProperties = defineProperties({
   properties: {
     display: ['none', 'flex', 'block'],
     flexDirection: ['row', 'column'],
-    position: ['absolute', 'relative', 'fixed', 'sticky'],
+    position: ['absolute', 'relative', 'fixed', 'sticky', 'static'],
     alignItems: ['stretch', 'flex-start', 'center', 'flex-end'],
     justifyContent: [
       'stretch',
@@ -81,6 +81,7 @@ const responsiveProperties = defineProperties({
     alignSelf: ['flex-start'],
     visibility: ['hidden', 'visible'],
     cursor: ['pointer', 'auto'],
+    order: [0, 1, 2, 3, 4, 5],
   },
   shorthands: {
     padding: ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight'],

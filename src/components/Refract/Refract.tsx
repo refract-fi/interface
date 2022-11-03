@@ -174,11 +174,10 @@ const Refract = ({ page }: RefractProps) => {
           className={clsx(styles.refract, page, isTopSkew && 'topSkew')}
         >
           <svg
-            width='900'
-            height='450'
             viewBox='0 0 900 450'
             fill='none'
             xmlns='http://www.w3.org/2000/svg'
+            className={styles.svg}
           >
             <g clipPath='url(#clip0_4667_3237)'>
               <rect width='900' height='450' fill='black' />

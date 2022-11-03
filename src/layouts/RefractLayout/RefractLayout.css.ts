@@ -20,5 +20,5 @@ export const textGradient = style({
 });
 
 export const title = style({
-  letterSpacing: '12px',
+  letterSpacing: '8px',
 });

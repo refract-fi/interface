@@ -1,12 +1,12 @@
 import { animated, useSpring } from '@react-spring/web';
 import { Box, BoxProps } from 'theme/components';
-
+import { Sprinkles } from 'theme/sprinkles.css';
 interface RefractButtonLogoProps extends BoxProps {
   onClick: () => void;
-  size: number;
+  size: Sprinkles['width'];
 }
 
-const RefractLogoButton = ({ onClick, size = 50, ...restProps }: RefractButtonLogoProps) => {
+const RefractLogoButton = ({ onClick, size = '12x', ...restProps }: RefractButtonLogoProps) => {
   const [{ stop1, stop2, stop3, stop4, stop5, stop6, stop7, stop8 }, setSVGParams] = useSpring(
     () => ({
       stop1: 'white',
@@ -51,11 +51,13 @@ const RefractLogoButton = ({ onClick, size = 50, ...restProps }: RefractButtonLo
       onClick={() => onClick()}
       {...restProps}
     >
-      <svg
+      <Box
         width={size}
+        // @ts-ignore
         height={size}
         viewBox='0 0 50 50'
         fill='none'
+        component={'svg'}
         xmlns='http://www.w3.org/2000/svg'
       >
         <path d='M23.4883 4.23607L23.4883 46L0.999996 23.5117L23.4883 4.23607Z' fill='white' />
@@ -187,7 +189,7 @@ const RefractLogoButton = ({ onClick, size = 50, ...restProps }: RefractButtonLo
             <animated.stop offset='1' stopColor={stop8} />
           </linearGradient>
         </defs>
-      </svg>
+      </Box>
     </Box>
   );
 };

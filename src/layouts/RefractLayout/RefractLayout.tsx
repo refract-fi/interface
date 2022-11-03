@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { BorderButton, Button, Icon, Refract, RefractLogoButton } from 'components';
+import { BorderButton, Button, Icon, Refract, RefractLogoButton, Text, Title } from 'components';
 import { useRouter } from 'next/router';
 import { ReactNode, useCallback, useMemo, useState } from 'react';
 import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
@@ -32,35 +32,65 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
 
   return (
     <Box>
-      <FlexRow
+      <Flex
         gap='2x'
-        justifyContent={'center'}
-        paddingY='6x'
+        justifyContent={{ sm: 'space-between', md: 'center' }}
+        paddingX={{ sm: '2x', md: 'none' }}
+        paddingY={{ sm: '3x', md: '6x' }}
         position={'sticky'}
         top={'0'}
         backgroundColor='black'
         zIndex={2}
+        flexWrap='wrap'
       >
-        <RefractLogoButton position={'absolute'} left='7x' onClick={() => push('/')} size={28} />
-        <Button
-          label='stats'
-          variant='nav'
-          active={isActive('stats')}
-          onClick={() => changeRoute('stats')}
-        />
-        <Button
-          label='REFRACT'
-          variant='nav'
-          active={!isActive('allocations') && !isActive('stats')}
-          onClick={() => changeRoute('')}
-        />
-        <Button
-          label='ALLOCATIONS'
-          variant='nav'
-          active={isActive('allocations')}
-          onClick={() => changeRoute('allocations')}
-        />
-        <FlexRow position={'absolute'} gap='1x' right='7x'>
+        <FlexRow alignItems={'center'} gap='1x'>
+          <RefractLogoButton
+            position={{ md: 'absolute' }}
+            left='7x'
+            onClick={() => push('/')}
+            size={{ sm: '5x', md: '7x' }}
+          />
+          <Title
+            level='6'
+            special
+            weight='bold'
+            textTransform={'uppercase'}
+            className={styles.title}
+          >
+            Refract
+          </Title>
+        </FlexRow>
+        <FlexRow
+          order={{ sm: 2, lg: 0 }}
+          component='nav'
+          position={{ sm: 'static', lg: 'absolute' }}
+          width={{ sm: 'full', lg: 'auto' }}
+        >
+          <Button
+            label='stats'
+            variant='nav'
+            active={isActive('stats')}
+            onClick={() => changeRoute('stats')}
+          />
+          <Button
+            label='REFRACT'
+            variant='nav'
+            active={!isActive('allocations') && !isActive('stats')}
+            onClick={() => changeRoute('')}
+          />
+          <Button
+            label='ALLOCATIONS'
+            variant='nav'
+            active={isActive('allocations')}
+            onClick={() => changeRoute('allocations')}
+          />
+        </FlexRow>
+        <FlexRow
+          position={{ sm: 'static', lg: 'absolute' }}
+          gap='1x'
+          right='7x'
+          order={{ sm: 0, lg: 2 }}
+        >
           <BorderButton
             textTransform={'uppercase'}
             label='create'
@@ -69,17 +99,18 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
             level='f4'
             weight='bold'
             variant='secondary'
+            display={{ sm: 'none', md: 'block' }}
           />
           <BorderButton
             textTransform={'uppercase'}
             label='share'
             right='7x'
-            width='28x'
+            width={{ sm: '20x', md: '28x' }}
             level='f4'
             weight='bold'
           />
         </FlexRow>
-      </FlexRow>
+      </Flex>
       <FlexCol paddingTop='24x' position={'relative'}>
         <Refract page={page} />
         <Flex justifyContent={'center'} className={clsx(styles.childWrapper, page)}>

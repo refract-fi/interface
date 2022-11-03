@@ -46,8 +46,6 @@ export const grain = style({
 });
 
 export const refract = style({
-  width: 900,
-  height: 450,
   transition: 'all 0.3s ease',
   // mixBlendMode: 'color-burn',
   filter: 'saturate(150%) brightness(110%)',
@@ -66,7 +64,36 @@ export const refract = style({
       transform: 'perspective(1200px) rotateY(85deg) scale(1)',
     },
   },
+  width: 900,
+  height: 450,
+  '@media': {
+    'screen and (min-width: 768px)': {
+      width: 700,
+      height: 350,
+    },
+    'screen and (min-width: 1024px)': {
+      width: 900,
+      height: 450,
+    },
+  },
 });
 export const scale = style({
   scale: 10,
+});
+
+export const svg = style({
+  width: 450,
+  height: 225,
+  transform: 'rotate(90deg) scaleY(165%) scaleX(100%)',
+  '@media': {
+    'screen and (min-width: 768px)': {
+      transform: 'none',
+      width: 700,
+      height: 350,
+    },
+    'screen and (min-width: 1024px)': {
+      width: 900,
+      height: 450,
+    },
+  },
 });

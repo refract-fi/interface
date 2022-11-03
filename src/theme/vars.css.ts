@@ -137,6 +137,7 @@ export const vars = createGlobalTheme(':root', {
     '16x': spaceIncrements(16),
     '17x': spaceIncrements(17),
     '18x': spaceIncrements(18),
+    '20x': spaceIncrements(20),
     '24x': spaceIncrements(24),
     '28x': spaceIncrements(28),
     '30x': spaceIncrements(30),
