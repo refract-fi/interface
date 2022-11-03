@@ -43,7 +43,12 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
         zIndex={2}
         flexWrap='wrap'
       >
-        <FlexRow alignItems={'center'} gap='1x'>
+        <FlexRow
+          alignItems={'center'}
+          gap='1x'
+          height={{ sm: '5x', md: '6x' }}
+          marginBottom={{ md: 2 }}
+        >
           <RefractLogoButton
             position={{ md: 'absolute' }}
             left='7x'
