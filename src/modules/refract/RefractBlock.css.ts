@@ -9,11 +9,3 @@ export const refractBlock = style({
     },
   },
 });
-
-export const assetBlock = style({
-  backgroundColor: vars.color.primary,
-});
-
-globalStyle(`${refractBlock}:hover ${assetBlock}`, {
-  backgroundColor: vars.color.primary,
-});

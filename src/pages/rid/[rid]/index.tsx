@@ -13,9 +13,15 @@ const Refraction: NextPageWithLayout = () => {
   const { isTopSkew } = useRecoilValue(refractPhaseState);
   const { setIsTopSkew } = useRefractPhaseActions();
   return (
-    <Box className={basicFadeIn}>
+    <Box className={basicFadeIn} width={{ sm: 'full', md: 'auto' }}>
       {isTopSkew && (
-        <Flex position={'absolute'} top='0' left='0' width='full'>
+        <Flex
+          position={'absolute'}
+          top='0'
+          left='0'
+          width='full'
+          display={{ sm: 'none', md: 'block' }}
+        >
           <Button
             label='Reset View'
             variant='none'
@@ -25,10 +31,29 @@ const Refraction: NextPageWithLayout = () => {
           />
         </Flex>
       )}
-      <FlexCol width='full' marginTop={'12x'} gap='4x'>
+      {/* Workaround below for bug with vanilla extract that hides to verified icon on desktop when display: none on mobile block */}
+      <FlexRow
+        alignItems={'center'}
+        width='full'
+        justifyContent={'space-between'}
+        visibility={{ sm: 'visible', md: 'hidden' }}
+      >
+        <Text
+          alignItems='center'
+          display='flex'
+          level='f5'
+          textTransform={'uppercase'}
+          color='secondary'
+        >
+          <Icon name='verified-chromatic' size={18} />
+          Verified
+        </Text>
+        <Button textTransform='uppercase' label='refract info' />
+      </FlexRow>
+      <FlexCol width='full' marginTop={'12x'} gap='4x' display={{ sm: 'none', md: 'flex' }}>
         <FlexRow gap='2x' width={'full'} justifyContent='space-between'>
           <FlexRow alignItems={'center'} gap='0x'>
-            <Icon name='verified-chromatic' />
+            <Icon name='verified-chromatic' size={24} />
             <Text level='f5' textTransform={'uppercase'} color='secondary'>
               verified
             </Text>

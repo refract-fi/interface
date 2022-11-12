@@ -8,7 +8,12 @@ export const childWrapper = style({
   width: '100%',
   selectors: {
     '&.refract': {
-      marginTop: '450px',
+      marginTop: '350px',
+      '@media': {
+        'screen and (min-width: 768px)': {
+          marginTop: '450px',
+        },
+      },
     },
   },
 });

@@ -344,7 +344,7 @@ const Refract = ({ page }: RefractProps) => {
           page === 'stats' ||
           page === 'refract' ||
           page === 'insights') && (
-          <>
+          <Box display={{ sm: 'none', md: 'block' }}>
             <Button
               position={'absolute'}
               left='60x'
@@ -555,7 +555,7 @@ const Refract = ({ page }: RefractProps) => {
                 />
               </>
             )}
-          </>
+          </Box>
         )}
       </Flex>
     </>

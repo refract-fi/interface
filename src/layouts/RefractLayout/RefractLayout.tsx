@@ -1,9 +1,7 @@
 import clsx from 'clsx';
-import { BorderButton, Button, Icon, Refract, RefractLogoButton, Text, Title } from 'components';
+import { BorderButton, Button, Refract, RefractLogoButton, Title } from 'components';
 import { useRouter } from 'next/router';
-import { ReactNode, useCallback, useMemo, useState } from 'react';
-import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
-import { useRecoilValue } from 'recoil';
+import { ReactNode, useCallback, useMemo } from 'react';
 import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './RefractLayout.css';
 
