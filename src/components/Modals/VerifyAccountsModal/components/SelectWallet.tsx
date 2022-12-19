@@ -1,4 +1,5 @@
 import { useWeb3React } from '@web3-react/core';
+import axios from 'axios';
 import Button from 'components/Button/Button';
 import Text from 'components/Typography/Text';
 import { useRecoilValue } from 'recoil';
@@ -31,19 +32,32 @@ const SelectWallet = ({ verifAccount, setVerifPhase }: SelectWalletProps) => {
     try {
       if (provider) {
         const signer = provider.getSigner();
-        const signature = await signer.signMessage('this is a test');
-        const address = await signer.getAddress();
-
-        let newAccountsArr = accounts.map(account => {
-          if (account.address === verifAccount && address === account.address) {
-            return { ...account, signature: signature };
-          }
-          return { ...account };
+        const sign = await axios.post('/api/wallet', {
+          address: account,
+          origin: 'https://app.refract.fi',
         });
 
-        setAccounts(newAccountsArr);
-        setVerifPhase('default');
-        disconnect();
+        const signature = await signer.signMessage(sign.data.text);
+        const response = await axios.post('/api/validate', {
+          address: account,
+          challengerId: sign.data.challengerId,
+          signature: signature,
+        });
+
+        if (response.data.validated) {
+          const address = await signer.getAddress();
+
+          let newAccountsArr = accounts.map(account => {
+            if (account.address === verifAccount && address === account.address) {
+              return { ...account, challengerId: sign.data.challengerId };
+            }
+            return { ...account };
+          });
+
+          setAccounts(newAccountsArr);
+          setVerifPhase('default');
+          disconnect();
+        }
       }
     } catch (e) {
       console.log(e);
