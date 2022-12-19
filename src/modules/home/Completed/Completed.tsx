@@ -38,7 +38,7 @@ const Completed = () => {
           alignItems='center'
           padding='0x'
         >
-          <Text component={'div'}>refract.fi/rid/oskis-likes-cheese</Text>
+          <Text component={'div'}>refract.fi/rid/a90idfgiajks</Text>
           <Flex gap='2x' height={'full'}>
             <BorderButton textTransform={'uppercase'} label='copy' weight='bold' width={'17x'} />
             <Button
@@ -47,7 +47,7 @@ const Completed = () => {
               level='f5'
               width='17x'
               onClick={async () => {
-                await push('/rid/oskis-likes-cheese');
+                await push('/rid/a90idfgiajks');
                 resetFormPhase();
               }}
             />
