@@ -75,7 +75,7 @@ const RefractDetailsDesk = ({ asset }: RefractDetailsDeskProps) => {
           width='24x'
         />
       </FlexRow>
-      <FlexCol alignItems={'center'}>
+      <FlexCol alignItems={'center'} marginTop='2x'>
         <Text level='f3'>41.12%</Text>
         <Text marginTop='1x' marginBottom={'0x'} level='b3'>
           {asset}
