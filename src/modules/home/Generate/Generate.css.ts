@@ -29,7 +29,7 @@ export const refractWrapper = style({
   animationDuration: '1s',
   animationFillMode: 'both',
   overflow: 'hidden',
-  marginTop: '-10px',
+  marginTop: '-19px',
 });
 
 export const loadingDots = style({

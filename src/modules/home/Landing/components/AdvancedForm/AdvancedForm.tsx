@@ -62,7 +62,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
           </FlexRow>
           <Box height={1} background='spectrum' marginTop={'1x'} />
         </FlexCol>
-        <Box>
+        {/* <Box>
           <FormTitle
             title='expiration'
             icon='hourglass'
@@ -95,7 +95,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
                 onClick={() => setDuration(refractDuration.duration)}
               />
             ))}
-            {/* <Option label='CUSTOM' flex={1} /> */}
+            <Option label='CUSTOM' flex={1} />
           </FlexRow>
           <Flex display={{ sm: 'flex', md: 'none' }} width='full' marginTop={'1x'}>
             <Slider
@@ -103,9 +103,9 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
               onChange={(value, index) => setDuration(refractDurations[value].duration)}
             />
           </Flex>
-        </Box>
-        <Box width='full' backgroundColor={'separator'} height={1} />
-        <Box>
+        </Box> */}
+        {/* <Box width='full' backgroundColor={'separator'} height={1} /> */}
+        {/* <Box>
           <FormTitle
             title='portfolio data'
             icon='snapshot'
@@ -130,7 +130,6 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
               onClick={() => setIsSnapshot(true)}
               details='Portfolio data is taken once at link creation and stored in decentralized storage. Addresses are never stored and only used once to fetch the data.'
             />
-            {/* Adjust margin */}
             <Option
               variant='detailed'
               label='REAL TIME'
@@ -141,7 +140,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
             />
           </Flex>
         </Box>
-        <Box width='full' backgroundColor={'separator'} height={1} />
+        <Box width='full' backgroundColor={'separator'} height={1} /> */}
         <FormTitle
           title='nft allocations'
           icon='nft'
@@ -151,7 +150,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
           toggled={form.includeNFTs}
           setToggle={setIncludeNFTs}
         />
-        <Box width='full' backgroundColor={'separator'} height={1} />
+        {/* <Box width='full' backgroundColor={'separator'} height={1} />
 
         <FormTitle
           title='group assets'
@@ -175,7 +174,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
               : `${form.networks.length} NETWORK${form.networks.length === 1 ? '' : 'S'}`
           }
           modal='NETWORK_SELECT'
-        />
+        /> */}
         <Box width='full' backgroundColor={'separator'} height={1} />
         <FormTitle
           title='VERIFICATION'

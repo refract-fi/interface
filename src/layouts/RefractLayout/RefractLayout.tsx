@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { BorderButton, Button, Refract, RefractLogoButton, Title } from 'components';
+import { BorderButton, Button, Icon, Refract, RefractLogoButton, Text, Title } from 'components';
 import { useRouter } from 'next/router';
 import { ReactNode, useCallback, useMemo } from 'react';
 import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
@@ -30,7 +30,7 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
 
   return (
     <Box>
-      <Flex
+      {/* <Flex
         gap='2x'
         justifyContent={{ sm: 'space-between', md: 'center' }}
         paddingX={{ sm: '3x', md: 'none' }}
@@ -114,8 +114,20 @@ const RefractLayout = ({ children }: RefractLayoutProps) => {
             weight='bold'
           />
         </FlexRow>
-      </Flex>
-      <FlexCol paddingTop='24x' position={'relative'}>
+      </Flex> */}
+      <FlexRow alignItems={'center'} gap='3x' width={'full'} justifyContent='center' marginY='16x'>
+        <RefractLogoButton onClick={() => push('/')} size={{ sm: '5x', md: '7x' }} />
+        <Title
+          level='2'
+          special
+          weight='semi-bold'
+          textTransform={'uppercase'}
+          className={styles.title}
+        >
+          Refract
+        </Title>
+      </FlexRow>
+      <FlexCol position={'relative'}>
         <Refract page={page} />
         <Flex justifyContent={'center'} className={clsx(styles.childWrapper, page)}>
           {children}

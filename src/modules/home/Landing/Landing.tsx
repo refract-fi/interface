@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { AddressInput, Button, Icon, Text, Title } from 'components';
 import { useMemo } from 'react';
 import { useRecoilValue } from 'recoil';
@@ -11,20 +12,17 @@ import * as styles from './Landing.css';
 interface LandingProps {
   fadeOut: (cb: () => void) => void;
   fadeIn: () => void;
+  onGenerateClick: () => void;
 }
 
-const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
+const Landing = ({ fadeOut, fadeIn, onGenerateClick }: LandingProps) => {
   const { showParams } = useRecoilValue(formPhaseState);
   const { setPhase, setShowParams } = useFormPhaseActions();
-  const { accounts } = useRecoilValue(formState);
-  const onGenerateClick = () => {
-    setTimeout(() => setPhase(FormPhases.REVIEW), 150);
-    fadeOut(() => setTimeout(() => fadeIn(), 150));
-  };
+  const form = useRecoilValue(formState);
 
   const isDisabled = useMemo(() => {
-    return accounts.length < 1;
-  }, [accounts]);
+    return form.accounts.length < 1;
+  }, [form.accounts]);
   return (
     <FlexCol alignItems={'center'} paddingTop={{ sm: '30x', md: '60x' }}>
       <Title special level={{ sm: '2', md: '0' }} weight={'bold'} className={styles.title}>
@@ -44,7 +42,7 @@ const Landing = ({ fadeOut, fadeIn }: LandingProps) => {
           variant='hero'
           marginTop='8x'
           size='large'
-          onClick={() => !isDisabled && onGenerateClick()}
+          onClick={async () => !isDisabled && (await onGenerateClick())}
           disabled={isDisabled}
           width={{ sm: 'full', md: 'auto' }}
         />

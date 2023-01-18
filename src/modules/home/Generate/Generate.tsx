@@ -46,15 +46,15 @@ const ReviewForm = () => {
     loadingAnimation();
   }, [phase]);
 
-  useEffect(() => {
-    if (phase === FormPhases.GENERATING) {
-      const completeTimeout = setTimeout(() => {
-        setTimeout(() => setPhase(FormPhases.COMPLETED), 300);
-        fadeOut(() => setTimeout(() => fadeIn(), 300));
-      }, 8000);
-      return () => clearTimeout(completeTimeout);
-    }
-  }, [phase]);
+  // useEffect(() => {
+  //   if (phase === FormPhases.GENERATING) {
+  //     const completeTimeout = setTimeout(() => {
+  //       setTimeout(() => setPhase(FormPhases.COMPLETED), 300);
+  //       fadeOut(() => setTimeout(() => fadeIn(), 300));
+  //     }, 8000);
+  //     return () => clearTimeout(completeTimeout);
+  //   }
+  // }, [phase]);
 
   return (
     <FlexCol alignItems={'center'}>
@@ -80,7 +80,7 @@ const ReviewForm = () => {
             </Text>
           </>
         )}
-        {phase === FormPhases.COMPLETED && (
+        {/* {phase === FormPhases.COMPLETED && (
           <>
             <Title
               special
@@ -130,7 +130,7 @@ const ReviewForm = () => {
               </Flex>
             </BorderInput>
           </>
-        )}
+        )} */}
       </FlexCol>
     </FlexCol>
   );

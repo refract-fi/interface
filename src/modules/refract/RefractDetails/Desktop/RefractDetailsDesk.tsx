@@ -1,84 +1,37 @@
 import clsx from 'clsx';
 import { Text } from 'components';
 import { Box, FlexCol, FlexRow } from 'theme/components';
+import { DataApp, Token } from 'utils/types/refractData';
 import * as styles from './RefractDetailsDesk.css';
 
 interface RefractDetailsDeskProps {
-  asset: string;
+  apps: DataApp[];
+  token: Token;
+  percentage: number;
 }
 
-const RefractDetailsDesk = ({ asset }: RefractDetailsDeskProps) => {
+const RefractDetailsDesk = ({ apps, percentage, token }: RefractDetailsDeskProps) => {
   return (
     <Box display={{ sm: 'none', md: 'block' }}>
       {' '}
       <FlexRow>
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='10x'
-          marginRight={'0x'}
-        />
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='7x'
-          marginRight='1x'
-        />
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='2x'
-          marginRight='0x'
-        />
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='2x'
-          marginRight='0x'
-        />
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='1x'
-          marginRight={2}
-        />
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='0x'
-          marginRight={2}
-        />
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='8x'
-          marginRight={'2x'}
-        />
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='0x'
-          marginRight={2}
-        />
-        <Box
-          component='span'
-          className={clsx(styles.assetBlock, 'assetBlock')}
-          height={'2x'}
-          width='24x'
-        />
+        {apps &&
+          apps.length > 0 &&
+          apps.map((app: DataApp) => (
+            <Box
+              key={`${app.name}-${token.id}`}
+              component='span'
+              className={clsx(styles.assetBlock, 'assetBlock')}
+              height={'2x'}
+              style={{ width: `${(app.percentage / percentage) * 100}%` }}
+              marginRight={'0x'}
+            />
+          ))}
       </FlexRow>
-      <FlexCol alignItems={'center'}>
-        <Text level='f3'>41.12%</Text>
+      <FlexCol alignItems={'center'} marginTop='2x'>
+        <Text level='f3'>{percentage.toFixed(2)}%</Text>
         <Text marginTop='1x' marginBottom={'0x'} level='b3'>
-          {asset}
+          {token.name}
         </Text>
         <Text level='b4' color='secondary'>
           click to view details

@@ -1,32 +1,41 @@
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { refractPhaseState, useRefractPhaseActions } from 'states/refractPhaseState';
 import { Box, Flex } from 'theme/components';
 import * as styles from './Refract.css';
 import { animated, easings, useSpring } from '@react-spring/web';
 import Button from 'components/Button/Button';
+import useData from 'hooks/useData';
+import { useRouter } from 'next/router';
+import { RefractData } from 'utils/types/refractData';
 
 interface RefractProps {
   page?: string;
 }
 
 const initialRefractValues = {
+  topLeftColor: '#000000',
   topLeftOffset: 0.5,
   topLeftOpacity: 1,
 
+  topMiddleColor: '#000000',
   topMiddleOffset: 0.5,
   topMiddleOpacity: 1,
 
+  topRightColor: '#000000',
   topRightOffset: 0.5,
   topRightOpacity: 1,
 
+  bottomLeftColor: '#000000',
   bottomLeftOffset: 0.5,
   bottomLeftOpacity: 1,
 
+  bottomMiddleColor: '#000000',
   bottomMiddleOffset: 0.5,
   bottomMiddleOpacity: 1,
 
+  bottomRightColor: '#000000',
   bottomRightOffset: 0.5,
   bottomRightOpacity: 1,
 };
@@ -41,6 +50,42 @@ const Refract = ({ page }: RefractProps) => {
 
   const { isTopSkew } = useRecoilValue(refractPhaseState);
   const { setIsTopSkew } = useRefractPhaseActions();
+  const router = useRouter();
+  const { data, error, isValidating } = useData(router?.query?.rid ? `${router.query.rid}` : '');
+
+  const sortedBalanceData = useMemo(() => {
+    if (data && !error && !isValidating) {
+      const sortedData = data.data.sort(
+        (a: RefractData, b: RefractData) => b.percentage - a.percentage
+      );
+      const organisedData = data.data.slice(0, 5);
+
+      let sumOfOtherAssets = 0;
+      const otherAssets = sortedData.slice(5, -1).map((otherAsset: RefractData) => {
+        sumOfOtherAssets += otherAsset.percentage;
+        return {
+          name: otherAsset.token.name,
+          percentage: otherAsset.percentage,
+          metaType: 'other',
+        };
+      });
+      organisedData.push({
+        apps: otherAssets,
+        percentage: sumOfOtherAssets,
+        token: {
+          colors: ['#000000', '#FFFFFF'],
+          decimals: 18,
+          mainColor: '#9AF46F',
+          id: 'other-assets',
+          name: 'Other Assets',
+          symbol: 'OTHER',
+        },
+      });
+      return organisedData;
+    } else {
+      return [];
+    }
+  }, [data]);
 
   const [
     {
@@ -263,8 +308,22 @@ const Refract = ({ page }: RefractProps) => {
                   topLeftScale * 100
                 })`}
               >
-                <stop stopColor='#FF4343' />
-                <animated.stop offset={topLeftOffset} stopColor='#FF4343' stopOpacity='0' />
+                <stop
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[0]?.token.mainColor
+                      ? sortedBalanceData[0]?.token.mainColor
+                      : '#FFF'
+                  }
+                />
+                <animated.stop
+                  offset={topLeftOffset}
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[0]?.token.mainColor
+                      ? sortedBalanceData[0].token.mainColor
+                      : '#FFF'
+                  }
+                  stopOpacity='0'
+                />
               </animated.radialGradient>
               <animated.radialGradient
                 id='top_middle_gradient'
@@ -276,8 +335,22 @@ const Refract = ({ page }: RefractProps) => {
                   topMiddleScale * 100
                 })`}
               >
-                <stop stopColor='#0024FF' />
-                <animated.stop offset={topMiddleOffset} stopColor='#0024FF' stopOpacity='0' />
+                <stop
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[1]?.token.mainColor
+                      ? sortedBalanceData[1]?.token.mainColor
+                      : '#FFF'
+                  }
+                />
+                <animated.stop
+                  offset={topMiddleOffset}
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[1]?.token.mainColor
+                      ? sortedBalanceData[1]?.token.mainColor
+                      : '#FFF'
+                  }
+                  stopOpacity='0'
+                />
               </animated.radialGradient>
               <animated.radialGradient
                 id='top_right_gradient'
@@ -289,8 +362,22 @@ const Refract = ({ page }: RefractProps) => {
                   topRightScale * 100
                 })`}
               >
-                <stop stopColor='#FFAB0F' />
-                <animated.stop offset={topRightOffset} stopColor='#FFAB0F' stopOpacity='0' />
+                <stop
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[2]?.token.mainColor
+                      ? sortedBalanceData[2]?.token.mainColor
+                      : '#FFF'
+                  }
+                />
+                <animated.stop
+                  offset={topRightOffset}
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[2]?.token.mainColor
+                      ? sortedBalanceData[2]?.token.mainColor
+                      : '#FFF'
+                  }
+                  stopOpacity='0'
+                />
               </animated.radialGradient>
               <animated.radialGradient
                 id='bottom_left_gradient'
@@ -302,8 +389,22 @@ const Refract = ({ page }: RefractProps) => {
                   bottomLeftScale * 100
                 })`}
               >
-                <stop stopColor='#886FF4' />
-                <animated.stop offset={bottomLeftOffset} stopColor='#886FF4' stopOpacity='0' />
+                <stop
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[3]?.token.mainColor
+                      ? sortedBalanceData[3]?.token.mainColor
+                      : '#FFF'
+                  }
+                />
+                <animated.stop
+                  offset={bottomLeftOffset}
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[3]?.token.mainColor
+                      ? sortedBalanceData[3]?.token.mainColor
+                      : '#FFF'
+                  }
+                  stopOpacity='0'
+                />
               </animated.radialGradient>
 
               <animated.radialGradient
@@ -316,8 +417,22 @@ const Refract = ({ page }: RefractProps) => {
                   bottomMiddleScale * 100
                 })`}
               >
-                <stop stopColor='#9AF46F' />
-                <animated.stop offset={bottomMiddleOffset} stopColor='#9AF46F' stopOpacity='0' />
+                <stop
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[4]?.token.mainColor
+                      ? sortedBalanceData[4]?.token.mainColor
+                      : '#FFF'
+                  }
+                />
+                <animated.stop
+                  offset={bottomMiddleOffset}
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[4]?.token.mainColor
+                      ? sortedBalanceData[4]?.token.mainColor
+                      : '#FFF'
+                  }
+                  stopOpacity='0'
+                />
               </animated.radialGradient>
               <animated.radialGradient
                 id='bottom_right_gradient'
@@ -329,8 +444,22 @@ const Refract = ({ page }: RefractProps) => {
                   bottomRightScale * 100
                 })`}
               >
-                <stop stopColor='#88E3F0' />
-                <animated.stop offset={bottomRightOffset} stopColor='#88E3F0' stopOpacity='0' />
+                <stop
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[5]?.token.mainColor
+                      ? sortedBalanceData[5]?.token.mainColor
+                      : '#FFF'
+                  }
+                />
+                <animated.stop
+                  offset={bottomRightOffset}
+                  stopColor={
+                    sortedBalanceData.length > 0 && sortedBalanceData[5]?.token.mainColor
+                      ? sortedBalanceData[5]?.token.mainColor
+                      : '#FFF'
+                  }
+                  stopOpacity='0'
+                />
               </animated.radialGradient>
 
               <clipPath id='clip0_4667_3237'>

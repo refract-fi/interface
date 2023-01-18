@@ -6,11 +6,17 @@ import { FormPhases } from 'utils/types/formPhase';
 import { NextPageWithLayout } from './_app';
 import * as styles from 'modules/home/index.css';
 import { useRecoilValue } from 'recoil';
-import { formPhaseState } from 'states/formPhasesState';
+import { formPhaseState, useFormPhaseActions } from 'states/formPhasesState';
+import { formState } from 'states/formState';
+import axios from 'axios';
+import { useRouter } from 'next/router';
 
 const Home: NextPageWithLayout = () => {
   const { phase } = useRecoilValue(formPhaseState);
   const [isFadingOut, setIsFadingOut] = useState(false);
+  const { setPhase } = useFormPhaseActions();
+  const form = useRecoilValue(formState);
+  const { push } = useRouter();
 
   const fadeOut = (cb: () => void) => {
     setIsFadingOut(true);
@@ -20,13 +26,38 @@ const Home: NextPageWithLayout = () => {
     setIsFadingOut(false);
   };
 
+  const onGenerateClick = async () => {
+    try {
+      setTimeout(() => setPhase(FormPhases.GENERATING), 150);
+      const response = await axios.post('/api/job', form);
+      const start = (Date.now() / 1000).toFixed(0);
+      const timer = setInterval(async () => {
+        const { data } = await axios(`/api/job/`, { params: { id: response.data.id } });
+        if (
+          data.status === 'FINISHED' &&
+          parseInt((Date.now() / 1000).toFixed(0)) > parseInt(start) + 8
+        ) {
+          clearInterval(timer);
+          setPhase(FormPhases.COMPLETED);
+          const test = setTimeout(() => push(`/rid/${response.data.id}`), 150);
+          return () => clearTimeout(test);
+        }
+      }, 1000);
+      fadeOut(() => setTimeout(() => fadeIn(), 150));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <Box
         className={isFadingOut ? styles.fadeOutAnim : styles.fadeInAnim}
         paddingX={{ sm: '2x', md: 'none' }}
       >
-        {phase === FormPhases.CREATE && <Landing fadeOut={fadeOut} fadeIn={fadeIn} />}
+        {phase === FormPhases.CREATE && (
+          <Landing fadeOut={fadeOut} fadeIn={fadeIn} onGenerateClick={onGenerateClick} />
+        )}
         {(phase === FormPhases.REVIEW ||
           phase === FormPhases.GENERATING ||
           phase === FormPhases.COMPLETED) && (

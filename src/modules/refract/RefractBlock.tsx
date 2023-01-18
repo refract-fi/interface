@@ -1,13 +1,16 @@
 import { useRefractPhaseActions } from 'states/refractPhaseState';
 import { FlexCol } from 'theme/components';
+import { DataApp, RefractData, Token } from 'utils/types/refractData';
 import * as styles from './RefractBlock.css';
 import RefractDetailsDesk from './RefractDetails/Desktop/RefractDetailsDesk';
 
 interface RefractBlockProps {
-  asset: string;
+  apps: DataApp[];
+  token: Token;
+  percentage: number;
 }
 
-const RefractBlock = ({ asset }: RefractBlockProps) => {
+const RefractBlock = ({ apps, percentage, token }: RefractBlockProps) => {
   const { setIsTopSkew } = useRefractPhaseActions();
   return (
     <FlexCol
@@ -15,8 +18,9 @@ const RefractBlock = ({ asset }: RefractBlockProps) => {
       className={styles.refractBlock}
       onClick={() => setIsTopSkew(true)}
       display={{ sm: 'none', md: 'block' }}
+      style={{ width: `${percentage}%` }}
     >
-      <RefractDetailsDesk asset={asset} />
+      <RefractDetailsDesk apps={apps} percentage={percentage} token={token} />
     </FlexCol>
   );
 };

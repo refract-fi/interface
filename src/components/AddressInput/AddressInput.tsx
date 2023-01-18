@@ -7,7 +7,7 @@ import { formState, useFormActions } from 'states/formState';
 import { Box, Flex } from 'theme/components';
 import { vars } from 'theme/vars.css';
 import { IForm } from 'utils/types';
-import { IAccountInfo } from 'utils/types/form';
+import { AccountInfo, WalletAccount } from 'utils/types/form';
 import { useModalActions } from 'states/modalState';
 import BorderInput from 'components/BorderInput/BorderInput';
 import * as styles from './AddressInput.css';
@@ -24,7 +24,7 @@ const AddressInput = () => {
   const checkInput = async (targetVal: string) => {
     //Check for duplicates
     const indexOfDuplicate = [...accounts].findIndex(
-      (account: IAccountInfo) =>
+      (account: WalletAccount) =>
         account.address === value.replaceAll(',', '').replaceAll(' ', '') ||
         account.ens === value.replaceAll(',', '').replaceAll(' ', '')
     );
@@ -41,7 +41,7 @@ const AddressInput = () => {
     if (ethers.utils.isAddress(targetVal)) {
       setError('');
       setValue('');
-      setAccounts([...accounts, { address: targetVal, type: 'ethereum' }]);
+      setAccounts([...accounts, { address: targetVal, type: 'evm' }]);
       return true;
     }
     if (validate(targetVal)) {
@@ -61,7 +61,7 @@ const AddressInput = () => {
         if (targetAddress) {
           setError('');
           setValue('');
-          setAccounts([...accounts, { address: targetAddress, ens: targetVal, type: 'ethereum' }]);
+          setAccounts([...accounts, { address: targetAddress, ens: targetVal, type: 'evm' }]);
           return true;
         }
       } catch (e) {
@@ -164,12 +164,12 @@ const AddressInput = () => {
         <Text color='negative' level='f4' textTransform={'uppercase'}>
           {error}
         </Text>
-        <Button
+        {/* <Button
           label='Add Centralized Exchange'
           size='none'
           color='action'
           onClick={() => setVisibleModal('ADD_CEX')}
-        />
+        /> */}
       </Flex>
     </Box>
   );
