@@ -9,7 +9,7 @@ export const initialFormState: CreationJob = {
   networks: initialNetworksState,
   groupAssetsUnder: 1,
   // isGroupAssetsUnder: true,
-  // includeNFTs: true,
+  includeNFTs: true,
   // isSnapshot: true,
   // CEXs: [],
 };
@@ -34,8 +34,8 @@ export function useFormActions() {
     setForm((prevState: CreationJob) => ({ ...prevState, groupAssetsUnder }));
   // const setIsGroupAssetsUnder = (isGroupAssetsUnder: IForm['isGroupAssetsUnder']) =>
   //   setForm(prevState => ({ ...prevState, isGroupAssetsUnder }));
-  // const setIncludeNFTs = (includeNFTs: IForm['includeNFTs']) =>
-  //   setForm(prevState => ({ ...prevState, includeNFTs }));
+  const setIncludeNFTs = (includeNFTs: IForm['includeNFTs']) =>
+    setForm((prevState: CreationJob) => ({ ...prevState, includeNFTs }));
   // const setIsSnapshot = (isSnapshot: IForm['isSnapshot']) =>
   //   setForm(prevState => ({ ...prevState, isSnapshot }));
 
@@ -44,6 +44,7 @@ export function useFormActions() {
     setAccounts,
     // setName,
     // setDuration,
+    setIncludeNFTs,
     setNetworks,
     setGroupAssetsUnder,
     // setIsGroupAssetsUnder,

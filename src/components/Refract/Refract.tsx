@@ -9,33 +9,34 @@ import Button from 'components/Button/Button';
 import useData from 'hooks/useData';
 import { useRouter } from 'next/router';
 import { RefractData } from 'utils/types/refractData';
+import { formPhaseState } from 'states/formPhasesState';
 
 interface RefractProps {
   page?: string;
 }
 
 const initialRefractValues = {
-  topLeftColor: '#000000',
+  topLeftColor: '#FF4343',
   topLeftOffset: 0.5,
   topLeftOpacity: 1,
 
-  topMiddleColor: '#000000',
+  topMiddleColor: '#0024FF',
   topMiddleOffset: 0.5,
   topMiddleOpacity: 1,
 
-  topRightColor: '#000000',
+  topRightColor: '#FFAB0F',
   topRightOffset: 0.5,
   topRightOpacity: 1,
 
-  bottomLeftColor: '#000000',
+  bottomLeftColor: '#886FF4',
   bottomLeftOffset: 0.5,
   bottomLeftOpacity: 1,
 
-  bottomMiddleColor: '#000000',
+  bottomMiddleColor: '#9AF46F',
   bottomMiddleOffset: 0.5,
   bottomMiddleOpacity: 1,
 
-  bottomRightColor: '#000000',
+  bottomRightColor: '#88E3F0',
   bottomRightOffset: 0.5,
   bottomRightOpacity: 1,
 };
@@ -48,11 +49,12 @@ const Refract = ({ page }: RefractProps) => {
   const [bottomMiddleScale, setBottomMiddleScale] = useState(10);
   const [bottomRightScale, setBottomRightScale] = useState(10);
 
+  const { phase } = useRecoilValue(formPhaseState);
+
   const { isTopSkew } = useRecoilValue(refractPhaseState);
   const { setIsTopSkew } = useRefractPhaseActions();
   const router = useRouter();
   const { data, error, isValidating } = useData(router?.query?.rid ? `${router.query.rid}` : '');
-
   const sortedBalanceData = useMemo(() => {
     if (data && !error && !isValidating) {
       const sortedData = data.data.sort(
@@ -85,20 +87,55 @@ const Refract = ({ page }: RefractProps) => {
     } else {
       return [];
     }
-  }, [data]);
+  }, [data, error, isValidating]);
 
+  const userRefractValues = useMemo(() => {
+    if (sortedBalanceData.length > 0) {
+      return {
+        topLeftColor: sortedBalanceData[0]?.token.mainColor,
+        topLeftOffset: 0.5,
+        topLeftOpacity: 1,
+
+        topMiddleColor: sortedBalanceData[5]?.token.mainColor,
+        topMiddleOffset: 0.5,
+        topMiddleOpacity: 1,
+
+        topRightColor: sortedBalanceData[2]?.token.mainColor,
+        topRightOffset: 0.5,
+        topRightOpacity: 1,
+
+        bottomLeftColor: sortedBalanceData[1]?.token.mainColor,
+        bottomLeftOffset: 0.5,
+        bottomLeftOpacity: 1,
+
+        bottomMiddleColor: sortedBalanceData[4]?.token.mainColor,
+        bottomMiddleOffset: 0.5,
+        bottomMiddleOpacity: 1,
+
+        bottomRightColor: sortedBalanceData[3]?.token.mainColor,
+        bottomRightOffset: 0.5,
+        bottomRightOpacity: 1,
+      };
+    }
+  }, [sortedBalanceData]);
   const [
     {
+      topLeftColor,
       topLeftOffset,
       topLeftOpacity,
+      topMiddleColor,
       topMiddleOffset,
       topMiddleOpacity,
+      topRightColor,
       topRightOffset,
       topRightOpacity,
+      bottomLeftColor,
       bottomLeftOffset,
       bottomLeftOpacity,
+      bottomMiddleColor,
       bottomMiddleOffset,
       bottomMiddleOpacity,
+      bottomRightColor,
       bottomRightOffset,
       bottomRightOpacity,
     },
@@ -128,16 +165,22 @@ const Refract = ({ page }: RefractProps) => {
     if (page === 'loading') {
       setSVGParams(() => ({
         from: {
+          topLeftColor: '#FF4343',
           topLeftOffset: 0.5,
           topLeftOpacity: 0.5,
+          topMiddleColor: '#0024FF',
           topMiddleOffset: 0,
           topMiddleOpacity: 0,
+          topRightColor: '#FFAB0F',
           topRightOffset: 0,
           topRightOpacity: 0,
+          bottomLeftColor: '#886FF4',
           bottomLeftOffset: 0,
           bottomLeftOpacity: 0,
+          bottomMiddleColor: '#9AF46F',
           bottomMiddleOffset: 0,
           bottomMiddleOpacity: 0,
+          bottomRightColor: '#88E3F0',
           bottomRightOffset: 0,
           bottomRightOpacity: 0,
         },
@@ -189,10 +232,13 @@ const Refract = ({ page }: RefractProps) => {
         },
       }));
     }
-    if (page === 'completed') {
+  }, [page, setSVGParams]);
+
+  useEffect(() => {
+    if (userRefractValues) {
       setSVGParams(() => ({
         to: async (next, cancel) => {
-          await next(initialRefractValues);
+          await next(userRefractValues);
         },
         config: {
           friction: 100,
@@ -204,7 +250,8 @@ const Refract = ({ page }: RefractProps) => {
         },
       }));
     }
-  }, [page, setSVGParams]);
+    console.log('re-render');
+  }, [userRefractValues, setSVGParams]);
 
   return (
     <>
@@ -308,20 +355,22 @@ const Refract = ({ page }: RefractProps) => {
                   topLeftScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[0]?.token.mainColor
-                      ? sortedBalanceData[0]?.token.mainColor
-                      : '#FFF'
-                  }
+                <animated.stop
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[0]?.token.mainColor
+                  //     ? sortedBalanceData[0]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={topLeftColor}
                 />
                 <animated.stop
                   offset={topLeftOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[0]?.token.mainColor
-                      ? sortedBalanceData[0].token.mainColor
-                      : '#FFF'
-                  }
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[0]?.token.mainColor
+                  //     ? sortedBalanceData[0].token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={topLeftColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -335,20 +384,22 @@ const Refract = ({ page }: RefractProps) => {
                   topMiddleScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[1]?.token.mainColor
-                      ? sortedBalanceData[1]?.token.mainColor
-                      : '#FFF'
-                  }
+                <animated.stop
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[1]?.token.mainColor
+                  //     ? sortedBalanceData[1]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={topMiddleColor}
                 />
                 <animated.stop
                   offset={topMiddleOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[1]?.token.mainColor
-                      ? sortedBalanceData[1]?.token.mainColor
-                      : '#FFF'
-                  }
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[1]?.token.mainColor
+                  //     ? sortedBalanceData[1]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={topMiddleColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -362,20 +413,22 @@ const Refract = ({ page }: RefractProps) => {
                   topRightScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[2]?.token.mainColor
-                      ? sortedBalanceData[2]?.token.mainColor
-                      : '#FFF'
-                  }
+                <animated.stop
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[2]?.token.mainColor
+                  //     ? sortedBalanceData[2]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={topRightColor}
                 />
                 <animated.stop
                   offset={topRightOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[2]?.token.mainColor
-                      ? sortedBalanceData[2]?.token.mainColor
-                      : '#FFF'
-                  }
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[2]?.token.mainColor
+                  //     ? sortedBalanceData[2]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={topRightColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -389,20 +442,22 @@ const Refract = ({ page }: RefractProps) => {
                   bottomLeftScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[3]?.token.mainColor
-                      ? sortedBalanceData[3]?.token.mainColor
-                      : '#FFF'
-                  }
+                <animated.stop
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[3]?.token.mainColor
+                  //     ? sortedBalanceData[3]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={bottomLeftColor}
                 />
                 <animated.stop
                   offset={bottomLeftOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[3]?.token.mainColor
-                      ? sortedBalanceData[3]?.token.mainColor
-                      : '#FFF'
-                  }
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[3]?.token.mainColor
+                  //     ? sortedBalanceData[3]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={bottomLeftColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -417,20 +472,22 @@ const Refract = ({ page }: RefractProps) => {
                   bottomMiddleScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[4]?.token.mainColor
-                      ? sortedBalanceData[4]?.token.mainColor
-                      : '#FFF'
-                  }
+                <animated.stop
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[4]?.token.mainColor
+                  //     ? sortedBalanceData[4]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={bottomMiddleColor}
                 />
                 <animated.stop
                   offset={bottomMiddleOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[4]?.token.mainColor
-                      ? sortedBalanceData[4]?.token.mainColor
-                      : '#FFF'
-                  }
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[4]?.token.mainColor
+                  //     ? sortedBalanceData[4]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={bottomMiddleColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -444,20 +501,22 @@ const Refract = ({ page }: RefractProps) => {
                   bottomRightScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[5]?.token.mainColor
-                      ? sortedBalanceData[5]?.token.mainColor
-                      : '#FFF'
-                  }
+                <animated.stop
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[5]?.token.mainColor
+                  //     ? sortedBalanceData[5]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={bottomRightColor}
                 />
                 <animated.stop
                   offset={bottomRightOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[5]?.token.mainColor
-                      ? sortedBalanceData[5]?.token.mainColor
-                      : '#FFF'
-                  }
+                  // stopColor={
+                  //   sortedBalanceData.length > 0 && sortedBalanceData[5]?.token.mainColor
+                  //     ? sortedBalanceData[5]?.token.mainColor
+                  //     : '#FFF'
+                  // }
+                  stopColor={bottomRightColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -491,10 +550,12 @@ const Refract = ({ page }: RefractProps) => {
                   bottomRightOpacity: 0.2,
                 })
               }
-              onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+              onMouseLeave={() =>
+                !isTopSkew && setSVGParams(userRefractValues || initialRefractValues)
+              }
               onClick={() => {
                 if (isTopSkew) {
-                  setSVGParams(initialRefractValues);
+                  setSVGParams(userRefractValues || initialRefractValues);
                   setIsTopSkew(false);
                 } else {
                   setSVGParams({
@@ -526,10 +587,12 @@ const Refract = ({ page }: RefractProps) => {
                   bottomRightOpacity: 0.2,
                 })
               }
-              onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+              onMouseLeave={() =>
+                !isTopSkew && setSVGParams(userRefractValues || initialRefractValues)
+              }
               onClick={() => {
                 if (isTopSkew) {
-                  setSVGParams(initialRefractValues);
+                  setSVGParams(userRefractValues || initialRefractValues);
                   setIsTopSkew(false);
                 } else {
                   setSVGParams({
@@ -560,10 +623,12 @@ const Refract = ({ page }: RefractProps) => {
                   bottomRightOpacity: 0.2,
                 })
               }
-              onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+              onMouseLeave={() =>
+                !isTopSkew && setSVGParams(userRefractValues || initialRefractValues)
+              }
               onClick={() => {
                 if (isTopSkew) {
-                  setSVGParams(initialRefractValues);
+                  setSVGParams(userRefractValues || initialRefractValues);
                   setIsTopSkew(false);
                 } else {
                   setSVGParams({
@@ -596,10 +661,12 @@ const Refract = ({ page }: RefractProps) => {
                       bottomRightOpacity: 0.2,
                     })
                   }
-                  onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+                  onMouseLeave={() =>
+                    !isTopSkew && setSVGParams(userRefractValues || initialRefractValues)
+                  }
                   onClick={() => {
                     if (isTopSkew) {
-                      setSVGParams(initialRefractValues);
+                      setSVGParams(userRefractValues || initialRefractValues);
                       setIsTopSkew(false);
                     } else {
                       setSVGParams({
@@ -631,10 +698,12 @@ const Refract = ({ page }: RefractProps) => {
                       bottomRightOpacity: 0.2,
                     })
                   }
-                  onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+                  onMouseLeave={() =>
+                    !isTopSkew && setSVGParams(userRefractValues || initialRefractValues)
+                  }
                   onClick={() => {
                     if (isTopSkew) {
-                      setSVGParams(initialRefractValues);
+                      setSVGParams(userRefractValues || initialRefractValues);
                       setIsTopSkew(false);
                     } else {
                       setSVGParams({
@@ -665,10 +734,12 @@ const Refract = ({ page }: RefractProps) => {
                       bottomMiddleOpacity: 0.2,
                     })
                   }
-                  onMouseLeave={() => !isTopSkew && setSVGParams(initialRefractValues)}
+                  onMouseLeave={() =>
+                    !isTopSkew && setSVGParams(userRefractValues || initialRefractValues)
+                  }
                   onClick={() => {
                     if (isTopSkew) {
-                      setSVGParams(initialRefractValues);
+                      setSVGParams(userRefractValues || initialRefractValues);
                       setIsTopSkew(false);
                     } else {
                       setSVGParams({

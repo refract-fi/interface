@@ -7,16 +7,18 @@ import { NextPageWithLayout } from './_app';
 import * as styles from 'modules/home/index.css';
 import { useRecoilValue } from 'recoil';
 import { formPhaseState, useFormPhaseActions } from 'states/formPhasesState';
-import { formState } from 'states/formState';
+import { formState, useFormActions } from 'states/formState';
 import axios from 'axios';
 import { useRouter } from 'next/router';
+import useData from 'hooks/useData';
 
 const Home: NextPageWithLayout = () => {
   const { phase } = useRecoilValue(formPhaseState);
   const [isFadingOut, setIsFadingOut] = useState(false);
-  const { setPhase } = useFormPhaseActions();
+  const { setPhase, resetFormPhase } = useFormPhaseActions();
   const form = useRecoilValue(formState);
   const { push } = useRouter();
+  const { resetForm } = useFormActions();
 
   const fadeOut = (cb: () => void) => {
     setIsFadingOut(true);
@@ -38,9 +40,15 @@ const Home: NextPageWithLayout = () => {
           parseInt((Date.now() / 1000).toFixed(0)) > parseInt(start) + 8
         ) {
           clearInterval(timer);
-          setPhase(FormPhases.COMPLETED);
-          const test = setTimeout(() => push(`/rid/${response.data.id}`), 150);
-          return () => clearTimeout(test);
+          // setPhase(FormPhases.COMPLETED);
+          const refractView = setTimeout(async () => {
+            await push(`/rid/${response.data.id}`);
+            await resetForm();
+            await resetFormPhase();
+          }, 150);
+          return () => {
+            clearTimeout(refractView);
+          };
         }
       }, 1000);
       fadeOut(() => setTimeout(() => fadeIn(), 150));
