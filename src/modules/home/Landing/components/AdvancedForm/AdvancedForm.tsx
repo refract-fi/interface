@@ -30,14 +30,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
     return refractDurations.findIndex(value => value.duration === form.duration);
   }, [form.duration]);
 
-  const {
-    setDuration,
-    setGroupAssetsUnder,
-    setIsGroupAssetsUnder,
-    setIncludeNFTs,
-    setIsSnapshot,
-    resetForm,
-  } = useFormActions();
+  const { setIncludeNFTs, resetForm } = useFormActions();
   return (
     <>
       <FlexCol
