@@ -19,7 +19,7 @@ const RefractDetailsDesk = ({ apps, percentage, token }: RefractDetailsDeskProps
           apps.length > 0 &&
           apps.map((app: DataApp) => (
             <Box
-              key={`${app.name}-${token.id}`}
+              key={`${app.name}-${token.id}-${app.percentage}}`}
               component='span'
               className={clsx(styles.assetBlock, 'assetBlock')}
               height={'2x'}

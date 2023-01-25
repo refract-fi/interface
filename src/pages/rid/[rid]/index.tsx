@@ -104,7 +104,12 @@ const Refraction: NextPageWithLayout = () => {
           {sortedBalanceData &&
             sortedBalanceData.map(({ token, apps, percentage }: RefractData) => {
               return (
-                <RefractBlock percentage={percentage} key={token.id} apps={apps} token={token} />
+                <RefractBlock
+                  percentage={percentage}
+                  key={`${token.id}-${percentage}`}
+                  apps={apps}
+                  token={token}
+                />
               );
             })}
         </FlexRow>

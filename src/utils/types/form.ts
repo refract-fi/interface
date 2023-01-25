@@ -36,6 +36,7 @@ export interface CreationJob {
   accounts: AccountInfo[];
   name?: string | null; // feature not in refract v1
   duration?: number | null; //duration in seconds, null => never expires
+  includeNFTs?: boolean; // if does the refract consider the nft balances
   networks: SupportedNetworks[];
   groupAssetsUnder: number; // percentage: [0.00, 100.00]
 }
