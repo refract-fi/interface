@@ -15,29 +15,38 @@ interface RefractProps {
 }
 
 const initialRefractValues = {
-  topLeftColor: '#000000',
   topLeftOffset: 0.5,
   topLeftOpacity: 1,
+  topLeftScale: 1000,
 
-  topMiddleColor: '#000000',
   topMiddleOffset: 0.5,
   topMiddleOpacity: 1,
+  topMiddleScale: 10,
 
-  topRightColor: '#000000',
   topRightOffset: 0.5,
   topRightOpacity: 1,
+  topRightScale: 10,
 
-  bottomLeftColor: '#000000',
   bottomLeftOffset: 0.5,
   bottomLeftOpacity: 1,
+  bottomLeftScale: 10,
 
-  bottomMiddleColor: '#000000',
   bottomMiddleOffset: 0.5,
   bottomMiddleOpacity: 1,
+  bottomMiddleScale: 10,
 
-  bottomRightColor: '#000000',
   bottomRightOffset: 0.5,
   bottomRightOpacity: 1,
+  bottomRightScale: 10,
+};
+
+const initialRefractColors = {
+  topLeftColor: '#000000',
+  topMiddleColor: '#000000',
+  topRightColor: '#000000',
+  bottomLeftColor: '#000000',
+  bottomMiddleColor: '#000000',
+  bottomRightColor: '#000000',
 };
 
 const Refract = ({ page }: RefractProps) => {
@@ -52,6 +61,20 @@ const Refract = ({ page }: RefractProps) => {
   const { setIsTopSkew } = useRefractPhaseActions();
   const router = useRouter();
   const { data, error, isValidating } = useData(router?.query?.rid ? `${router.query.rid}` : '');
+
+  const [
+    {
+      topLeftColor,
+      topMiddleColor,
+      topRightColor,
+      bottomLeftColor,
+      bottomMiddleColor,
+      bottomRightColor,
+    },
+    setSVGColors,
+  ] = useSpring(() => ({
+    from: initialRefractColors,
+  }));
 
   const sortedBalanceData = useMemo(() => {
     if (data && !error && !isValidating) {
@@ -81,11 +104,31 @@ const Refract = ({ page }: RefractProps) => {
           symbol: 'OTHER',
         },
       });
+      if (page !== 'loading') {
+        setSVGColors(() => ({
+          to: {
+            topLeftColor: organisedData[0]?.token?.mainColor
+              ? organisedData[0].token.mainColor
+              : '#000000',
+            topRightColor: organisedData[1]?.token?.mainColor
+              ? organisedData[1].token.mainColor
+              : '#000000',
+            topMiddleColor: organisedData[2]?.token?.mainColor
+              ? organisedData[2].token.mainColor
+              : '#000000',
+            bottomLeftColor: organisedData[3]?.token?.mainColor
+              ? organisedData[3].token.mainColor
+              : '#000000',
+            bottomMiddleColor: organisedData[4]?.token?.mainColor
+              ? organisedData[4].token.mainColor
+              : '#000000',
+            bottomRightColor: organisedData[5] ? organisedData[5].token.mainColor : '#000000',
+          },
+        }));
+      }
       return organisedData;
-    } else {
-      return [];
     }
-  }, [data]);
+  }, [data, isValidating, error, setSVGColors, page]);
 
   const [
     {
@@ -125,7 +168,17 @@ const Refract = ({ page }: RefractProps) => {
   const bottomRightPosX = 900;
   const bottomRightPosY = 450;
   useEffect(() => {
-    if (page === 'loading') {
+    if (page === 'loading' || page === 'completed') {
+      setSVGColors(() => ({
+        from: {
+          topLeftColor: '#FF4343',
+          topMiddleColor: '#0024FF',
+          topRightColor: '#FFAB0F',
+          bottomLeftColor: '#886FF4',
+          bottomMiddleColor: '#9AF46F',
+          bottomRightColor: '#88E3F0',
+        },
+      }));
       setSVGParams(() => ({
         from: {
           topLeftOffset: 0.5,
@@ -189,22 +242,7 @@ const Refract = ({ page }: RefractProps) => {
         },
       }));
     }
-    if (page === 'completed') {
-      setSVGParams(() => ({
-        to: async (next, cancel) => {
-          await next(initialRefractValues);
-        },
-        config: {
-          friction: 100,
-          duration: 300,
-          easing: easings.easeOutCirc,
-        },
-        loop: {
-          reverse: false,
-        },
-      }));
-    }
-  }, [page, setSVGParams]);
+  }, [page, setSVGParams, setSVGColors]);
 
   return (
     <>
@@ -308,22 +346,8 @@ const Refract = ({ page }: RefractProps) => {
                   topLeftScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[0]?.token.mainColor
-                      ? sortedBalanceData[0]?.token.mainColor
-                      : '#FFF'
-                  }
-                />
-                <animated.stop
-                  offset={topLeftOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[0]?.token.mainColor
-                      ? sortedBalanceData[0].token.mainColor
-                      : '#FFF'
-                  }
-                  stopOpacity='0'
-                />
+                <animated.stop stopColor={topLeftColor} />
+                <animated.stop offset={topLeftOffset} stopColor={topLeftColor} stopOpacity='0' />
               </animated.radialGradient>
               <animated.radialGradient
                 id='top_middle_gradient'
@@ -335,20 +359,10 @@ const Refract = ({ page }: RefractProps) => {
                   topMiddleScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[1]?.token.mainColor
-                      ? sortedBalanceData[1]?.token.mainColor
-                      : '#FFF'
-                  }
-                />
+                <animated.stop stopColor={topMiddleColor} />
                 <animated.stop
                   offset={topMiddleOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[1]?.token.mainColor
-                      ? sortedBalanceData[1]?.token.mainColor
-                      : '#FFF'
-                  }
+                  stopColor={topMiddleColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -362,22 +376,8 @@ const Refract = ({ page }: RefractProps) => {
                   topRightScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[2]?.token.mainColor
-                      ? sortedBalanceData[2]?.token.mainColor
-                      : '#FFF'
-                  }
-                />
-                <animated.stop
-                  offset={topRightOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[2]?.token.mainColor
-                      ? sortedBalanceData[2]?.token.mainColor
-                      : '#FFF'
-                  }
-                  stopOpacity='0'
-                />
+                <animated.stop stopColor={topRightColor} />
+                <animated.stop offset={topRightOffset} stopColor={topRightColor} stopOpacity='0' />
               </animated.radialGradient>
               <animated.radialGradient
                 id='bottom_left_gradient'
@@ -389,20 +389,10 @@ const Refract = ({ page }: RefractProps) => {
                   bottomLeftScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[3]?.token.mainColor
-                      ? sortedBalanceData[3]?.token.mainColor
-                      : '#FFF'
-                  }
-                />
+                <animated.stop stopColor={bottomLeftColor} />
                 <animated.stop
                   offset={bottomLeftOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[3]?.token.mainColor
-                      ? sortedBalanceData[3]?.token.mainColor
-                      : '#FFF'
-                  }
+                  stopColor={bottomLeftColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -417,20 +407,10 @@ const Refract = ({ page }: RefractProps) => {
                   bottomMiddleScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[4]?.token.mainColor
-                      ? sortedBalanceData[4]?.token.mainColor
-                      : '#FFF'
-                  }
-                />
+                <animated.stop stopColor={bottomMiddleColor} />
                 <animated.stop
                   offset={bottomMiddleOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[4]?.token.mainColor
-                      ? sortedBalanceData[4]?.token.mainColor
-                      : '#FFF'
-                  }
+                  stopColor={bottomMiddleColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
@@ -444,20 +424,10 @@ const Refract = ({ page }: RefractProps) => {
                   bottomRightScale * 100
                 })`}
               >
-                <stop
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[5]?.token.mainColor
-                      ? sortedBalanceData[5]?.token.mainColor
-                      : '#FFF'
-                  }
-                />
+                <animated.stop stopColor={bottomRightColor} />
                 <animated.stop
                   offset={bottomRightOffset}
-                  stopColor={
-                    sortedBalanceData.length > 0 && sortedBalanceData[5]?.token.mainColor
-                      ? sortedBalanceData[5]?.token.mainColor
-                      : '#FFF'
-                  }
+                  stopColor={bottomRightColor}
                   stopOpacity='0'
                 />
               </animated.radialGradient>
