@@ -7,12 +7,12 @@ import { formState } from 'states/formState';
 import { Box, FlexCol, FlexRow } from 'theme/components';
 import { formatMoment } from 'utils/func';
 import { getBorderColor } from 'utils/func/getBorderColor';
-import { IForm, SupportedNetworks } from 'utils/types';
+import { SupportedNetworks } from 'utils/types';
 import { FormPhases } from 'utils/types/formPhase';
 import FormOption from '../Generate/components/FormOption/FormOption';
 import * as styles from './Review.css';
 const Review = () => {
-  const form = useRecoilValue<IForm>(formState);
+  const form = useRecoilValue(formState);
   const { setPhase, setShowParams } = useFormPhaseActions();
 
   useEffect(() => {
@@ -28,10 +28,10 @@ const Review = () => {
         review your parameters
       </Title>
       <FlexRow gap='2x' marginTop={'9x'} className={styles.reviewFormAnim}>
-        {form.accounts.map(({ address, ens, type, exchange }, index) => (
+        {form.accounts.map(({ address, ens, type }, index) => (
           <Chips
             key={address}
-            label={type === 'exchange' && exchange ? exchange : ens ? ens : address ? address : ''}
+            label={ens ? ens : address ? address : ''}
             isLocked
             background={getBorderColor(index)}
           />
@@ -49,19 +49,19 @@ const Review = () => {
             }
             animDelay={'0.3s'}
           />
-          <FormOption
+          {/* <FormOption
             title={'portfolio data'}
             icon='snapshot'
             activeOption={form.isSnapshot ? 'STATIC' : 'REAL TIME'}
             animDelay={'0.9s'}
-          />
+          /> */}
           <FormOption
             title={'nft allocations'}
             icon='nft'
             activeOption={`${form.includeNFTs ? 'INCLUDE' : 'EXCLUDE'} NFTS`}
             animDelay={'1.5s'}
           />
-          <FormOption
+          {/* <FormOption
             title={'group assets'}
             icon='group'
             activeOption={
@@ -70,7 +70,7 @@ const Review = () => {
                 : 'NOT GROUPED'
             }
             animDelay={'2.1s'}
-          />
+          /> */}
           <FormOption
             title={'multichain'}
             icon='multichain'

@@ -120,6 +120,8 @@ const Refraction: NextPageWithLayout = () => {
 };
 
 export const getServerSideProps: GetServerSideProps = async context => {
+  // Fix later
+  // @ts-ignore
   const { rid } = context.params;
   return {
     props: {

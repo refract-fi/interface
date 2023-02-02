@@ -6,10 +6,11 @@ import { useRecoilValue } from 'recoil';
 import { formState, initialNetworksState, useFormActions } from 'states/formState';
 import { useModalActions } from 'states/modalState';
 import { Box, FlexCol, FlexRow } from 'theme/components';
-import { IForm, SupportedNetworks } from 'utils/types';
+import { SupportedNetworks } from 'utils/types';
+import { CreationJob } from 'utils/types/form';
 
 const NetworkSelectModal = () => {
-  const { networks } = useRecoilValue<IForm>(formState);
+  const { networks } = useRecoilValue<CreationJob>(formState);
   const { isModalVisible, resetModalStatus } = useModalActions();
   const [selectedNetworks, setSelectedNetworks] = useState<SupportedNetworks[]>(networks);
 

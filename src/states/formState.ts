@@ -1,5 +1,5 @@
 import { atom, useSetRecoilState } from 'recoil';
-import { IForm, SupportedNetworks } from 'utils/types';
+import { SupportedNetworks } from 'utils/types';
 import { CreationJob } from 'utils/types/form';
 
 export const initialNetworksState: SupportedNetworks[] = [...Object.values(SupportedNetworks)];
@@ -14,7 +14,7 @@ export const initialFormState: CreationJob = {
   // CEXs: [],
 };
 
-export const formState = atom<IForm>({
+export const formState = atom<CreationJob>({
   key: 'formState',
   default: initialFormState,
 });
@@ -23,20 +23,20 @@ export function useFormActions() {
   const setForm = useSetRecoilState(formState);
   const resetForm = () => setForm(initialFormState);
 
-  const setAccounts = (accounts: IForm['accounts']) =>
+  const setAccounts = (accounts: CreationJob['accounts']) =>
     setForm((prevState: CreationJob) => ({ ...prevState, accounts }));
-  // const setName = (name: IForm['name']) => setForm(prevState => ({ ...prevState, name }));
-  // const setDuration = (duration: IForm['duration']) =>
+  // const setName = (name: CreationJob['name']) => setForm(prevState => ({ ...prevState, name }));
+  // const setDuration = (duration: CreationJob['duration']) =>
   //   setForm(prevState => ({ ...prevState, duration }));
-  const setNetworks = (networks: IForm['networks']) =>
+  const setNetworks = (networks: CreationJob['networks']) =>
     setForm((prevState: CreationJob) => ({ ...prevState, networks }));
-  const setGroupAssetsUnder = (groupAssetsUnder: IForm['groupAssetsUnder']) =>
+  const setGroupAssetsUnder = (groupAssetsUnder: CreationJob['groupAssetsUnder']) =>
     setForm((prevState: CreationJob) => ({ ...prevState, groupAssetsUnder }));
-  // const setIsGroupAssetsUnder = (isGroupAssetsUnder: IForm['isGroupAssetsUnder']) =>
+  // const setIsGroupAssetsUnder = (isGroupAssetsUnder: CreationJob['isGroupAssetsUnder']) =>
   //   setForm(prevState => ({ ...prevState, isGroupAssetsUnder }));
-  // const setIncludeNFTs = (includeNFTs: IForm['includeNFTs']) =>
-  //   setForm(prevState => ({ ...prevState, includeNFTs }));
-  // const setIsSnapshot = (isSnapshot: IForm['isSnapshot']) =>
+  const setIncludeNFTs = (includeNFTs: CreationJob['includeNFTs']) =>
+    setForm((prevState: CreationJob) => ({ ...prevState, includeNFTs }));
+  // const setIsSnapshot = (isSnapshot: CreationJob['isSnapshot']) =>
   //   setForm(prevState => ({ ...prevState, isSnapshot }));
 
   return {
@@ -47,7 +47,7 @@ export function useFormActions() {
     setNetworks,
     setGroupAssetsUnder,
     // setIsGroupAssetsUnder,
-    // setIncludeNFTs,
+    setIncludeNFTs,
     // setIsSnapshot,
   };
 }

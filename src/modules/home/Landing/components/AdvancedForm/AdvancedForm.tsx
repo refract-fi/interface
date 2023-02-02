@@ -3,7 +3,7 @@ import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import * as styles from './AdvancedForm.css';
 import FormTitle from '../FormTitle/FormTitle';
 import { useMemo, useState } from 'react';
-import { IForm, SupportedNetworks } from 'utils/types';
+import { SupportedNetworks } from 'utils/types';
 import { formState, useFormActions } from 'states/formState';
 import { useRecoilValue } from 'recoil';
 import moment from 'moment';
@@ -12,6 +12,7 @@ import VerifyAccountsModal from 'components/Modals/VerifyAccountsModal/VerifyAcc
 import { formatMoment } from 'utils/func';
 import { modalState, useModalActions } from 'states/modalState';
 import { refractDurations } from 'utils/constants/durations';
+import { CreationJob } from 'utils/types/form';
 
 interface AdvancedFormProps {
   isVisible: boolean;
@@ -24,7 +25,7 @@ const AdvancedForm = ({ isVisible }: AdvancedFormProps) => {
 
   const isModalActive = useMemo(() => visibleModal === 'NONE', [visibleModal]);
 
-  const form = useRecoilValue<IForm>(formState);
+  const form = useRecoilValue<CreationJob>(formState);
 
   const currentDurationIndex = useMemo(() => {
     return refractDurations.findIndex(value => value.duration === form.duration);

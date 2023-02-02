@@ -6,15 +6,14 @@ import { useRecoilValue } from 'recoil';
 import { formState, useFormActions } from 'states/formState';
 import { Box, Flex } from 'theme/components';
 import { vars } from 'theme/vars.css';
-import { IForm } from 'utils/types';
-import { AccountInfo, WalletAccount } from 'utils/types/form';
+import { AccountInfo, CreationJob, WalletAccount } from 'utils/types/form';
 import { useModalActions } from 'states/modalState';
 import BorderInput from 'components/BorderInput/BorderInput';
 import * as styles from './AddressInput.css';
 import { formatAccount, titleCase } from 'utils/func';
 
 const AddressInput = () => {
-  const { accounts } = useRecoilValue<IForm>(formState);
+  const { accounts } = useRecoilValue<CreationJob>(formState);
   const { setAccounts } = useFormActions();
   const { setVisibleModal } = useModalActions();
 
@@ -24,7 +23,7 @@ const AddressInput = () => {
   const checkInput = async (targetVal: string) => {
     //Check for duplicates
     const indexOfDuplicate = [...accounts].findIndex(
-      (account: WalletAccount) =>
+      account =>
         account.address === value.replaceAll(',', '').replaceAll(' ', '') ||
         account.ens === value.replaceAll(',', '').replaceAll(' ', '')
     );
@@ -109,12 +108,18 @@ const AddressInput = () => {
     }
   };
 
-  const onBlur = () => {
-    if (value.length > 3) {
-      setValue('');
-      setAccounts([...accounts, { address: value.replaceAll(',', '').replaceAll(' ', '') }]);
-    }
-  };
+  // const onBlur = () => {
+  //   if (value.length > 3) {
+  //     setValue('');
+  //     setAccounts([
+  //       ...accounts,
+  //       {
+  //         address: value.replaceAll(',', '').replaceAll(' ', ''),
+  //         type: value.slice(-3) === 'btc' ? 'bitcoin' : 'evm',
+  //       },
+  //     ]);
+  //   }
+  // };
 
   const getBorderColor = (index: number) => {
     type backgroundType = keyof typeof vars.background;
@@ -138,21 +143,13 @@ const AddressInput = () => {
           width='full'
           background={error ? 'error' : 'spectrum'}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange(e)}
-          onBlur={() => onBlur()}
+          // onBlur={() => onBlur()}
           onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => onKeydown(e)}
         >
           {accounts.length >= 1 &&
-            accounts.map(({ address, ens, type, exchange }, index) => (
+            accounts.map(({ address, ens }, index) => (
               <Chips
-                label={
-                  type === 'exchange' && exchange
-                    ? titleCase(exchange)
-                    : ens
-                    ? ens
-                    : address
-                    ? formatAccount(address)
-                    : ''
-                }
+                label={ens ? ens : address ? formatAccount(address) : ''}
                 key={address}
                 background={getBorderColor(index)}
                 onClear={() => onClear(index)}

@@ -55,7 +55,8 @@ export interface CexAccount {
   secretApiKey: string;
 }
 
-export type AccountInfo = WalletAccount | CexAccount;
+export type AccountInfo = WalletAccount;
+// | CexAccount;
 // export interface IAccountInfo {
 //   address?: string;
 //   ens?: string;

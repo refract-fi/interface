@@ -4,7 +4,6 @@ import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import { Button, Icon, Text, Title, Input } from 'components';
 import { useState } from 'react';
 import { SupportedExchanges } from 'utils/types/exchanges';
-import { IAccountInfo } from 'utils/types/form';
 import { formState, useFormActions } from 'states/formState';
 import { useRecoilValue } from 'recoil';
 
@@ -20,6 +19,8 @@ const AddCEXModal = () => {
   const { accounts } = useRecoilValue(formState);
   const { setAccounts } = useFormActions();
   const [error, setError] = useState('');
+  // Removed feature, will fix if we re-add this feature
+  // @ts-ignore
   const [CEXInfo, setCEXInfo] = useState<IAccountInfo>(initialAddressInfo);
 
   const onAdd = () => {
@@ -50,6 +51,7 @@ const AddCEXModal = () => {
         <FlexCol justifyContent={{ sm: 'space-between', md: 'flex-start' }} height='full'>
           <FlexCol gap='2x'>
             {Object.values(SupportedExchanges).map((exchange: SupportedExchanges) => {
+              // @ts-ignore
               const isDisabled = !(accounts.findIndex(CEX => CEX.exchange === exchange) === -1);
               return (
                 <Button

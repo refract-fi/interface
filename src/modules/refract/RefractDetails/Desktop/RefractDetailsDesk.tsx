@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { Text } from 'components';
 import { Box, FlexCol, FlexRow } from 'theme/components';
-import { DataApp, Token } from 'utils/types/refractData';
+import { AppBalance, AppBalances, Token } from 'utils/types/refractData';
 import * as styles from './RefractDetailsDesk.css';
 
 interface RefractDetailsDeskProps {
-  apps: DataApp[];
+  apps: AppBalances;
   token: Token;
   percentage: number;
 }
@@ -17,7 +17,7 @@ const RefractDetailsDesk = ({ apps, percentage, token }: RefractDetailsDeskProps
       <FlexRow>
         {apps &&
           apps.length > 0 &&
-          apps.map((app: DataApp) => (
+          apps.map((app: AppBalance) => (
             <Box
               key={`${app.name}-${token.id}-${app.percentage}}`}
               component='span'

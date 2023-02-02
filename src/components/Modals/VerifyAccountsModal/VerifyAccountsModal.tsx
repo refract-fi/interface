@@ -18,7 +18,7 @@ const VerifyAccountsModal = () => {
   const [verifAccount, setVerifAccount] = useState('');
 
   const verifiedAccounts = useMemo(() => {
-    return accounts.filter(account => account.signature || account.secretApiKey).length;
+    return accounts.filter(account => account.challengerId).length;
   }, [accounts]);
 
   const modalTitle = useMemo(() => {
@@ -58,21 +58,21 @@ const VerifyAccountsModal = () => {
           <FlexCol gap='0x'>
             {accounts.map(account => {
               const formattedAccount = account.address && formatAccount(account.address);
-              const isVerified = account.secretApiKey || account.signature;
+              const isVerified = !!account.challengerId;
               return (
                 <FlexRow
                   justifyContent={'space-between'}
                   paddingX='2x'
                   paddingY='1x'
                   backgroundColor={isVerified ? 'gray-5' : 'none'}
-                  key={account.address ? account.address : account.apiKey}
+                  key={account.address}
                 >
                   <Text level='b2'>
                     {account.ens
                       ? account.ens
-                      : account.exchange
-                      ? titleCase(account.exchange)
-                      : formattedAccount}
+                      : // : account.exchange
+                        // ? titleCase(account.exchange)
+                        formattedAccount}
                   </Text>
                   <Flex alignItems={'center'} gap='0x'>
                     {isVerified ? (

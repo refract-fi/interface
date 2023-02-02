@@ -1,11 +1,11 @@
 import { useRefractPhaseActions } from 'states/refractPhaseState';
 import { FlexCol } from 'theme/components';
-import { DataApp, RefractData, Token } from 'utils/types/refractData';
+import { AppBalances, Token } from 'utils/types/refractData';
 import * as styles from './RefractBlock.css';
 import RefractDetailsDesk from './RefractDetails/Desktop/RefractDetailsDesk';
 
 interface RefractBlockProps {
-  apps: DataApp[];
+  apps: AppBalances;
   token: Token;
   percentage: number;
 }

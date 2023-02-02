@@ -10,7 +10,6 @@ import { formState } from 'states/formState';
 import { Box, Flex, FlexCol, FlexRow } from 'theme/components';
 import { formatMoment } from 'utils/func';
 import { getBorderColor } from 'utils/func/getBorderColor';
-import { IForm, SupportedNetworks } from 'utils/types';
 import { FormPhases } from 'utils/types/formPhase';
 import { fadeOutAnim } from '../index.css';
 import FormOption from './components/FormOption/FormOption';
